@@ -14,6 +14,7 @@
 		764CD73C2DC3EDF600900B78 /* T_Trips.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 764CD73A2DC3EDF600900B78 /* T_Trips.xcdatamodeld */; };
 		764CD73E2DC3EDFC00900B78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 764CD73D2DC3EDFC00900B78 /* Assets.xcassets */; };
 		764CD7412DC3EDFC00900B78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 764CD73F2DC3EDFC00900B78 /* LaunchScreen.storyboard */; };
+		764CD74A2DC3F7B800900B78 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 764CD7492DC3F7B800900B78 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				764CD74A2DC3F7B800900B78 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +88,9 @@
 			dependencies = (
 			);
 			name = "T-Trips";
+			packageProductDependencies = (
+				764CD7492DC3F7B800900B78 /* SnapKit */,
+			);
 			productName = "T-Trips";
 			productReference = 764CD72E2DC3EDF600900B78 /* T-Trips.app */;
 			productType = "com.apple.product-type.application";
@@ -114,6 +119,9 @@
 				Base,
 			);
 			mainGroup = 764CD7252DC3EDF600900B78;
+			packageReferences = (
+				764CD7482DC3F7B800900B78 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 764CD72F2DC3EDF600900B78 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -364,6 +372,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		764CD7482DC3F7B800900B78 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		764CD7492DC3F7B800900B78 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 764CD7482DC3F7B800900B78 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		764CD73A2DC3EDF600900B78 /* T_Trips.xcdatamodeld */ = {
