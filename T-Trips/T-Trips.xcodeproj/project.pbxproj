@@ -10,12 +10,18 @@
 		764CD7322DC3EDF600900B78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764CD7312DC3EDF600900B78 /* AppDelegate.swift */; };
 		764CD7342DC3EDF600900B78 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764CD7332DC3EDF600900B78 /* SceneDelegate.swift */; };
 		764CD7362DC3EDF600900B78 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764CD7352DC3EDF600900B78 /* ViewController.swift */; };
-		764CD7392DC3EDF600900B78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 764CD7372DC3EDF600900B78 /* Main.storyboard */; };
 		764CD73C2DC3EDF600900B78 /* T_Trips.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 764CD73A2DC3EDF600900B78 /* T_Trips.xcdatamodeld */; };
 		764CD73E2DC3EDFC00900B78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 764CD73D2DC3EDFC00900B78 /* Assets.xcassets */; };
-		764CD7412DC3EDFC00900B78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 764CD73F2DC3EDFC00900B78 /* LaunchScreen.storyboard */; };
 		764CD74A2DC3F7B800900B78 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 764CD7492DC3F7B800900B78 /* SnapKit */; };
 		764CD74C2DC3FD0600900B78 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 764CD74B2DC3FD0600900B78 /* .swiftlint.yml */; };
+		766E62F52DD22DA200E70F12 /* TextFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766E62F42DD22DA100E70F12 /* TextFieldModel.swift */; };
+		766E62F72DD22DCB00E70F12 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766E62F62DD22DCB00E70F12 /* CustomTextField.swift */; };
+		766E62F92DD22DE900E70F12 /* TextFieldFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766E62F82DD22DE900E70F12 /* TextFieldFactory.swift */; };
+		766E62FB2DD2317A00E70F12 /* CustomTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766E62FA2DD2317A00E70F12 /* CustomTextFieldDelegate.swift */; };
+		76BD79882DD0AF8300FB7A75 /* ButtonActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BD79872DD0AF8300FB7A75 /* ButtonActionHandler.swift */; };
+		76BD798B2DD0AFF500FB7A75 /* ButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BD798A2DD0AFF500FB7A75 /* ButtonModel.swift */; };
+		76BD798D2DD0B05800FB7A75 /* ButtonFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BD798C2DD0B05800FB7A75 /* ButtonFactory.swift */; };
+		76BD798F2DD0B07500FB7A75 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BD798E2DD0B07400FB7A75 /* CustomButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,12 +29,18 @@
 		764CD7312DC3EDF600900B78 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		764CD7332DC3EDF600900B78 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		764CD7352DC3EDF600900B78 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		764CD7382DC3EDF600900B78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		764CD73B2DC3EDF600900B78 /* T_Trips.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = T_Trips.xcdatamodel; sourceTree = "<group>"; };
 		764CD73D2DC3EDFC00900B78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		764CD7402DC3EDFC00900B78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		764CD7422DC3EDFC00900B78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		764CD74B2DC3FD0600900B78 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		766E62F42DD22DA100E70F12 /* TextFieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldModel.swift; sourceTree = "<group>"; };
+		766E62F62DD22DCB00E70F12 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		766E62F82DD22DE900E70F12 /* TextFieldFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldFactory.swift; sourceTree = "<group>"; };
+		766E62FA2DD2317A00E70F12 /* CustomTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldDelegate.swift; sourceTree = "<group>"; };
+		76BD79872DD0AF8300FB7A75 /* ButtonActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonActionHandler.swift; sourceTree = "<group>"; };
+		76BD798A2DD0AFF500FB7A75 /* ButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModel.swift; sourceTree = "<group>"; };
+		76BD798C2DD0B05800FB7A75 /* ButtonFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonFactory.swift; sourceTree = "<group>"; };
+		76BD798E2DD0B07400FB7A75 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,14 +77,60 @@
 			children = (
 				764CD7312DC3EDF600900B78 /* AppDelegate.swift */,
 				764CD7332DC3EDF600900B78 /* SceneDelegate.swift */,
-				764CD7352DC3EDF600900B78 /* ViewController.swift */,
-				764CD7372DC3EDF600900B78 /* Main.storyboard */,
+				766E62EE2DD1E5F400E70F12 /* MVVM */,
+				766E62F22DD1E66A00E70F12 /* CustomViews */,
 				764CD73D2DC3EDFC00900B78 /* Assets.xcassets */,
-				764CD73F2DC3EDFC00900B78 /* LaunchScreen.storyboard */,
 				764CD7422DC3EDFC00900B78 /* Info.plist */,
 				764CD73A2DC3EDF600900B78 /* T_Trips.xcdatamodeld */,
 			);
 			path = "T-Trips";
+			sourceTree = "<group>";
+		};
+		766E62EE2DD1E5F400E70F12 /* MVVM */ = {
+			isa = PBXGroup;
+			children = (
+				766E62EF2DD1E5FE00E70F12 /* Registration */,
+			);
+			path = MVVM;
+			sourceTree = "<group>";
+		};
+		766E62EF2DD1E5FE00E70F12 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				764CD7352DC3EDF600900B78 /* ViewController.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
+		766E62F22DD1E66A00E70F12 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				76BD79892DD0AFCE00FB7A75 /* CustomButton */,
+				766E62F32DD22D8500E70F12 /* CustomTextField */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		766E62F32DD22D8500E70F12 /* CustomTextField */ = {
+			isa = PBXGroup;
+			children = (
+				766E62F42DD22DA100E70F12 /* TextFieldModel.swift */,
+				766E62F62DD22DCB00E70F12 /* CustomTextField.swift */,
+				766E62F82DD22DE900E70F12 /* TextFieldFactory.swift */,
+				766E62FA2DD2317A00E70F12 /* CustomTextFieldDelegate.swift */,
+			);
+			path = CustomTextField;
+			sourceTree = "<group>";
+		};
+		76BD79892DD0AFCE00FB7A75 /* CustomButton */ = {
+			isa = PBXGroup;
+			children = (
+				76BD79872DD0AF8300FB7A75 /* ButtonActionHandler.swift */,
+				76BD798A2DD0AFF500FB7A75 /* ButtonModel.swift */,
+				76BD798C2DD0B05800FB7A75 /* ButtonFactory.swift */,
+				76BD798E2DD0B07400FB7A75 /* CustomButton.swift */,
+			);
+			path = CustomButton;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,9 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				764CD74C2DC3FD0600900B78 /* .swiftlint.yml in Resources */,
-				764CD7412DC3EDFC00900B78 /* LaunchScreen.storyboard in Resources */,
 				764CD73E2DC3EDFC00900B78 /* Assets.xcassets in Resources */,
-				764CD7392DC3EDF600900B78 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,6 +208,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		76B8D4322DC3FEB500C36484 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -175,32 +232,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				764CD7362DC3EDF600900B78 /* ViewController.swift in Sources */,
+				76BD798D2DD0B05800FB7A75 /* ButtonFactory.swift in Sources */,
+				76BD79882DD0AF8300FB7A75 /* ButtonActionHandler.swift in Sources */,
+				766E62F52DD22DA200E70F12 /* TextFieldModel.swift in Sources */,
+				766E62F72DD22DCB00E70F12 /* CustomTextField.swift in Sources */,
 				764CD73C2DC3EDF600900B78 /* T_Trips.xcdatamodeld in Sources */,
+				766E62F92DD22DE900E70F12 /* TextFieldFactory.swift in Sources */,
+				766E62FB2DD2317A00E70F12 /* CustomTextFieldDelegate.swift in Sources */,
+				76BD798F2DD0B07500FB7A75 /* CustomButton.swift in Sources */,
 				764CD7322DC3EDF600900B78 /* AppDelegate.swift in Sources */,
 				764CD7342DC3EDF600900B78 /* SceneDelegate.swift in Sources */,
+				76BD798B2DD0AFF500FB7A75 /* ButtonModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		764CD7372DC3EDF600900B78 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				764CD7382DC3EDF600900B78 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		764CD73F2DC3EDFC00900B78 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				764CD7402DC3EDFC00900B78 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		764CD7432DC3EDFC00900B78 /* Debug */ = {
@@ -329,7 +375,6 @@
 				INFOPLIST_FILE = "T-Trips/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -358,7 +403,6 @@
 				INFOPLIST_FILE = "T-Trips/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
