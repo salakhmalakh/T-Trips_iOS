@@ -9,12 +9,13 @@ import Foundation
 
 struct ButtonModel {
     let title: String
-    let state: ButtonState
+    let state: State
     let isEnabled: Bool
-}
+    let action: (() -> Void)?
 
-enum ButtonState {
-    case primary
-    case secondary
-    case addition
+    enum State {
+        case primary
+        case secondary
+        case addition
+    }
 }

@@ -9,11 +9,11 @@ import Foundation
 
 struct TextFieldModel {
     let placeholder: String
-    let state: TextFieldState
-}
+    let state: State
 
-enum TextFieldState {
-    case name
-    case phoneNumber
-    case password
+    enum State {
+        case name
+        case phoneNumber
+        case password
+    }
 }

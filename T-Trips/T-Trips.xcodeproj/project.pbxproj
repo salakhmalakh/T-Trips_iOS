@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		764CD7322DC3EDF600900B78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764CD7312DC3EDF600900B78 /* AppDelegate.swift */; };
 		764CD7342DC3EDF600900B78 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764CD7332DC3EDF600900B78 /* SceneDelegate.swift */; };
-		764CD7362DC3EDF600900B78 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764CD7352DC3EDF600900B78 /* ViewController.swift */; };
+		764CD7362DC3EDF600900B78 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764CD7352DC3EDF600900B78 /* RegistrationViewController.swift */; };
 		764CD73C2DC3EDF600900B78 /* T_Trips.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 764CD73A2DC3EDF600900B78 /* T_Trips.xcdatamodeld */; };
 		764CD73E2DC3EDFC00900B78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 764CD73D2DC3EDFC00900B78 /* Assets.xcassets */; };
 		764CD74A2DC3F7B800900B78 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 764CD7492DC3F7B800900B78 /* SnapKit */; };
@@ -28,7 +28,7 @@
 		764CD72E2DC3EDF600900B78 /* T-Trips.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "T-Trips.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		764CD7312DC3EDF600900B78 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		764CD7332DC3EDF600900B78 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		764CD7352DC3EDF600900B78 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		764CD7352DC3EDF600900B78 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		764CD73B2DC3EDF600900B78 /* T_Trips.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = T_Trips.xcdatamodel; sourceTree = "<group>"; };
 		764CD73D2DC3EDFC00900B78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		764CD7422DC3EDFC00900B78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 		766E62EF2DD1E5FE00E70F12 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
-				764CD7352DC3EDF600900B78 /* ViewController.swift */,
+				764CD7352DC3EDF600900B78 /* RegistrationViewController.swift */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -231,7 +231,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				764CD7362DC3EDF600900B78 /* ViewController.swift in Sources */,
+				764CD7362DC3EDF600900B78 /* RegistrationViewController.swift in Sources */,
 				76BD798D2DD0B05800FB7A75 /* ButtonFactory.swift in Sources */,
 				76BD79882DD0AF8300FB7A75 /* ButtonActionHandler.swift in Sources */,
 				766E62F52DD22DA200E70F12 /* TextFieldModel.swift in Sources */,

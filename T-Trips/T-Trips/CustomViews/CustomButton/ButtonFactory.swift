@@ -6,30 +6,23 @@
 //
 
 import Foundation
-import UIKit
 
-enum ButtonFactory {
-    static func createButton(with model: ButtonModel) -> CustomButton {
-        let button = CustomButton()
-        
-        button.setTitle(model.title, for: .normal)
-        button.isEnabled = model.isEnabled
-        
-        switch model.state {
-        case .primary:
-            button.backgroundColor = UIColor(named: "primaryButtonColor")
-            button.setTitleColor(.black, for: .normal)
-            button.layer.cornerRadius = 8
-        case .secondary:
-            button.backgroundColor = UIColor(named: "secondaryButtonColor")
-            button.setTitleColor(.black, for: .normal)
-            button.layer.cornerRadius = 8
-        case .addition:
-            button.backgroundColor = UIColor(named: "primaryButtonColor")
-            button.setTitleColor(.black, for: .normal)
-            button.layer.cornerRadius = 8
-        }
-        
-        return button
+protocol ButtonFactoryProtocol {
+    func makeConfiguration(
+        title: String,
+        state: ButtonModel.State,
+        isEnabled: Bool,
+        action: (() -> Void)?
+    ) -> ButtonModel
+}
+
+final class ButtonFactory: ButtonFactoryProtocol {
+    func makeConfiguration(
+        title: String,
+        state: ButtonModel.State,
+        isEnabled: Bool,
+        action: (() -> Void)?
+    ) -> ButtonModel {
+        return ButtonModel(title: title, state: state, isEnabled: isEnabled, action: action)
     }
 }

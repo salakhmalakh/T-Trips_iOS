@@ -8,8 +8,12 @@
 import Foundation
 import UIKit
 
-class CustomTextField: UITextField {
+final class CustomTextField: UITextField {    
+    // MARK: - Private
+
     private var strongDelegateReference: UITextFieldDelegate?
+
+    // MARK: - Init
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,6 +24,8 @@ class CustomTextField: UITextField {
         super.init(coder: coder)
         commonInit()
     }
+
+    // MARK: - Methods
 
     private func commonInit() {
         borderStyle = .roundedRect

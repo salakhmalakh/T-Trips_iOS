@@ -8,8 +8,12 @@
 import Foundation
 import UIKit
 
-enum TextFieldFactory {
-    static func createTextField(with model: TextFieldModel) -> CustomTextField {
+protocol TextFieldFactoryProtocol {
+    func makeTextField(with model: TextFieldModel) -> CustomTextField
+}
+
+final class TextFieldFactory: TextFieldFactoryProtocol {
+    func makeTextField(with model: TextFieldModel) -> CustomTextField {
         let textField = CustomTextField()
         textField.placeholder = model.placeholder
 

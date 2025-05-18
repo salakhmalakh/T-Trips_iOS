@@ -8,13 +8,19 @@
 import Foundation
 import UIKit
 
-class CustomTextFieldDelegate: NSObject, UITextFieldDelegate {
-    private let state: TextFieldState
+final class CustomTextFieldDelegate: NSObject, UITextFieldDelegate {
+    // MARK: - Properties
+
+    private let state: TextFieldModel.State
     private let phonePrefix = "+7"
 
-    init(state: TextFieldState) {
+    // MARK: - Init
+
+    init(state: TextFieldModel.State) {
         self.state = state
     }
+
+    // MARK: - UITextFieldDelegate
 
     func textField(
         _ textField: UITextField,
@@ -42,11 +48,7 @@ class CustomTextFieldDelegate: NSObject, UITextFieldDelegate {
             }
 
             let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
-
-            guard newText.hasPrefix(phonePrefix) else {
-                return false
-            }
-
+            guard newText.hasPrefix(phonePrefix) else { return false }
             let suffix = newText.dropFirst(phonePrefix.count)
 
             return suffix.allSatisfy { $0.isNumber } && newText.count <= 12
