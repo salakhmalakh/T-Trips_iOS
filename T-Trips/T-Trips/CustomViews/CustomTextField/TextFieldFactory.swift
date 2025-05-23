@@ -24,6 +24,8 @@ final class TextFieldFactory: TextFieldFactoryProtocol {
             textField.keyboardType = .numberPad
         case .password:
             textField.keyboardType = .default
+            textField.textContentType = .password
+            textField.passwordRules = nil
             textField.isSecureTextEntry = true
         }
 

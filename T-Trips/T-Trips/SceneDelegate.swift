@@ -15,11 +15,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }
+        guard let windowScene = scene as? UIWindowScene else { return }
         
-        window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = UINavigationController(rootViewController: RegistrationViewController())
-        window?.makeKeyAndVisible()
+        let window = UIWindow(windowScene: windowScene)
+        let authVC = AuthViewController()
+        let nav = UINavigationController(rootViewController: authVC)
+        nav.navigationBar.prefersLargeTitles = true
+        window.rootViewController = nav
+        window.makeKeyAndVisible()
+        
+        self.window = window
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

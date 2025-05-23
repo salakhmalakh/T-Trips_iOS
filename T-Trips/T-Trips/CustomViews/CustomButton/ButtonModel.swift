@@ -16,6 +16,7 @@ struct ButtonModel {
     enum State {
         case primary
         case secondary
+        case secondaryBorederless
         case addition
     }
 }
