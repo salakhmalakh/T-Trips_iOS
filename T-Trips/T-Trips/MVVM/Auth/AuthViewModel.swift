@@ -1,0 +1,46 @@
+//
+//  AuthViewModel.swift
+//  T-Trips
+//
+//  Created by Тимур Салахиев on 22.05.2025.
+//
+
+import Foundation
+import Combine
+
+final class AuthViewModel {
+    // MARK: - Inputs
+    @Published var phone: String = ""
+    @Published var password: String = ""
+
+    // MARK: - Outputs
+    @Published private(set) var isLoginEnabled = false
+
+    // MARK: - Callbacks
+    var onLoginSuccess: (() -> Void)?
+    var onRegister: (() -> Void)?
+
+    private var cancellables = Set<AnyCancellable>()
+
+    // MARK: - Init
+    init() {
+        // Enable the button when the phone tf is not blank and the password is not shorter than 8 symblos
+        Publishers.CombineLatest($phone, $password)
+            .map { phone, password in
+                return !phone.isEmpty && password.count >= 8
+            }
+            .receive(on: RunLoop.main)
+            .assign(to: \ .isLoginEnabled, on: self)
+            .store(in: &cancellables)
+    }
+
+    // MARK: - Actions
+    func login() {
+        // TODO: call API for auth
+        onLoginSuccess?()
+    }
+
+    func register() {
+        onRegister?()
+    }
+}

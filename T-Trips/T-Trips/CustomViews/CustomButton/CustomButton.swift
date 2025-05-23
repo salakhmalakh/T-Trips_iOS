@@ -41,13 +41,17 @@ final class CustomButton: UIButton {
         switch model.state {
         case .primary:
             backgroundColor = Constants.primaryColor
+            setTitleColor(.black, for: .normal)
         case .secondary:
             backgroundColor = Constants.secondaryColor
+            setTitleColor(UIColor(named: "secondaryButtonTextColor"), for: .normal)
         case .addition:
             backgroundColor = Constants.primaryColor
+            setTitleColor(.black, for: .normal)
+        case .secondaryBorederless:
+            backgroundColor = Constants.secondaryBorderlessColor
+            setTitleColor(UIColor(named: "secondaryButtonTextColor"), for: .normal)
         }
-
-        setTitleColor(.black, for: .normal)
     }
 
     private func setupUI() {
@@ -59,8 +63,9 @@ final class CustomButton: UIButton {
 
 private extension CustomButton {
     enum Constants {
-        static let cornerRadius: CGFloat = 8
+        static let cornerRadius: CGFloat = 12
         static let primaryColor = UIColor(named: "primaryButtonColor")
         static let secondaryColor = UIColor(named: "secondaryButtonColor")
+        static let secondaryBorderlessColor = UIColor.clear
     }
 }

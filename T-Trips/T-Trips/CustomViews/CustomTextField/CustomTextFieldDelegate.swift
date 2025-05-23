@@ -28,36 +28,100 @@ final class CustomTextFieldDelegate: NSObject, UITextFieldDelegate {
         replacementString string: String
     ) -> Bool {
         guard let currentText = textField.text else { return true }
-
+        
         switch state {
         case .name:
+            /// only letters and space are allowed
             let allowed = CharacterSet.letters.union(.whitespaces)
-            return string.rangeOfCharacter(from: allowed.inverted) == nil
-
+            guard string.rangeOfCharacter(from: allowed.inverted) == nil else { return false }
+            
+            let prospective = (currentText as NSString).replacingCharacters(in: range, with: string)
+            /// only one space in a row allowed
+            if prospective.contains("  ") { return false }
+            /// not more than two words is allowd
+            let words = prospective
+                .split(separator: " ", omittingEmptySubsequences: true)
+            if words.count > 2 { return false }
+            
+            return true
+            
         case .password:
             return true
-
+            
         case .phoneNumber:
-            if currentText.isEmpty && string.rangeOfCharacter(from: .decimalDigits) != nil {
+            if currentText.isEmpty, string.rangeOfCharacter(from: .decimalDigits) != nil {
                 textField.text = phonePrefix + string
                 return false
             }
-
+            /// non-deletable prefix
             if range.location < phonePrefix.count {
                 return false
             }
-
-            let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+            /// check for prefix presence and length
+            let newText = (currentText as NSString)
+                .replacingCharacters(in: range, with: string)
             guard newText.hasPrefix(phonePrefix) else { return false }
             let suffix = newText.dropFirst(phonePrefix.count)
-
             return suffix.allSatisfy { $0.isNumber } && newText.count <= 12
         }
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if state == .phoneNumber, (textField.text ?? "").isEmpty {
-            textField.text = phonePrefix
+        /// remove formatting when the phine is being edited
+        if state == .phoneNumber, let current = textField.text {
+            let digits = current.filter { $0.isNumber }
+            textField.text = phonePrefix + digits.dropFirst()
         }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        switch state {
+        case .name:
+            let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            let capitalized = trimmed.capitalized
+            let parts = capitalized.split(
+                separator: " ",
+                maxSplits: 1,
+                omittingEmptySubsequences: true)
+                .map(String.init)
+            let first = parts.first ?? ""
+            let last  = parts.count > 1 ? parts[1] : ""
+            textField.text = [first, last]
+                .filter { !$0.isEmpty }
+                .joined(separator: " ")
+
+        case .phoneNumber:
+            /// applies formatting after leaving the TF
+            let digits = text.filter { $0.isNumber }
+            textField.text = formatPhoneNumber(digits)
+
+        default:
+            break
+        }
+    }
+
+    // MARK: - Helpers
+
+    private func formatPhoneNumber(_ digits: String) -> String {
+        /// formatting: +7 (XXX) XXX-XX-XX
+        var result = ""
+        let chars = Array(digits)
+        for (idx, aChar) in chars.enumerated() {
+            if idx == 0 {
+                result += "+"
+            }
+            if idx == 1 {
+                result += " ("
+            }
+            if idx == 4 {
+                result += ") "
+            }
+            if idx == 7 || idx == 9 {
+                result += "-"
+            }
+            result.append(aChar)
+        }
+        return result
     }
 }
