@@ -10,9 +10,7 @@ import UIKit
 
 final class CustomTextField: UITextField {
     // MARK: - Properties
-    private let textPadding = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
-    
-    // MARK: - Private
+    private let textPadding = Constants.textPadding
     private var strongDelegateReference: UITextFieldDelegate?
 
     // MARK: - Init
@@ -26,38 +24,38 @@ final class CustomTextField: UITextField {
         commonInit()
     }
 
-    // MARK: - Methods
-
+    // MARK: - Setup
     private func commonInit() {
-        font = UIFont.systemFont(ofSize: 16)
+        font = UIFont.systemFont(ofSize: Constants.fontSize)
         autocorrectionType = .no
         autocapitalizationType = .none
         setupUI()
     }
-    
+
     private func setupUI() {
-        layer.borderWidth = 0.5
-        layer.borderColor = UIColor.lightGray.cgColor
+        layer.borderWidth = Constants.borderWidth
+        layer.borderColor = Constants.borderColor.cgColor
         layer.cornerRadius = Constants.cornerRadius
         layer.masksToBounds = true
     }
 
+    // MARK: - Delegate
     func setCustomDelegate(_ delegate: UITextFieldDelegate) {
         self.delegate = delegate
-        self.strongDelegateReference = delegate
+        strongDelegateReference = delegate
     }
-    
+
     // MARK: - Text Padding Overrides
     public override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: textPadding)
+        bounds.inset(by: textPadding)
     }
 
     public override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: textPadding)
+        bounds.inset(by: textPadding)
     }
 
     public override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: textPadding)
+        bounds.inset(by: textPadding)
     }
 }
 
@@ -65,5 +63,9 @@ final class CustomTextField: UITextField {
 private extension CustomTextField {
     enum Constants {
         static let cornerRadius: CGFloat = 12
+        static let borderWidth: CGFloat = 0.5
+        static let borderColor: UIColor = .lightGray
+        static let fontSize: CGFloat = 16
+        static let textPadding = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
     }
 }
