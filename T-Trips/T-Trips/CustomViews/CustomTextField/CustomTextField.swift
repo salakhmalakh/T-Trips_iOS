@@ -10,7 +10,7 @@ import UIKit
 
 final class CustomTextField: UITextField {
     // MARK: - Properties
-    private let textPadding = Constants.textPadding
+    private let textPadding = UIEdgeInsets.textPadding
     private var strongDelegateReference: UITextFieldDelegate?
 
     // MARK: - Init
@@ -26,16 +26,16 @@ final class CustomTextField: UITextField {
 
     // MARK: - Setup
     private func commonInit() {
-        font = UIFont.systemFont(ofSize: Constants.fontSize)
+        font = UIFont.systemFont(ofSize: CGFloat.fontSize)
         autocorrectionType = .no
         autocapitalizationType = .none
         setupUI()
     }
 
     private func setupUI() {
-        layer.borderWidth = Constants.borderWidth
-        layer.borderColor = Constants.borderColor.cgColor
-        layer.cornerRadius = Constants.cornerRadius
+        layer.borderWidth = CGFloat.borderWidth
+        layer.borderColor = UIColor.borderColor.cgColor
+        layer.cornerRadius = CGFloat.cornerRadius
         layer.masksToBounds = true
     }
 
@@ -60,12 +60,16 @@ final class CustomTextField: UITextField {
 }
 
 // MARK: - Constants
-private extension CustomTextField {
-    enum Constants {
-        static let cornerRadius: CGFloat = 12
-        static let borderWidth: CGFloat = 0.5
-        static let borderColor: UIColor = .lightGray
-        static let fontSize: CGFloat = 16
-        static let textPadding = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
-    }
+private extension UIEdgeInsets {
+    static let textPadding = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
+}
+
+private extension CGFloat {
+    static let cornerRadius: CGFloat = 12
+    static let borderWidth: CGFloat = 0.5
+    static let fontSize: CGFloat = 16
+}
+
+private extension UIColor {
+    static let borderColor: UIColor = .lightGray
 }

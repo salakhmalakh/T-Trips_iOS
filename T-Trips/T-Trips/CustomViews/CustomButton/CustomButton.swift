@@ -23,7 +23,7 @@ final class CustomButton: UIButton {
     // MARK: – Override enabled state
     override var isEnabled: Bool {
         didSet {
-            alpha = isEnabled ? 1.0 : 0.5
+            alpha = isEnabled ? CGFloat.defaultAlpha : CGFloat.translucentAlpha
         }
     }
 
@@ -40,8 +40,8 @@ final class CustomButton: UIButton {
 
     // MARK: - Setup
     private func setup() {
-        alpha = 1.0
-        titleLabel?.font = UIFont.systemFont(ofSize: Constants.fontSize, weight: .medium)
+        alpha = CGFloat.defaultAlpha
+        titleLabel?.font = UIFont.systemFont(ofSize: CGFloat.fontSize, weight: .medium)
         addAction(UIAction { [weak self] _ in self?.action?() }, for: .touchUpInside)
     }
 
@@ -53,39 +53,42 @@ final class CustomButton: UIButton {
 
         switch model.state {
         case .primary:
-            backgroundColor = Constants.primaryColor
-            setTitleColor(Constants.primaryTextColor, for: .normal)
-            layer.cornerRadius = Constants.cornerRadius
+            backgroundColor = UIColor.primaryColor
+            setTitleColor(UIColor.primaryTextColor, for: .normal)
+            layer.cornerRadius = CGFloat.cornerRadius
 
         case .secondary:
-            backgroundColor = Constants.secondaryColor
-            setTitleColor(Constants.secondaryTextColor, for: .normal)
-            layer.cornerRadius = Constants.cornerRadius
+            backgroundColor = UIColor.secondaryColor
+            setTitleColor(UIColor.secondaryTextColor, for: .normal)
+            layer.cornerRadius = CGFloat.cornerRadius
 
         case .addition:
-            backgroundColor = Constants.primaryColor
-            setTitleColor(Constants.primaryTextColor, for: .normal)
-            titleLabel?.font = UIFont.systemFont(ofSize: Constants.additionFontSize, weight: .medium)
-            layer.cornerRadius = Constants.cornerRadius
+            backgroundColor = UIColor.primaryColor
+            setTitleColor(UIColor.primaryTextColor, for: .normal)
+            titleLabel?.font = UIFont.systemFont(ofSize: CGFloat.additionFontSize, weight: .medium)
+            layer.cornerRadius = CGFloat.cornerRadius
 
         case .secondaryBorederless:
-            backgroundColor = Constants.borderlessColor
-            setTitleColor(Constants.secondaryTextColor, for: .normal)
-            layer.cornerRadius = Constants.cornerRadius
+            backgroundColor = UIColor.borderlessColor
+            setTitleColor(UIColor.secondaryTextColor, for: .normal)
+            layer.cornerRadius = CGFloat.cornerRadius
         }
     }
 }
 
 // MARK: - Constants
-private extension CustomButton {
-    enum Constants {
-        static let fontSize: CGFloat = 16
-        static let additionFontSize: CGFloat = 32
-        static let cornerRadius: CGFloat = 12
-        static let primaryColor = UIColor(named: "primaryButtonColor")
-        static let secondaryColor = UIColor(named: "secondaryButtonColor")
-        static let borderlessColor = UIColor.clear
-        static let primaryTextColor = UIColor.black
-        static let secondaryTextColor = UIColor(named: "secondaryButtonTextColor")
-    }
+private extension CGFloat {
+    static let fontSize: CGFloat = 16
+    static let defaultAlpha: CGFloat = 1.0
+    static let translucentAlpha: CGFloat = 0.5
+    static let additionFontSize: CGFloat = 32
+    static let cornerRadius: CGFloat = 12
+}
+
+private extension UIColor {
+    static let primaryColor = UIColor(named: "primaryButtonColor")
+    static let secondaryColor = UIColor(named: "secondaryButtonColor")
+    static let borderlessColor = UIColor.clear
+    static let primaryTextColor = UIColor.black
+    static let secondaryTextColor = UIColor(named: "secondaryButtonTextColor")
 }

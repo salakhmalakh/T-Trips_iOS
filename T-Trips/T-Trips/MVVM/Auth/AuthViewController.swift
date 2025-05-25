@@ -51,8 +51,8 @@ final class AuthViewController: UIViewController {
             window.makeKeyAndVisible()
             UIView.transition(
                 with: window,
-                duration: 0.3,
-                options: .transitionFlipFromRight,
+                duration: 0.2,
+                options: .transitionCrossDissolve,
                 animations: nil
             )
         }
