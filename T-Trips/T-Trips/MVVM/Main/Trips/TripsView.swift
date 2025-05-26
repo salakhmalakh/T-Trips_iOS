@@ -17,12 +17,7 @@ final class TripsView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = CGFloat.tripsFilterSpacing
-        layout.sectionInset = UIEdgeInsets(
-            top: 0,
-            left: CGFloat.tripsHorizontalInset,
-            bottom: 0,
-            right: CGFloat.tripsHorizontalInset
-        )
+        layout.sectionInset = UIEdgeInsets.cvSectionInset
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.showsHorizontalScrollIndicator = false
         collection.backgroundColor = .systemBackground
@@ -32,7 +27,7 @@ final class TripsView: UIView {
 
     let tableView: UITableView = {
         let table = UITableView()
-        table.register(CustomTripCell.self, forCellReuseIdentifier: CustomTripCell.reuseId)
+        table.register(CustomTableCell.self, forCellReuseIdentifier: CustomTableCell.reuseId)
         return table
     }()
     
@@ -94,12 +89,12 @@ final class TripsView: UIView {
 
 // MARK: - TripsView Constants
 private extension CGFloat {
-    static let tripsFilterHeight: CGFloat    = 44
-    static let tripsFilterSpacing: CGFloat   = 8
+    static let tripsFilterHeight: CGFloat = 44
+    static let tripsFilterSpacing: CGFloat = 8
     static let tripsHorizontalInset: CGFloat = 16
-    static let tripsVerticalInset: CGFloat   = 16
-    static let tripsBorderWidth: CGFloat     = 1
-    static let tripsAddButtonSize: CGFloat   = 55
+    static let tripsVerticalInset: CGFloat = 16
+    static let tripsBorderWidth: CGFloat = 1
+    static let tripsAddButtonSize: CGFloat = 55
 }
 
 private extension UIColor {
@@ -108,4 +103,13 @@ private extension UIColor {
 
 private extension String {
     static let tripsAddButtonTitle: String = "+"
+}
+
+private extension UIEdgeInsets {
+    static let cvSectionInset = UIEdgeInsets(
+        top: 0,
+        left: CGFloat.tripsHorizontalInset,
+        bottom: 0,
+        right: CGFloat.tripsHorizontalInset
+    )
 }

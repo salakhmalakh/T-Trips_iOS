@@ -27,7 +27,7 @@ final class AuthViewModel {
         // Enable the button when the phone tf is not blank and the password is not shorter than 8 symblos
         Publishers.CombineLatest($phone, $password)
             .map { phone, password in
-                return !phone.isEmpty && password.count >= 8
+                return !phone.isEmpty && password.count >= .minPasswordLength
             }
             .receive(on: RunLoop.main)
             .assign(to: \ .isLoginEnabled, on: self)
@@ -43,4 +43,9 @@ final class AuthViewModel {
     func register() {
         onRegister?()
     }
+}
+
+// MARK: - Constants
+private extension Int {
+    static let minPasswordLength = 8
 }

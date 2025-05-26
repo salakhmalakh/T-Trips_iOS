@@ -20,7 +20,7 @@ final class AuthViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Вход"
+        title = .authTitle
         setupBindings()
         setupActions()
     }
@@ -51,7 +51,7 @@ final class AuthViewController: UIViewController {
             window.makeKeyAndVisible()
             UIView.transition(
                 with: window,
-                duration: 0.2,
+                duration: .transitionDuration,
                 options: .transitionCrossDissolve,
                 animations: nil
             )
@@ -87,4 +87,13 @@ final class AuthViewController: UIViewController {
             self?.viewModel.register()
         }
     }
+}
+
+// MARK: - Constants
+private extension String {
+    static let authTitle = "Вход"
+}
+
+private extension Double {
+    static let transitionDuration = 0.2
 }

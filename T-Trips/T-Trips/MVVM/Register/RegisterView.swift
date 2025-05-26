@@ -122,13 +122,13 @@ final class RegisterView: UIView {
 }
 
 private extension CGFloat {
-    static let registerImageSize: CGFloat       = 100
-    static let registerImageInset: CGFloat      = 100
+    static let registerImageSize: CGFloat = 100
+    static let registerImageInset: CGFloat = 100
     static let registerTextFieldHeight: CGFloat = 50
-    static let registerButtonHeight: CGFloat    = 50
+    static let registerButtonHeight: CGFloat = 50
     static let registerVerticalSpacing: CGFloat = 16
     static let registerVarViewsSpacing: CGFloat = 24
-    static let registerInset: CGFloat           = 20
+    static let registerInset: CGFloat = 20
 }
 
 private extension String {

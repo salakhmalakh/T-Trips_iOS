@@ -105,19 +105,19 @@ final class AuthView: UIView {
 }
 
 private extension CGFloat {
-    static let authImageSize: CGFloat        = 100
-    static let authImageInset: CGFloat       = 100
-    static let authTextFieldHeight: CGFloat  = 50
-    static let authButtonHeight: CGFloat     = 50
-    static let authVerticalSpacing: CGFloat  = 16
-    static let authVarViewsSpacing: CGFloat  = 24
-    static let authInset: CGFloat            = 20
+    static let authImageSize: CGFloat = 100
+    static let authImageInset: CGFloat = 100
+    static let authTextFieldHeight: CGFloat = 50
+    static let authButtonHeight: CGFloat = 50
+    static let authVerticalSpacing: CGFloat = 16
+    static let authVarViewsSpacing: CGFloat = 24
+    static let authInset: CGFloat = 20
 }
 
 private extension String {
-    static let phone: String    = "Телефон"
+    static let phone: String = "Телефон"
     static let password: String = "Пароль"
-    static let login: String    = "Войти"
+    static let login: String = "Войти"
     static let register: String = "Зарегистрироваться"
 }
 

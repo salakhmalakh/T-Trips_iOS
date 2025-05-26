@@ -30,7 +30,7 @@ final class MainTabBarController: UITabBarController {
         //        notifNav.tabBarItem = UITabBarItem(
         //            title: "Уведомления",
         //            image: UIImage(systemName: "bell"),
-        //            tag: 2
+        //            tag: 1
         //        )
         //
         //        let settingsVC = SettingsViewController()
@@ -39,7 +39,7 @@ final class MainTabBarController: UITabBarController {
         //        settingsNav.tabBarItem = UITabBarItem(
         //            title: "Настройки",
         //            image: UIImage(systemName: "gearshape"),
-        //            tag: 3
+        //            tag: 2
         //        )
         // TODO: create new screens and add them into the braces below
         viewControllers = [tripsNav]

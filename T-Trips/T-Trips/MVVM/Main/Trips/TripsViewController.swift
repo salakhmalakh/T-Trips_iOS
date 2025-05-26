@@ -19,7 +19,7 @@ final class TripsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Поездки"
+        title = .tripsTitle
         setupBindings()
         setupActions()
         setupTable()
@@ -101,9 +101,9 @@ extension TripsViewController: UICollectionViewDataSource, UICollectionViewDeleg
     ) -> CGSize {
         let filter = TripsViewModel.Filter(rawValue: indexPath.item) ?? .active
         let width = filter.title.size(
-            withAttributes: [.font: UIFont.systemFont(ofSize: 14, weight: .medium)]
-        ).width + 32
-        return CGSize(width: width, height: 36)
+            withAttributes: [.font: UIFont.systemFont(ofSize: CGFloat.filterFontSize, weight: .medium)]
+        ).width + CGFloat.cvItemExpander
+        return CGSize(width: width, height: CGFloat.filterHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
@@ -127,9 +127,9 @@ extension TripsViewController: UITableViewDataSource, UITableViewDelegate {
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: CustomTripCell.reuseId,
+            withIdentifier: CustomTableCell.reuseId,
             for: indexPath
-        ) as? CustomTripCell else {
+        ) as? CustomTableCell else {
             return UITableViewCell()
         }
         cell.configure(with: viewModel.filteredTrips[indexPath.row])
@@ -138,7 +138,7 @@ extension TripsViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return .tvRowHeight
     }
     
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
@@ -153,6 +153,26 @@ extension TripsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // TODO: navigate to trip detail
+        
+        let trip = viewModel.filteredTrips[indexPath.row]
+        
+        let tripVM = TripViewModel(trip: trip)
+        
+        let tripVC = TripViewController(viewModel: tripVM)
+        tripVC.hidesBottomBarWhenPushed = true
+
+        navigationController?.pushViewController(tripVC, animated: true)
     }
+}
+
+// MARK: - Constants
+private extension CGFloat {
+    static let filterFontSize: CGFloat = 14
+    static let filterHeight: CGFloat = 36
+    static let tvRowHeight: CGFloat = 100
+    static let cvItemExpander: CGFloat = 32
+}
+
+private extension String {
+    static let tripsTitle = "Поездки"
 }
