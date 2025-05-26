@@ -17,37 +17,36 @@ final class RegisterView: UIView {
     var onRegister: (() -> Void)?
     var onLogin: (() -> Void)?
 
-    // MARK: - UI Components
     private let shieldImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "shieldT"))
-        imageView.contentMode = .scaleAspectFit
-        return imageView
+        let view = UIImageView(image: UIImage.tLogo)
+        view.contentMode = .scaleAspectFit
+        return view
     }()
-    
+
     public private(set) lazy var fullNameTextField: CustomTextField = {
-        let model = TextFieldModel(placeholder: "Имя, Фамилия", state: .name)
+        let model = TextFieldModel(placeholder: String.fullName, state: .name)
         return textFieldFactory.makeTextField(with: model)
     }()
 
     public private(set) lazy var phoneTextField: CustomTextField = {
-        let model = TextFieldModel(placeholder: "Телефон", state: .phoneNumber)
+        let model = TextFieldModel(placeholder: String.phone, state: .phoneNumber)
         return textFieldFactory.makeTextField(with: model)
     }()
 
     public private(set) lazy var passwordTextField: CustomTextField = {
-        let model = TextFieldModel(placeholder: "Пароль", state: .password)
+        let model = TextFieldModel(placeholder: String.password, state: .password)
         return textFieldFactory.makeTextField(with: model)
     }()
 
     public private(set) lazy var confirmPasswordTextField: CustomTextField = {
-        let model = TextFieldModel(placeholder: "Подтвердить пароль", state: .password)
+        let model = TextFieldModel(placeholder: String.confirmPassword, state: .password)
         return textFieldFactory.makeTextField(with: model)
     }()
 
     public private(set) lazy var registerButton: CustomButton = {
         let button = CustomButton()
         let model = buttonFactory.makeConfiguration(
-            title: "Зарегистрироваться",
+            title: String.register,
             state: .primary,
             isEnabled: false
         ) { [weak self] in self?.onRegister?() }
@@ -58,7 +57,7 @@ final class RegisterView: UIView {
     public private(set) lazy var loginButton: CustomButton = {
         let button = CustomButton()
         let model = buttonFactory.makeConfiguration(
-            title: "Уже есть аккаунт",
+            title: String.gotAnAccount,
             state: .secondaryBorederless,
             isEnabled: true
         ) { [weak self] in self?.onLogin?() }
@@ -66,7 +65,6 @@ final class RegisterView: UIView {
         return button
     }()
 
-    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -79,76 +77,69 @@ final class RegisterView: UIView {
         setupConstraints()
     }
 
-    // MARK: - Setup UI
     private func setupViews() {
         backgroundColor = .systemBackground
         [
-            shieldImageView,
-            fullNameTextField,
-            phoneTextField,
-            passwordTextField,
-            confirmPasswordTextField,
-            registerButton,
-            loginButton
-        ].forEach { addSubview($0) }
+            shieldImageView, fullNameTextField, phoneTextField, passwordTextField,
+            confirmPasswordTextField, registerButton, loginButton
+        ]
+            .forEach(addSubview)
     }
 
     private func setupConstraints() {
         shieldImageView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(Constants.imageInset)
-            make.leading.equalToSuperview().offset(((UIScreen.main.bounds.width) - Constants.imageSize) / 2)
-            make.trailing.equalToSuperview().offset(-((UIScreen.main.bounds.width) - Constants.imageSize) / 2)
-            make.size.equalTo(Constants.imageSize)
+            make.top.equalTo(safeAreaLayoutGuide).offset(CGFloat.registerImageInset)
+            make.centerX.equalToSuperview()
+            make.size.equalTo(CGFloat.registerImageSize)
         }
-
         fullNameTextField.snp.makeConstraints { make in
-            make.top.equalTo(shieldImageView.snp.bottom).offset(Constants.imageInset)
-            make.leading.trailing.equalToSuperview().inset(Constants.inset)
-            make.height.equalTo(Constants.textFieldHeight)
+            make.top.equalTo(shieldImageView.snp.bottom).offset(CGFloat.registerImageInset)
+            make.leading.trailing.equalToSuperview().inset(CGFloat.registerInset)
+            make.height.equalTo(CGFloat.registerTextFieldHeight)
         }
         phoneTextField.snp.makeConstraints { make in
-            make.top.equalTo(fullNameTextField.snp.bottom).offset(Constants.verticalSpacing)
+            make.top.equalTo(fullNameTextField.snp.bottom).offset(CGFloat.registerVerticalSpacing)
             make.leading.trailing.height.equalTo(fullNameTextField)
         }
         passwordTextField.snp.makeConstraints { make in
-            make.top.equalTo(phoneTextField.snp.bottom).offset(Constants.verticalSpacing)
+            make.top.equalTo(phoneTextField.snp.bottom).offset(CGFloat.registerVerticalSpacing)
             make.leading.trailing.height.equalTo(fullNameTextField)
         }
         confirmPasswordTextField.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(Constants.verticalSpacing)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(CGFloat.registerVerticalSpacing)
             make.leading.trailing.height.equalTo(fullNameTextField)
         }
         registerButton.snp.makeConstraints { make in
-            make.top.equalTo(confirmPasswordTextField.snp.bottom).offset(Constants.varViewsSpacing)
-            make.leading.trailing.equalToSuperview().inset(Constants.inset)
-            make.height.equalTo(Constants.buttonHeight)
+            make.top.equalTo(confirmPasswordTextField.snp.bottom).offset(CGFloat.registerVarViewsSpacing)
+            make.leading.trailing.equalToSuperview().inset(CGFloat.registerInset)
+            make.height.equalTo(CGFloat.registerButtonHeight)
         }
         loginButton.snp.makeConstraints { make in
-            make.top.equalTo(registerButton.snp.bottom).offset(Constants.verticalSpacing)
+            make.top.equalTo(registerButton.snp.bottom).offset(CGFloat.registerVerticalSpacing)
             make.centerX.equalToSuperview()
         }
     }
-
-    // MARK: - Public Binding
-    /// Reloads fields values and button accesibility
-    func bind(firstName: String, lastName: String, password: String, confirmPassword: String, isRegisterEnabled: Bool) {
-        fullNameTextField.text = firstName
-        phoneTextField.text = lastName
-        passwordTextField.text = password
-        confirmPasswordTextField.text = confirmPassword
-        registerButton.isEnabled = isRegisterEnabled
-    }
 }
 
-private extension RegisterView {
-    private enum Constants {
-        static let imageSize: CGFloat = 100
-        static let imageInset: CGFloat = 100
-        static let textFieldHeight: CGFloat = 50
-        static let buttonHeight: CGFloat = 50
-        static let verticalSpacing: CGFloat = 16
-        static let varViewsSpacing: CGFloat = 24
-        static let screenTopOffset: CGFloat = 40
-        static let inset: CGFloat = 20
-    }
+private extension CGFloat {
+    static let registerImageSize: CGFloat = 100
+    static let registerImageInset: CGFloat = 100
+    static let registerTextFieldHeight: CGFloat = 50
+    static let registerButtonHeight: CGFloat = 50
+    static let registerVerticalSpacing: CGFloat = 16
+    static let registerVarViewsSpacing: CGFloat = 24
+    static let registerInset: CGFloat = 20
+}
+
+private extension String {
+    static let fullName: String = "Имя, Фамилия"
+    static let phone: String = "Телефон"
+    static let password: String = "Пароль"
+    static let confirmPassword: String = "Подтвердите пароль"
+    static let register: String = "Зарегистрироваться"
+    static let gotAnAccount: String = "Уже есть аккаунт"
+}
+
+private extension UIImage {
+    static let tLogo = UIImage(named: "shieldT") ?? UIImage()
 }

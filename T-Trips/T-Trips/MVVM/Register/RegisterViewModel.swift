@@ -33,7 +33,10 @@ final class RegisterViewModel {
             $confirmPassword
         )
         .map { first, last, pass, confirm in
-            return !first.isEmpty && !last.isEmpty && pass.count >= 8 && pass == confirm
+            return !first.isEmpty &&
+            !last.isEmpty &&
+            pass.count >= .minPasswordLength &&
+            confirm.count >= .minPasswordLength
         }
         .receive(on: RunLoop.main)
         .assign(to: \ .isRegisterEnabled, on: self)
@@ -49,4 +52,9 @@ final class RegisterViewModel {
     func login() {
         onLogin?()
     }
+}
+
+// MARK: - Constants
+private extension Int {
+    static let minPasswordLength = 8
 }

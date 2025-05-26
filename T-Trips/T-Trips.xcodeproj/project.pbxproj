@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		762A60972DE468E700F31E34 /* CustomTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762A60962DE468E700F31E34 /* CustomTableCell.swift */; };
+		762A60992DE4690E00F31E34 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762A60982DE4690E00F31E34 /* FilterCell.swift */; };
 		764CD7322DC3EDF600900B78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764CD7312DC3EDF600900B78 /* AppDelegate.swift */; };
 		764CD7342DC3EDF600900B78 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764CD7332DC3EDF600900B78 /* SceneDelegate.swift */; };
 		764CD7362DC3EDF600900B78 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764CD7352DC3EDF600900B78 /* AuthView.swift */; };
@@ -21,6 +23,17 @@
 		767A42172DDF7FA6008970ED /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767A42162DDF7FA6008970ED /* RegisterView.swift */; };
 		767A421A2DDF8183008970ED /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767A42192DDF8183008970ED /* RegisterViewModel.swift */; };
 		767A421C2DDF826C008970ED /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767A421B2DDF826C008970ED /* RegisterViewController.swift */; };
+		767A42372DE1014E008970ED /* TripsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767A42362DE1014E008970ED /* TripsView.swift */; };
+		767A42392DE10166008970ED /* TripsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767A42382DE10166008970ED /* TripsViewModel.swift */; };
+		767A423B2DE1017E008970ED /* TripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767A423A2DE1017E008970ED /* TripsViewController.swift */; };
+		767A423E2DE11511008970ED /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767A423D2DE11511008970ED /* User.swift */; };
+		767A42402DE11525008970ED /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767A423F2DE11525008970ED /* Trip.swift */; };
+		767A42422DE12430008970ED /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767A42412DE12430008970ED /* MainTabBarController.swift */; };
+		767D33392DE37D7F00F66264 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767D33382DE37D7F00F66264 /* Extentions.swift */; };
+		767D333C2DE3C38700F66264 /* TripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767D333B2DE3C38700F66264 /* TripView.swift */; };
+		767D333E2DE3C39100F66264 /* TripViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767D333D2DE3C39100F66264 /* TripViewModel.swift */; };
+		767D33402DE3C3A300F66264 /* TripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767D333F2DE3C3A300F66264 /* TripViewController.swift */; };
+		767D33422DE3C4AF00F66264 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767D33412DE3C4AF00F66264 /* Expense.swift */; };
 		76BD79882DD0AF8300FB7A75 /* ButtonActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BD79872DD0AF8300FB7A75 /* ButtonActionHandler.swift */; };
 		76BD798B2DD0AFF500FB7A75 /* ButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BD798A2DD0AFF500FB7A75 /* ButtonModel.swift */; };
 		76BD798D2DD0B05800FB7A75 /* ButtonFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BD798C2DD0B05800FB7A75 /* ButtonFactory.swift */; };
@@ -30,6 +43,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		762A60962DE468E700F31E34 /* CustomTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableCell.swift; sourceTree = "<group>"; };
+		762A60982DE4690E00F31E34 /* FilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		764CD72E2DC3EDF600900B78 /* T-Trips.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "T-Trips.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		764CD7312DC3EDF600900B78 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		764CD7332DC3EDF600900B78 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +60,17 @@
 		767A42162DDF7FA6008970ED /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		767A42192DDF8183008970ED /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		767A421B2DDF826C008970ED /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		767A42362DE1014E008970ED /* TripsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsView.swift; sourceTree = "<group>"; };
+		767A42382DE10166008970ED /* TripsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsViewModel.swift; sourceTree = "<group>"; };
+		767A423A2DE1017E008970ED /* TripsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsViewController.swift; sourceTree = "<group>"; };
+		767A423D2DE11511008970ED /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		767A423F2DE11525008970ED /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		767A42412DE12430008970ED /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		767D33382DE37D7F00F66264 /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
+		767D333B2DE3C38700F66264 /* TripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripView.swift; sourceTree = "<group>"; };
+		767D333D2DE3C39100F66264 /* TripViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewModel.swift; sourceTree = "<group>"; };
+		767D333F2DE3C3A300F66264 /* TripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewController.swift; sourceTree = "<group>"; };
+		767D33412DE3C4AF00F66264 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		76BD79872DD0AF8300FB7A75 /* ButtonActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonActionHandler.swift; sourceTree = "<group>"; };
 		76BD798A2DD0AFF500FB7A75 /* ButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModel.swift; sourceTree = "<group>"; };
 		76BD798C2DD0B05800FB7A75 /* ButtonFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonFactory.swift; sourceTree = "<group>"; };
@@ -65,6 +91,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		762A60952DE468C400F31E34 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				762A60962DE468E700F31E34 /* CustomTableCell.swift */,
+				762A60982DE4690E00F31E34 /* FilterCell.swift */,
+			);
+			path = CustomCells;
+			sourceTree = "<group>";
+		};
 		764CD7252DC3EDF600900B78 = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +124,8 @@
 				764CD7332DC3EDF600900B78 /* SceneDelegate.swift */,
 				766E62EE2DD1E5F400E70F12 /* MVVM */,
 				766E62F22DD1E66A00E70F12 /* CustomViews */,
+				767A423C2DE114DB008970ED /* Models */,
+				767D33372DE37D6900F66264 /* Utils */,
 				764CD73D2DC3EDFC00900B78 /* Assets.xcassets */,
 				764CD7422DC3EDFC00900B78 /* Info.plist */,
 				764CD73A2DC3EDF600900B78 /* T_Trips.xcdatamodeld */,
@@ -99,6 +136,7 @@
 		766E62EE2DD1E5F400E70F12 /* MVVM */ = {
 			isa = PBXGroup;
 			children = (
+				767A42352DE1010B008970ED /* Main */,
 				766E62EF2DD1E5FE00E70F12 /* Auth */,
 				767A42182DDF816D008970ED /* Register */,
 			);
@@ -143,6 +181,55 @@
 				767A421B2DDF826C008970ED /* RegisterViewController.swift */,
 			);
 			path = Register;
+			sourceTree = "<group>";
+		};
+		767A42352DE1010B008970ED /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				762A60952DE468C400F31E34 /* CustomCells */,
+				767A42412DE12430008970ED /* MainTabBarController.swift */,
+				767A42442DE12492008970ED /* Trips */,
+				767D333A2DE3C12C00F66264 /* Trip */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		767A423C2DE114DB008970ED /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				767A423D2DE11511008970ED /* User.swift */,
+				767A423F2DE11525008970ED /* Trip.swift */,
+				767D33412DE3C4AF00F66264 /* Expense.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		767A42442DE12492008970ED /* Trips */ = {
+			isa = PBXGroup;
+			children = (
+				767A42362DE1014E008970ED /* TripsView.swift */,
+				767A42382DE10166008970ED /* TripsViewModel.swift */,
+				767A423A2DE1017E008970ED /* TripsViewController.swift */,
+			);
+			path = Trips;
+			sourceTree = "<group>";
+		};
+		767D33372DE37D6900F66264 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				767D33382DE37D7F00F66264 /* Extentions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		767D333A2DE3C12C00F66264 /* Trip */ = {
+			isa = PBXGroup;
+			children = (
+				767D333B2DE3C38700F66264 /* TripView.swift */,
+				767D333D2DE3C39100F66264 /* TripViewModel.swift */,
+				767D333F2DE3C3A300F66264 /* TripViewController.swift */,
+			);
+			path = Trip;
 			sourceTree = "<group>";
 		};
 		76BD79892DD0AFCE00FB7A75 /* CustomButton */ = {
@@ -254,9 +341,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				767A42402DE11525008970ED /* Trip.swift in Sources */,
 				764CD7362DC3EDF600900B78 /* AuthView.swift in Sources */,
+				767D33402DE3C3A300F66264 /* TripViewController.swift in Sources */,
+				767A42372DE1014E008970ED /* TripsView.swift in Sources */,
 				76BD798D2DD0B05800FB7A75 /* ButtonFactory.swift in Sources */,
 				76BD79882DD0AF8300FB7A75 /* ButtonActionHandler.swift in Sources */,
+				767A423B2DE1017E008970ED /* TripsViewController.swift in Sources */,
+				767A42422DE12430008970ED /* MainTabBarController.swift in Sources */,
+				767D33392DE37D7F00F66264 /* Extentions.swift in Sources */,
 				767A421A2DDF8183008970ED /* RegisterViewModel.swift in Sources */,
 				766E62F52DD22DA200E70F12 /* TextFieldModel.swift in Sources */,
 				766E62F72DD22DCB00E70F12 /* CustomTextField.swift in Sources */,
@@ -266,11 +359,18 @@
 				766E62FB2DD2317A00E70F12 /* CustomTextFieldDelegate.swift in Sources */,
 				76BD798F2DD0B07500FB7A75 /* CustomButton.swift in Sources */,
 				764CD7322DC3EDF600900B78 /* AppDelegate.swift in Sources */,
+				762A60972DE468E700F31E34 /* CustomTableCell.swift in Sources */,
+				762A60992DE4690E00F31E34 /* FilterCell.swift in Sources */,
+				767D333C2DE3C38700F66264 /* TripView.swift in Sources */,
+				767A42392DE10166008970ED /* TripsViewModel.swift in Sources */,
+				767D333E2DE3C39100F66264 /* TripViewModel.swift in Sources */,
 				767A421C2DDF826C008970ED /* RegisterViewController.swift in Sources */,
+				767D33422DE3C4AF00F66264 /* Expense.swift in Sources */,
 				76D60E6E2DDF6F8A001C542A /* AuthViewController.swift in Sources */,
 				764CD7342DC3EDF600900B78 /* SceneDelegate.swift in Sources */,
 				76D60E6C2DDF6F6B001C542A /* AuthViewModel.swift in Sources */,
 				76BD798B2DD0AFF500FB7A75 /* ButtonModel.swift in Sources */,
+				767A423E2DE11511008970ED /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

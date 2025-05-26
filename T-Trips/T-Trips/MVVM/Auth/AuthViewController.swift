@@ -20,7 +20,7 @@ final class AuthViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Вход"
+        title = .authTitle
         setupBindings()
         setupActions()
     }
@@ -42,8 +42,21 @@ final class AuthViewController: UIViewController {
 
         // Navigation
         viewModel.onLoginSuccess = {
-            // TODO: goto main
+            guard let scene =
+                UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                let delegate = scene.delegate as? SceneDelegate,
+                let window = delegate.window else { return }
+            let mainTab = MainTabBarController()
+            window.rootViewController = mainTab
+            window.makeKeyAndVisible()
+            UIView.transition(
+                with: window,
+                duration: .transitionDuration,
+                options: .transitionCrossDissolve,
+                animations: nil
+            )
         }
+
         viewModel.onRegister = { [weak self] in
             guard let self = self else { return }
             let registerVC = RegisterViewController()
@@ -74,4 +87,13 @@ final class AuthViewController: UIViewController {
             self?.viewModel.register()
         }
     }
+}
+
+// MARK: - Constants
+private extension String {
+    static let authTitle = "Вход"
+}
+
+private extension Double {
+    static let transitionDuration = 0.2
 }
