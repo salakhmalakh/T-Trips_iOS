@@ -1,5 +1,24 @@
 import Foundation
 
+import Combine
+
 final class DebtsViewModel {
-    var debts: [Debt] = MockData.debts
+    @Published private(set) var debts: [Debt] = []
+
+    private let tripId: Int64
+    private let userId: Int64?
+
+    init(tripId: Int64, userId: Int64? = nil) {
+        self.tripId = tripId
+        self.userId = userId
+        loadDebts()
+    }
+
+    func loadDebts() {
+        MockAPIService.shared.getDebts(tripId: tripId, userId: userId) { [weak self] debts in
+            DispatchQueue.main.async {
+                self?.debts = debts
+            }
+        }
+    }
 }

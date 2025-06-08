@@ -1,8 +1,20 @@
 import UIKit
+import Combine
 
 final class DebtsViewController: UIViewController {
     private let debtsView = DebtsView()
-    private let viewModel = DebtsViewModel()
+    private let viewModel: DebtsViewModel
+    private var cancellables = Set<AnyCancellable>()
+
+    init(tripId: Int64, userId: Int64? = nil) {
+        self.viewModel = DebtsViewModel(tripId: tripId, userId: userId)
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        self.viewModel = DebtsViewModel(tripId: 0)
+        super.init(coder: coder)
+    }
 
     override func loadView() {
         view = debtsView
@@ -11,12 +23,22 @@ final class DebtsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Долги"
+        setupBindings()
         setupTable()
     }
 
     private func setupTable() {
         debtsView.tableView.dataSource = self
         debtsView.tableView.delegate = self
+    }
+
+    private func setupBindings() {
+        viewModel.$debts
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.debtsView.tableView.reloadData()
+            }
+            .store(in: &cancellables)
     }
 }
 
