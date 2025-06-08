@@ -34,6 +34,7 @@ final class TripViewController: UIViewController {
         if viewModel.trip.status == .completed {
             tripView.addExpenseButton.isHidden = true
         }
+        setupNavigationBar()
         setupBindings()
         setupActions()
         setupTableView()
@@ -75,6 +76,41 @@ final class TripViewController: UIViewController {
         let table = tripView.tableView
         table.dataSource = self
         table.delegate = self
+    }
+
+    // MARK: - Navigation bar
+    private func setupNavigationBar() {
+        let details = UIAction(title: String.detailsTitle) { [weak self] _ in
+            self?.showTripDetails()
+        }
+        let debts = UIAction(title: String.debtsTitle) { [weak self] _ in
+            self?.showDebts()
+        }
+        let exit = UIAction(title: String.exitTitle, attributes: .destructive) { [weak self] _ in
+            self?.exitTrip()
+        }
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "ellipsis"),
+            menu: UIMenu(children: [details, debts, exit])
+        )
+    }
+
+    private func showTripDetails() {
+        let vm = TripDetailViewModel(trip: viewModel.trip, users: MockData.users)
+        let vc = TripDetailViewController(viewModel: vm)
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
+    private func showDebts() {
+        let vc = DebtsViewController(tripId: viewModel.trip.id)
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
+    private func exitTrip() {
+        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -150,4 +186,7 @@ private extension CGFloat {
 
 private extension String {
     static let tripTitile = "Поездка"
+    static let detailsTitle = "Детали"
+    static let debtsTitle = "Долги"
+    static let exitTitle = "Выйти"
 }

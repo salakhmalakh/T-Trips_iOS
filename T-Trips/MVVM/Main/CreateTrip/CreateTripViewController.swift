@@ -2,11 +2,23 @@ import UIKit
 import Combine
 
 final class CreateTripViewController: UIViewController {
+    public var onTripCreated: ((Trip) -> Void)?
+
     private let createView = CreateTripView()
-    private let viewModel = CreateTripViewModel()
+    private let viewModel: CreateTripViewModel
     private var cancellables = Set<AnyCancellable>()
 
     private let participants = MockData.users
+
+    init(adminId: Int64 = 0) {
+        self.viewModel = CreateTripViewModel(adminId: adminId)
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        self.viewModel = CreateTripViewModel()
+        super.init(coder: coder)
+    }
 
     override func loadView() {
         view = createView
@@ -84,8 +96,13 @@ final class CreateTripViewController: UIViewController {
 
         createView.saveButton.addAction(UIAction { [weak self] _ in
             self?.viewModel.saveTrip()
-            self?.navigationController?.popViewController(animated: true)
         }, for: .touchUpInside)
+
+        viewModel.onTripCreated = { [weak self] trip in
+            guard let self = self else { return }
+            self.onTripCreated?(trip)
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }
 

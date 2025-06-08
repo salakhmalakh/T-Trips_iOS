@@ -27,6 +27,9 @@ final class TripsViewModel {
     @Published private(set) var trips: [Trip] = []
     @Published private(set) var filteredTrips: [Trip] = []
 
+    // Handlers
+    var onAddTrip: (() -> Void)?
+
     private var cancellables = Set<AnyCancellable>()
 
     init() {
@@ -54,7 +57,11 @@ final class TripsViewModel {
         }
     }
 
-    func addTripTapped() { /* TODO */ }
+    func addTripTapped() { onAddTrip?() }
+
+    func addTrip(_ trip: Trip) {
+        trips.append(trip)
+    }
 }
 
 private extension TripsViewModel.Filter {
