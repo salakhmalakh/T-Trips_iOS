@@ -50,6 +50,20 @@
 		76BD798F2DD0B07500FB7A75 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BD798E2DD0B07400FB7A75 /* CustomButton.swift */; };
 		76D60E6C2DDF6F6B001C542A /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D60E6B2DDF6F6B001C542A /* AuthViewModel.swift */; };
 		76D60E6E2DDF6F8A001C542A /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D60E6D2DDF6F8A001C542A /* AuthViewController.swift */; };
+		76FFBE842DF6097900DD8272 /* Аутенфикация.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76FFBE762DF6097900DD8272 /* Аутенфикация.pdf */; };
+		76FFBE852DF6097900DD8272 /* Экран долгов завершенной поездки.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76FFBE772DF6097900DD8272 /* Экран долгов завершенной поездки.pdf */; };
+		76FFBE862DF6097900DD8272 /* Регистрация.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76FFBE782DF6097900DD8272 /* Регистрация.pdf */; };
+		76FFBE872DF6097900DD8272 /* Детали поездки.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76FFBE792DF6097900DD8272 /* Детали поездки.pdf */; };
+		76FFBE882DF6097900DD8272 /* Стартовый экран.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76FFBE7A2DF6097900DD8272 /* Стартовый экран.pdf */; };
+		76FFBE892DF6097900DD8272 /* Основной экран.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76FFBE7B2DF6097900DD8272 /* Основной экран.pdf */; };
+		76FFBE8A2DF6097900DD8272 /* Детали погашения долга.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76FFBE7C2DF6097900DD8272 /* Детали погашения долга.pdf */; };
+		76FFBE8B2DF6097900DD8272 /* Добавление расхода.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76FFBE7D2DF6097900DD8272 /* Добавление расхода.pdf */; };
+		76FFBE8C2DF6097900DD8272 /* Уведомления.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76FFBE7E2DF6097900DD8272 /* Уведомления.pdf */; };
+		76FFBE8D2DF6097A00DD8272 /* Настройки.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76FFBE7F2DF6097900DD8272 /* Настройки.pdf */; };
+		76FFBE8E2DF6097A00DD8272 /* Экран долгов текущей поездки.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76FFBE802DF6097900DD8272 /* Экран долгов текущей поездки.pdf */; };
+		76FFBE8F2DF6097A00DD8272 /* Создание поездки.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76FFBE812DF6097900DD8272 /* Создание поездки.pdf */; };
+		76FFBE902DF6097A00DD8272 /* Поездка.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76FFBE822DF6097900DD8272 /* Поездка.pdf */; };
+		76FFBE912DF6097A00DD8272 /* Детали расхода.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76FFBE832DF6097900DD8272 /* Детали расхода.pdf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,6 +111,20 @@
 		76BD798E2DD0B07400FB7A75 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		76D60E6B2DDF6F6B001C542A /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		76D60E6D2DDF6F8A001C542A /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		76FFBE762DF6097900DD8272 /* Аутенфикация.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Аутенфикация.pdf"; path = "../../../../../Downloads/T-BANK/Аутенфикация.pdf"; sourceTree = "<group>"; };
+		76FFBE772DF6097900DD8272 /* Экран долгов завершенной поездки.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Экран долгов завершенной поездки.pdf"; path = "../../../../../Downloads/T-BANK/Экран долгов завершенной поездки.pdf"; sourceTree = "<group>"; };
+		76FFBE782DF6097900DD8272 /* Регистрация.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Регистрация.pdf"; path = "../../../../../Downloads/T-BANK/Регистрация.pdf"; sourceTree = "<group>"; };
+		76FFBE792DF6097900DD8272 /* Детали поездки.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Детали поездки.pdf"; path = "../../../../../Downloads/T-BANK/Детали поездки.pdf"; sourceTree = "<group>"; };
+		76FFBE7A2DF6097900DD8272 /* Стартовый экран.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Стартовый экран.pdf"; path = "../../../../../Downloads/T-BANK/Стартовый экран.pdf"; sourceTree = "<group>"; };
+		76FFBE7B2DF6097900DD8272 /* Основной экран.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Основной экран.pdf"; path = "../../../../../Downloads/T-BANK/Основной экран.pdf"; sourceTree = "<group>"; };
+		76FFBE7C2DF6097900DD8272 /* Детали погашения долга.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Детали погашения долга.pdf"; path = "../../../../../Downloads/T-BANK/Детали погашения долга.pdf"; sourceTree = "<group>"; };
+		76FFBE7D2DF6097900DD8272 /* Добавление расхода.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Добавление расхода.pdf"; path = "../../../../../Downloads/T-BANK/Добавление расхода.pdf"; sourceTree = "<group>"; };
+		76FFBE7E2DF6097900DD8272 /* Уведомления.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Уведомления.pdf"; path = "../../../../../Downloads/T-BANK/Уведомления.pdf"; sourceTree = "<group>"; };
+		76FFBE7F2DF6097900DD8272 /* Настройки.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Настройки.pdf"; path = "../../../../../Downloads/T-BANK/Настройки.pdf"; sourceTree = "<group>"; };
+		76FFBE802DF6097900DD8272 /* Экран долгов текущей поездки.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Экран долгов текущей поездки.pdf"; path = "../../../../../Downloads/T-BANK/Экран долгов текущей поездки.pdf"; sourceTree = "<group>"; };
+		76FFBE812DF6097900DD8272 /* Создание поездки.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Создание поездки.pdf"; path = "../../../../../Downloads/T-BANK/Создание поездки.pdf"; sourceTree = "<group>"; };
+		76FFBE822DF6097900DD8272 /* Поездка.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Поездка.pdf"; path = "../../../../../Downloads/T-BANK/Поездка.pdf"; sourceTree = "<group>"; };
+		76FFBE832DF6097900DD8272 /* Детали расхода.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Детали расхода.pdf"; path = "../../../../../Downloads/T-BANK/Детали расхода.pdf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +161,7 @@
 		764CD7252DC3EDF600900B78 = {
 			isa = PBXGroup;
 			children = (
+				76FFBE752DF6095500DD8272 /* PDFs */,
 				764CD74B2DC3FD0600900B78 /* .swiftlint.yml */,
 				764CD7302DC3EDF600900B78 /* T-Trips */,
 				764CD72F2DC3EDF600900B78 /* Products */,
@@ -289,6 +318,27 @@
 			path = CustomButton;
 			sourceTree = "<group>";
 		};
+		76FFBE752DF6095500DD8272 /* PDFs */ = {
+			isa = PBXGroup;
+			children = (
+				76FFBE762DF6097900DD8272 /* Аутенфикация.pdf */,
+				76FFBE7C2DF6097900DD8272 /* Детали погашения долга.pdf */,
+				76FFBE792DF6097900DD8272 /* Детали поездки.pdf */,
+				76FFBE832DF6097900DD8272 /* Детали расхода.pdf */,
+				76FFBE7D2DF6097900DD8272 /* Добавление расхода.pdf */,
+				76FFBE7F2DF6097900DD8272 /* Настройки.pdf */,
+				76FFBE7B2DF6097900DD8272 /* Основной экран.pdf */,
+				76FFBE822DF6097900DD8272 /* Поездка.pdf */,
+				76FFBE782DF6097900DD8272 /* Регистрация.pdf */,
+				76FFBE812DF6097900DD8272 /* Создание поездки.pdf */,
+				76FFBE7A2DF6097900DD8272 /* Стартовый экран.pdf */,
+				76FFBE7E2DF6097900DD8272 /* Уведомления.pdf */,
+				76FFBE772DF6097900DD8272 /* Экран долгов завершенной поездки.pdf */,
+				76FFBE802DF6097900DD8272 /* Экран долгов текущей поездки.pdf */,
+			);
+			path = PDFs;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -354,7 +404,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76FFBE912DF6097A00DD8272 /* Детали расхода.pdf in Resources */,
+				76FFBE8C2DF6097900DD8272 /* Уведомления.pdf in Resources */,
 				764CD74C2DC3FD0600900B78 /* .swiftlint.yml in Resources */,
+				76FFBE872DF6097900DD8272 /* Детали поездки.pdf in Resources */,
+				76FFBE852DF6097900DD8272 /* Экран долгов завершенной поездки.pdf in Resources */,
+				76FFBE8D2DF6097A00DD8272 /* Настройки.pdf in Resources */,
+				76FFBE842DF6097900DD8272 /* Аутенфикация.pdf in Resources */,
+				76FFBE8E2DF6097A00DD8272 /* Экран долгов текущей поездки.pdf in Resources */,
+				76FFBE902DF6097A00DD8272 /* Поездка.pdf in Resources */,
+				76FFBE892DF6097900DD8272 /* Основной экран.pdf in Resources */,
+				76FFBE8B2DF6097900DD8272 /* Добавление расхода.pdf in Resources */,
+				76FFBE8F2DF6097A00DD8272 /* Создание поездки.pdf in Resources */,
+				76FFBE8A2DF6097900DD8272 /* Детали погашения долга.pdf in Resources */,
+				76FFBE862DF6097900DD8272 /* Регистрация.pdf in Resources */,
+				76FFBE882DF6097900DD8272 /* Стартовый экран.pdf in Resources */,
 				764CD73E2DC3EDFC00900B78 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
