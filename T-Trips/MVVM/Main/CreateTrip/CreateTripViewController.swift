@@ -9,6 +9,8 @@ final class CreateTripViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
 
     private let participants = MockData.users
+    private var selectedUsers: [User] = []
+    private let participantsPlaceholder = "Участники"
 
     init(adminId: Int64 = 0) {
         self.viewModel = CreateTripViewModel(adminId: adminId)
@@ -88,10 +90,18 @@ final class CreateTripViewController: UIViewController {
         }, for: .editingChanged)
 
         createView.participantsTextField.addAction(UIAction { [weak self] _ in
-            let row = self?.createView.participantsPicker.selectedRow(inComponent: 0) ?? 0
-            let user = self?.participants[row]
-            self?.viewModel.participantIds = [user?.id].compactMap { $0 }
-            self?.createView.participantsTextField.text = "\(user?.firstName ?? "") \(user?.lastName ?? "")"
+            guard let self = self else { return }
+            let row = self.createView.participantsPicker.selectedRow(inComponent: 0)
+            let user = self.participants[row]
+            guard !self.selectedUsers.contains(where: { $0.id == user.id }) else {
+                self.createView.endEditing(true)
+                return
+            }
+            self.selectedUsers.append(user)
+            self.viewModel.participantIds = self.selectedUsers.map { $0.id }
+            self.addToken(for: user)
+            self.createView.participantsTextField.text = ""
+            self.createView.participantsTextField.placeholder = self.selectedUsers.isEmpty ? self.participantsPlaceholder : nil
         }, for: .editingDidEnd)
 
         createView.saveButton.addAction(UIAction { [weak self] _ in
@@ -103,6 +113,20 @@ final class CreateTripViewController: UIViewController {
             self.onTripCreated?(trip)
             self.navigationController?.popViewController(animated: true)
         }
+    }
+
+    private func addToken(for user: User) {
+        let token = ParticipantTokenView(name: "\(user.firstName) \(user.lastName)")
+        token.onRemove = { [weak self, weak token] in
+            guard let self = self, let token = token else { return }
+            if let index = self.selectedUsers.firstIndex(where: { $0.id == user.id }) {
+                self.selectedUsers.remove(at: index)
+                self.viewModel.participantIds = self.selectedUsers.map { $0.id }
+                token.removeFromSuperview()
+                self.createView.participantsTextField.placeholder = self.selectedUsers.isEmpty ? self.participantsPlaceholder : nil
+            }
+        }
+        createView.tokensStackView.addArrangedSubview(token)
     }
 }
 
