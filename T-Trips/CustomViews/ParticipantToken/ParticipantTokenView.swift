@@ -10,7 +10,7 @@ final class ParticipantTokenView: UIView {
         super.init(frame: .zero)
         nameLabel.text = name
         nameLabel.font = UIFont.systemFont(ofSize: CGFloat.nameFontSize)
-        removeButton.setTitle("\u2715", for: .normal)
+        removeButton.setTitle("\u{2715}", for: .normal)
         removeButton.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat.nameFontSize, weight: .bold)
         removeButton.addAction(UIAction { [weak self] _ in
             self?.onRemove?()
