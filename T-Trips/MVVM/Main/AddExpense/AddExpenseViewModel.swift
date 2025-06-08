@@ -49,16 +49,18 @@ final class AddExpenseViewModel {
             let payerId = payerId,
             let payeeId = payeeId
         else { return }
-        let expense = Expense(
-            id: nil,
-            tripId: tripId,
-            title: title,
+
+        let dto = ExpenseDtoForCreate(
             category: Expense.Category(rawValue: category.uppercased()) ?? .other,
             amount: value,
-            ownerId: payerId,
-            createdAt: date,
+            title: title,
             paidForUserIds: [payeeId]
         )
-        onAdd?(expense)
+
+        MockAPIService.shared.createExpense(tripId: tripId, dto: dto, ownerId: payerId) { [weak self] expense in
+            DispatchQueue.main.async {
+                self?.onAdd?(expense)
+            }
+        }
     }
 }

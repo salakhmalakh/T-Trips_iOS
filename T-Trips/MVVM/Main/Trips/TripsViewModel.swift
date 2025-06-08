@@ -30,16 +30,28 @@ final class TripsViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init() {
-        loadTrips()
+        loadTrips(for: filter)
+
+        $filter
+            .sink { [weak self] newFilter in
+                self?.loadTrips(for: newFilter)
+            }
+            .store(in: &cancellables)
+
         Publishers.CombineLatest($trips, $filter)
-            .map { trips, filter in trips.filter { $0.status == filter.correspondingStatus } }
+            .map { trips, filter in
+                trips.filter { $0.status == filter.correspondingStatus }
+            }
             .receive(on: RunLoop.main)
             .assign(to: \ .filteredTrips, on: self)
             .store(in: &cancellables)
     }
-    func loadTrips() {
-        // TODO: заменить на API
-        self.trips = MockData.trips
+    func loadTrips(for filter: Filter) {
+        MockAPIService.shared.getUserTrips(status: filter.correspondingStatus) { [weak self] trips in
+            DispatchQueue.main.async {
+                self?.trips = trips
+            }
+        }
     }
 
     func addTripTapped() { /* TODO */ }

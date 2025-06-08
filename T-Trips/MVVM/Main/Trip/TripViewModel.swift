@@ -24,9 +24,11 @@ final class TripViewModel {
 
     // MARK: - Data Loading
     private func loadExpenses() {
-        // TODO: заменить на API
-        self.expenses = MockData.expenses
-            .filter { $0.tripId == trip.id }
+        MockAPIService.shared.getExpenses(tripId: trip.id) { [weak self] expenses in
+            DispatchQueue.main.async {
+                self?.expenses = expenses
+            }
+        }
     }
 
     // MARK: - Actions

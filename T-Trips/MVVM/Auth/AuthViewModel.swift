@@ -36,8 +36,11 @@ final class AuthViewModel {
 
     // MARK: - Actions
     func login() {
-        // TODO: call API for auth
-        onLoginSuccess?()
+        MockAPIService.shared.authenticate(phone: phone, password: password) { [weak self] success in
+            DispatchQueue.main.async {
+                if success { self?.onLoginSuccess?() }
+            }
+        }
     }
 
     func register() {
