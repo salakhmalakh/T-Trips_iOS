@@ -51,6 +51,16 @@ final class TripsViewController: UIViewController {
             },
             for: .touchUpInside
         )
+
+        viewModel.onAddTrip = { [weak self] in
+            guard let self = self else { return }
+            let createVC = CreateTripViewController()
+            createVC.onTripCreated = { [weak self] trip in
+                self?.viewModel.addTrip(trip)
+            }
+            createVC.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(createVC, animated: true)
+        }
     }
 
     private func updateFilterSelection() {
