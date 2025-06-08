@@ -41,20 +41,6 @@
 		767D333E2DE3C39100F66264 /* TripViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767D333D2DE3C39100F66264 /* TripViewModel.swift */; };
 		767D33402DE3C3A300F66264 /* TripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767D333F2DE3C3A300F66264 /* TripViewController.swift */; };
 		767D33422DE3C4AF00F66264 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767D33412DE3C4AF00F66264 /* Expense.swift */; };
-		768A37F82DF5FD3200D0F686 /* Детали погашения долга.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 768A37EA2DF5FD3100D0F686 /* Детали погашения долга.pdf */; };
-		768A37F92DF5FD3200D0F686 /* Основной экран.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 768A37EB2DF5FD3100D0F686 /* Основной экран.pdf */; };
-		768A37FA2DF5FD3200D0F686 /* Уведомления.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 768A37EC2DF5FD3100D0F686 /* Уведомления.pdf */; };
-		768A37FB2DF5FD3200D0F686 /* Поездка.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 768A37ED2DF5FD3100D0F686 /* Поездка.pdf */; };
-		768A37FC2DF5FD3200D0F686 /* Экран долгов завершенной поездки.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 768A37EE2DF5FD3100D0F686 /* Экран долгов завершенной поездки.pdf */; };
-		768A37FD2DF5FD3200D0F686 /* Экран долгов текущей поездки.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 768A37EF2DF5FD3100D0F686 /* Экран долгов текущей поездки.pdf */; };
-		768A37FE2DF5FD3200D0F686 /* Детали поездки.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 768A37F02DF5FD3100D0F686 /* Детали поездки.pdf */; };
-		768A37FF2DF5FD3200D0F686 /* Создание поездки.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 768A37F12DF5FD3100D0F686 /* Создание поездки.pdf */; };
-		768A38002DF5FD3200D0F686 /* Настройки.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 768A37F22DF5FD3100D0F686 /* Настройки.pdf */; };
-		768A38012DF5FD3200D0F686 /* Регистрация.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 768A37F32DF5FD3100D0F686 /* Регистрация.pdf */; };
-		768A38022DF5FD3200D0F686 /* Детали расхода.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 768A37F42DF5FD3100D0F686 /* Детали расхода.pdf */; };
-		768A38032DF5FD3200D0F686 /* Добавление расхода.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 768A37F52DF5FD3200D0F686 /* Добавление расхода.pdf */; };
-		768A38042DF5FD3200D0F686 /* Стартовый экран.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 768A37F62DF5FD3200D0F686 /* Стартовый экран.pdf */; };
-		768A38052DF5FD3200D0F686 /* Аутенфикация.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 768A37F72DF5FD3200D0F686 /* Аутенфикация.pdf */; };
 		76AE6E632DE65E1F0061BDA3 /* ExpenseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AE6E622DE65E1F0061BDA3 /* ExpenseDetailView.swift */; };
 		76AE6E652DE65E4C0061BDA3 /* ExpenseDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AE6E642DE65E4C0061BDA3 /* ExpenseDetailViewModel.swift */; };
 		76AE6E672DE65E660061BDA3 /* ExpenseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AE6E662DE65E660061BDA3 /* ExpenseDetailViewController.swift */; };
@@ -102,20 +88,6 @@
 		767D333D2DE3C39100F66264 /* TripViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewModel.swift; sourceTree = "<group>"; };
 		767D333F2DE3C3A300F66264 /* TripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewController.swift; sourceTree = "<group>"; };
 		767D33412DE3C4AF00F66264 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
-		768A37EA2DF5FD3100D0F686 /* Детали погашения долга.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Детали погашения долга.pdf"; path = "../../../../../../Downloads/T-BANK/Детали погашения долга.pdf"; sourceTree = "<group>"; };
-		768A37EB2DF5FD3100D0F686 /* Основной экран.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Основной экран.pdf"; path = "../../../../../../Downloads/T-BANK/Основной экран.pdf"; sourceTree = "<group>"; };
-		768A37EC2DF5FD3100D0F686 /* Уведомления.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Уведомления.pdf"; path = "../../../../../../Downloads/T-BANK/Уведомления.pdf"; sourceTree = "<group>"; };
-		768A37ED2DF5FD3100D0F686 /* Поездка.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Поездка.pdf"; path = "../../../../../../Downloads/T-BANK/Поездка.pdf"; sourceTree = "<group>"; };
-		768A37EE2DF5FD3100D0F686 /* Экран долгов завершенной поездки.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Экран долгов завершенной поездки.pdf"; path = "../../../../../../Downloads/T-BANK/Экран долгов завершенной поездки.pdf"; sourceTree = "<group>"; };
-		768A37EF2DF5FD3100D0F686 /* Экран долгов текущей поездки.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Экран долгов текущей поездки.pdf"; path = "../../../../../../Downloads/T-BANK/Экран долгов текущей поездки.pdf"; sourceTree = "<group>"; };
-		768A37F02DF5FD3100D0F686 /* Детали поездки.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Детали поездки.pdf"; path = "../../../../../../Downloads/T-BANK/Детали поездки.pdf"; sourceTree = "<group>"; };
-		768A37F12DF5FD3100D0F686 /* Создание поездки.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Создание поездки.pdf"; path = "../../../../../../Downloads/T-BANK/Создание поездки.pdf"; sourceTree = "<group>"; };
-		768A37F22DF5FD3100D0F686 /* Настройки.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Настройки.pdf"; path = "../../../../../../Downloads/T-BANK/Настройки.pdf"; sourceTree = "<group>"; };
-		768A37F32DF5FD3100D0F686 /* Регистрация.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Регистрация.pdf"; path = "../../../../../../Downloads/T-BANK/Регистрация.pdf"; sourceTree = "<group>"; };
-		768A37F42DF5FD3100D0F686 /* Детали расхода.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Детали расхода.pdf"; path = "../../../../../../Downloads/T-BANK/Детали расхода.pdf"; sourceTree = "<group>"; };
-		768A37F52DF5FD3200D0F686 /* Добавление расхода.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Добавление расхода.pdf"; path = "../../../../../../Downloads/T-BANK/Добавление расхода.pdf"; sourceTree = "<group>"; };
-		768A37F62DF5FD3200D0F686 /* Стартовый экран.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Стартовый экран.pdf"; path = "../../../../../../Downloads/T-BANK/Стартовый экран.pdf"; sourceTree = "<group>"; };
-		768A37F72DF5FD3200D0F686 /* Аутенфикация.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Аутенфикация.pdf"; path = "../../../../../../Downloads/T-BANK/Аутенфикация.pdf"; sourceTree = "<group>"; };
 		76AE6E622DE65E1F0061BDA3 /* ExpenseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailView.swift; sourceTree = "<group>"; };
 		76AE6E642DE65E4C0061BDA3 /* ExpenseDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailViewModel.swift; sourceTree = "<group>"; };
 		76AE6E662DE65E660061BDA3 /* ExpenseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailViewController.swift; sourceTree = "<group>"; };
@@ -178,7 +150,6 @@
 		764CD7302DC3EDF600900B78 /* T-Trips */ = {
 			isa = PBXGroup;
 			children = (
-				768A37E92DF5FD0200D0F686 /* PDFs */,
 				764CD7312DC3EDF600900B78 /* AppDelegate.swift */,
 				764CD7332DC3EDF600900B78 /* SceneDelegate.swift */,
 				766E62EE2DD1E5F400E70F12 /* MVVM */,
@@ -297,27 +268,6 @@
 			path = Trip;
 			sourceTree = "<group>";
 		};
-		768A37E92DF5FD0200D0F686 /* PDFs */ = {
-			isa = PBXGroup;
-			children = (
-				768A37F72DF5FD3200D0F686 /* Аутенфикация.pdf */,
-				768A37EA2DF5FD3100D0F686 /* Детали погашения долга.pdf */,
-				768A37F02DF5FD3100D0F686 /* Детали поездки.pdf */,
-				768A37F42DF5FD3100D0F686 /* Детали расхода.pdf */,
-				768A37F52DF5FD3200D0F686 /* Добавление расхода.pdf */,
-				768A37F22DF5FD3100D0F686 /* Настройки.pdf */,
-				768A37EB2DF5FD3100D0F686 /* Основной экран.pdf */,
-				768A37ED2DF5FD3100D0F686 /* Поездка.pdf */,
-				768A37F32DF5FD3100D0F686 /* Регистрация.pdf */,
-				768A37F12DF5FD3100D0F686 /* Создание поездки.pdf */,
-				768A37F62DF5FD3200D0F686 /* Стартовый экран.pdf */,
-				768A37EC2DF5FD3100D0F686 /* Уведомления.pdf */,
-				768A37EE2DF5FD3100D0F686 /* Экран долгов завершенной поездки.pdf */,
-				768A37EF2DF5FD3100D0F686 /* Экран долгов текущей поездки.pdf */,
-			);
-			path = PDFs;
-			sourceTree = "<group>";
-		};
 		76AE6E612DE65DFD0061BDA3 /* ExpenseDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -404,22 +354,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				768A37F92DF5FD3200D0F686 /* Основной экран.pdf in Resources */,
-				768A38002DF5FD3200D0F686 /* Настройки.pdf in Resources */,
-				768A38052DF5FD3200D0F686 /* Аутенфикация.pdf in Resources */,
-				768A37FA2DF5FD3200D0F686 /* Уведомления.pdf in Resources */,
-				768A38022DF5FD3200D0F686 /* Детали расхода.pdf in Resources */,
 				764CD74C2DC3FD0600900B78 /* .swiftlint.yml in Resources */,
-				768A37FF2DF5FD3200D0F686 /* Создание поездки.pdf in Resources */,
 				764CD73E2DC3EDFC00900B78 /* Assets.xcassets in Resources */,
-				768A37FE2DF5FD3200D0F686 /* Детали поездки.pdf in Resources */,
-				768A38012DF5FD3200D0F686 /* Регистрация.pdf in Resources */,
-				768A38042DF5FD3200D0F686 /* Стартовый экран.pdf in Resources */,
-				768A37FD2DF5FD3200D0F686 /* Экран долгов текущей поездки.pdf in Resources */,
-				768A37FB2DF5FD3200D0F686 /* Поездка.pdf in Resources */,
-				768A37FC2DF5FD3200D0F686 /* Экран долгов завершенной поездки.pdf in Resources */,
-				768A37F82DF5FD3200D0F686 /* Детали погашения долга.pdf in Resources */,
-				768A38032DF5FD3200D0F686 /* Добавление расхода.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
