@@ -18,8 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = scene as? UIWindowScene else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        let authVC = AuthViewController()
-        let nav = UINavigationController(rootViewController: authVC)
+        let startVC = StartViewController()
+        let nav = UINavigationController(rootViewController: startVC)
         nav.navigationBar.prefersLargeTitles = true
         window.rootViewController = nav
         window.makeKeyAndVisible()

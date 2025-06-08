@@ -86,6 +86,12 @@ final class CustomTableCell: UITableViewCell {
         titleLabel.text = "\(amountString)"
         dateLabel.text = "\(categoryString)"
     }
+
+    // MARK: - Configure with plain text
+    func configure(with text: String) {
+        titleLabel.text = text
+        dateLabel.text = nil
+    }
 }
 
 // MARK: - Constants
