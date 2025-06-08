@@ -75,10 +75,10 @@ final class CustomTableCell: UITableViewCell {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         let start = formatter.string(from: trip.startDate)
-        let end = trip.endDate.map { formatter.string(from: $0) } ?? ""
-        dateLabel.text = end.isEmpty ? start : "\(start) - \(end)"
+        let end = formatter.string(from: trip.endDate)
+        dateLabel.text = "\(start) - \(end)"
     }
-    
+
     // MARK: - Configure for Expense
     func configure(with expense: Expense) {
         let amountString = String(format: "%.2f ₽", expense.amount)
