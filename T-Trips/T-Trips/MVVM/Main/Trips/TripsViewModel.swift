@@ -38,57 +38,15 @@ final class TripsViewModel {
             .store(in: &cancellables)
     }
     func loadTrips() {
-        let now = Date()
-        trips = [
-            // swiftlint:disable line_length
-            Trip(
-                id: UUID(),
-                adminId: UUID(),
-                title: "Отпуск в Сочи",
-                startDate: now,
-                endDate: Calendar.current.date(byAdding: .day, value: 7, to: now),
-                budget: 100000,
-                description: nil,
-                status: .active,
-                createdAt: now),
-            Trip(id: UUID(), adminId: UUID(), title: "Поездка №1", startDate: now, endDate: Calendar.current.date(byAdding: .day, value: 5, to: now), budget: 50000, description: nil, status: .active, createdAt: now),
-            Trip(id: UUID(), adminId: UUID(), title: "Поездка №2", startDate: now, endDate: Calendar.current.date(byAdding: .day, value: 3, to: now), budget: 30000, description: nil, status: .active, createdAt: now),
-            Trip(id: UUID(), adminId: UUID(), title: "Поездка №3", startDate: now, endDate: Calendar.current.date(byAdding: .day, value: 10, to: now), budget: 120000, description: nil, status: .active, createdAt: now),
-            Trip(id: UUID(), adminId: UUID(), title: "Поездка №4", startDate: now, endDate: Calendar.current.date(byAdding: .day, value: 2, to: now), budget: 20000, description: nil, status: .active, createdAt: now),
-            Trip(id: UUID(), adminId: UUID(), title: "Поездка №5", startDate: now, endDate: Calendar.current.date(byAdding: .day, value: 14, to: now), budget: 150000, description: nil, status: .active, createdAt: now),
-            Trip(id: UUID(), adminId: UUID(), title: "Поездка №6", startDate: now, endDate: Calendar.current.date(byAdding: .day, value: 4, to: now), budget: 40000, description: nil, status: .active, createdAt: now),
-            Trip(id: UUID(), adminId: UUID(), title: "Поездка №7", startDate: now, endDate: Calendar.current.date(byAdding: .day, value: 8, to: now), budget: 80000, description: nil, status: .active, createdAt: now),
-            Trip(id: UUID(), adminId: UUID(), title: "Поездка №8", startDate: now, endDate: Calendar.current.date(byAdding: .day, value: 6, to: now), budget: 60000, description: nil, status: .active, createdAt: now),
-            Trip(id: UUID(), adminId: UUID(), title: "Поездка №9", startDate: now, endDate: Calendar.current.date(byAdding: .day, value: 9, to: now), budget: 90000, description: nil, status: .active, createdAt: now),
-            Trip(id: UUID(), adminId: UUID(), title: "Поездка №10", startDate: now, endDate: Calendar.current.date(byAdding: .day, value: 1, to: now), budget: 25000, description: nil, status: .active, createdAt: now),
-            Trip(
-                id: UUID(),
-                adminId: UUID(),
-                title: "Горное восхождение",
-                startDate: now,
-                endDate: Calendar.current.date(byAdding: .day, value: 10, to: now),
-                budget: 50000,
-                description: nil,
-                status: .planning,
-                createdAt: now),
-            Trip(
-                id: UUID(),
-                adminId: UUID(),
-                title: "Бизнес-поездка",
-                startDate: now.addingTimeInterval(-86400 * 30),
-                endDate: now.addingTimeInterval(-86400 * 25),
-                budget: 200000,
-                description: nil,
-                status: .completed,
-                createdAt: now.addingTimeInterval(-86400 * 40))
-            // swiftlint:enable line_length
-        ]
+        // TODO: заменить на API
+        self.trips = MockData.trips
     }
+
     func addTripTapped() { /* TODO */ }
 }
 
 private extension TripsViewModel.Filter {
-    var correspondingStatus: TripStatus {
+    var correspondingStatus: Trip.Status {
         switch self {
         case .active: return .active
         case .planning: return .planning

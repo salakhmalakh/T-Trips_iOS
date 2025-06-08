@@ -9,24 +9,30 @@ import Foundation
 
 // MARK: - User Model
 
-enum UserStatus: String, Codable {
-    case active   = "ACTIVE"
-    case blocked  = "BLOCKED"
-    case deleted  = "DELETED"
-}
-
-struct User: Codable {
+struct User: Codable, Identifiable {
     let id: UUID
     let login: String
     let phone: String
     let password: String
-    let name: String?
-    let surname: String?
-    let status: UserStatus
+    let name: String
+    let surname: String
+    let status: Status
     let createdAt: Date
 
-    enum CodingKeys: String, CodingKey {
-        case id, login, phone, password, name, surname, status
+    enum Status: String, Codable, CaseIterable {
+        case active = "ACTIVE"
+        case blocked = "BLOCKED"
+        case deleted = "DELETED"
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case login
+        case phone
+        case password
+        case name
+        case surname
+        case status
         case createdAt = "created_at"
     }
 }

@@ -13,6 +13,7 @@ final class CustomTextFieldDelegate: NSObject, UITextFieldDelegate {
 
     private let state: TextFieldModel.State
     private let phonePrefix = "+7"
+    private let moneyPrefix = "₽"
 
     // MARK: - Init
 
@@ -45,9 +46,6 @@ final class CustomTextFieldDelegate: NSObject, UITextFieldDelegate {
             
             return true
             
-        case .password:
-            return true
-            
         case .phoneNumber:
             if currentText.isEmpty, string.rangeOfCharacter(from: .decimalDigits) != nil {
                 textField.text = phonePrefix + string
@@ -63,14 +61,28 @@ final class CustomTextFieldDelegate: NSObject, UITextFieldDelegate {
             guard newText.hasPrefix(phonePrefix) else { return false }
             let suffix = newText.dropFirst(phonePrefix.count)
             return suffix.allSatisfy { $0.isNumber } && newText.count <= 12
+            
+        case .picker:
+            if string.isEmpty {
+                return false
+            }
+            return true
+            
+        default:
+            return true
         }
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        /// remove formatting when the phine is being edited
+        /// remove formatting when the phone is being edited
         if state == .phoneNumber, let current = textField.text {
             let digits = current.filter { $0.isNumber }
             textField.text = phonePrefix + digits.dropFirst()
+        }
+        /// remove formatting when the money is being edited
+        if state == .money, let current = textField.text {
+            let digits = current.filter { $0.isNumber }
+            textField.text = digits
         }
     }
     
@@ -96,6 +108,11 @@ final class CustomTextFieldDelegate: NSObject, UITextFieldDelegate {
             let digits = text.filter { $0.isNumber }
             textField.text = formatPhoneNumber(digits)
 
+        case .money:
+            /// applies formatting after leaving the TF
+            let digits = text.filter { $0.isNumber }
+            textField.text = formatMoney(digits)
+            
         default:
             break
         }
@@ -119,6 +136,18 @@ final class CustomTextFieldDelegate: NSObject, UITextFieldDelegate {
             }
             if idx == 7 || idx == 9 {
                 result += "-"
+            }
+            result.append(aChar)
+        }
+        return result
+    }
+    private func formatMoney(_ digits: String) -> String {
+        /// formatting: ₽99.99
+        var result = ""
+        let chars = Array(digits)
+        for (idx, aChar) in chars.enumerated() {
+            if idx == 0 {
+                result += "₽"
             }
             result.append(aChar)
         }

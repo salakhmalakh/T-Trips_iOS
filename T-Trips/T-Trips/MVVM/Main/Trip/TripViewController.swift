@@ -31,6 +31,9 @@ final class TripViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = .tripTitile
+        if viewModel.trip.status == .completed {
+            tripView.addExpenseButton.isHidden = true
+        }
         setupBindings()
         setupActions()
         setupTableView()
@@ -51,8 +54,20 @@ final class TripViewController: UIViewController {
             UIAction { [weak self] _ in self?.viewModel.addExpenseTapped() },
             for: .touchUpInside
         )
-        viewModel.onAddExpense = { 
-            // TODO: present add expense screen
+        viewModel.onAddExpense = { [weak self] in
+            guard let self = self else { return }
+            let names = MockData.users.map { "\($0.name) \($0.surname)" }
+            let addVC = AddExpenseViewController(
+                tripId: self.viewModel.trip.id,
+                payers: names,
+                payees: names
+            )
+            addVC.onExpenseAdded = { [weak self] expense in
+                self?.viewModel.addExpense(expense)
+            }
+            
+            addVC.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(addVC, animated: true)
         }
     }
 
@@ -99,7 +114,32 @@ extension TripViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // TODO: navigate to expense detail
+        let expense = viewModel.expenses[indexPath.row]
+        
+        // Кто оплатил
+        let payerName: String = {
+            if let owner = expense.owner {
+                return "\(owner.name) \(owner.surname)"
+            }
+            return ""
+        }()
+        
+        // За кого оплачено — список через запятую
+        let payeeName: String = {
+            let names = expense.paidForUsers
+                .map { "\($0.name) \($0.surname)" }
+            return names.joined(separator: ", ")
+        }()
+        
+        // Передаём оба имени в Detail ViewModel
+        let detailVM = ExpenseDetailViewModel(
+            expense: expense,
+            payerName: payerName,
+            payeeName: payeeName
+        )
+        let detailVC = ExpenseDetailViewController(viewModel: detailVM)
+        detailVC.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 

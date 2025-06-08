@@ -8,15 +8,27 @@
 import Foundation
 
 struct Expense: Codable, Identifiable {
-    let id: UUID
-    let tripId: UUID
+    let id: Int64?
+    let tripId: Int64
+    let title: String
     let category: Category
     let amount: Double
-    let userId: UUID
-    let description: String?
-    let createdAt: Date
+    let ownerId: Int64
+    let createdAt: Date?
+    let paidForUserIds: [Int64]
 
-    // MARK: - Coding Keys
+    var owner: User? { MockData.users.first { $0.id == ownerId } }
+    var paidForUsers: [User] { MockData.users.filter { paidForUserIds.contains($0.id) } }
+
+    enum Category: String, Codable, CaseIterable {
+        case tickets = "TICKETS"
+        case hotels = "HOTELS"
+        case food = "FOOD"
+        case entertainment = "ENTERTAINMENT"
+        case insurance = "INSURANCE"
+        case other = "OTHER"
+    }
+
     private enum CodingKeys: String, CodingKey {
         case id
         case tripId = "trip_id"
@@ -26,35 +38,23 @@ struct Expense: Codable, Identifiable {
         case description
         case createdAt = "created_at"
     }
-
-    // MARK: - Category Enum
-    enum Category: String, Codable {
-        case tickets = "TICKETS"
-        case hotels = "HOTELS"
-        case food = "FOOD"
-        case entertainment = "ENTERTAINMENT"
-        case insurance = "INSURANCE"
-        case other = "OTHER"
-    }
 }
 
-// MARK: - JSONDecoder Extension for ISO8601 Date Parsing
-extension JSONDecoder {
-    static var iso8601WithFractionalSeconds: JSONDecoder {
-        let decoder = JSONDecoder()
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        decoder.dateDecodingStrategy = .custom { decoder in
-            let container = try decoder.singleValueContainer()
-            let dateStr = try container.decode(String.self)
-            if let date = formatter.date(from: dateStr) {
-                return date
-            }
-            throw DecodingError.dataCorruptedError(
-                in: container,
-                debugDescription: "Invalid date: \(dateStr)"
-            )
+extension Expense.Category {
+    var localized: String {
+        switch self {
+        case .tickets:
+            return "Билеты"
+        case .hotels:
+            return "Отель"
+        case .food:
+            return "Еда"
+        case .entertainment:
+            return "Развлечения"
+        case .insurance:
+            return "Страховка"
+        case .other:
+            return "Другое"
         }
-        return decoder
     }
 }
