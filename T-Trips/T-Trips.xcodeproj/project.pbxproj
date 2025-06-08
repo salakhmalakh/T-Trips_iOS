@@ -44,20 +44,6 @@
 		76AE6E632DE65E1F0061BDA3 /* ExpenseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AE6E622DE65E1F0061BDA3 /* ExpenseDetailView.swift */; };
 		76AE6E652DE65E4C0061BDA3 /* ExpenseDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AE6E642DE65E4C0061BDA3 /* ExpenseDetailViewModel.swift */; };
 		76AE6E672DE65E660061BDA3 /* ExpenseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AE6E662DE65E660061BDA3 /* ExpenseDetailViewController.swift */; };
-		76AF27DD2DF602C70064065D /* Регистрация.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76AF27CF2DF602C60064065D /* Регистрация.pdf */; };
-		76AF27DE2DF602C70064065D /* Стартовый экран.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76AF27D02DF602C60064065D /* Стартовый экран.pdf */; };
-		76AF27DF2DF602C70064065D /* Детали поездки.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76AF27D12DF602C60064065D /* Детали поездки.pdf */; };
-		76AF27E02DF602C70064065D /* Экран долгов текущей поездки.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76AF27D22DF602C60064065D /* Экран долгов текущей поездки.pdf */; };
-		76AF27E12DF602C70064065D /* Уведомления.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76AF27D32DF602C60064065D /* Уведомления.pdf */; };
-		76AF27E22DF602C70064065D /* Экран долгов завершенной поездки.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76AF27D42DF602C70064065D /* Экран долгов завершенной поездки.pdf */; };
-		76AF27E32DF602C70064065D /* Настройки.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76AF27D52DF602C70064065D /* Настройки.pdf */; };
-		76AF27E42DF602C70064065D /* Добавление расхода.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76AF27D62DF602C70064065D /* Добавление расхода.pdf */; };
-		76AF27E52DF602C70064065D /* Детали погашения долга.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76AF27D72DF602C70064065D /* Детали погашения долга.pdf */; };
-		76AF27E62DF602C70064065D /* Детали расхода.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76AF27D82DF602C70064065D /* Детали расхода.pdf */; };
-		76AF27E72DF602C70064065D /* Основной экран.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76AF27D92DF602C70064065D /* Основной экран.pdf */; };
-		76AF27E82DF602C70064065D /* Поездка.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76AF27DA2DF602C70064065D /* Поездка.pdf */; };
-		76AF27E92DF602C70064065D /* Создание поездки.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76AF27DB2DF602C70064065D /* Создание поездки.pdf */; };
-		76AF27EA2DF602C70064065D /* Аутенфикация.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76AF27DC2DF602C70064065D /* Аутенфикация.pdf */; };
 		76BD79882DD0AF8300FB7A75 /* ButtonActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BD79872DD0AF8300FB7A75 /* ButtonActionHandler.swift */; };
 		76BD798B2DD0AFF500FB7A75 /* ButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BD798A2DD0AFF500FB7A75 /* ButtonModel.swift */; };
 		76BD798D2DD0B05800FB7A75 /* ButtonFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BD798C2DD0B05800FB7A75 /* ButtonFactory.swift */; };
@@ -105,20 +91,6 @@
 		76AE6E622DE65E1F0061BDA3 /* ExpenseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailView.swift; sourceTree = "<group>"; };
 		76AE6E642DE65E4C0061BDA3 /* ExpenseDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailViewModel.swift; sourceTree = "<group>"; };
 		76AE6E662DE65E660061BDA3 /* ExpenseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailViewController.swift; sourceTree = "<group>"; };
-		76AF27CF2DF602C60064065D /* Регистрация.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Регистрация.pdf"; path = "../../../../../../Downloads/T-BANK/Регистрация.pdf"; sourceTree = "<group>"; };
-		76AF27D02DF602C60064065D /* Стартовый экран.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Стартовый экран.pdf"; path = "../../../../../../Downloads/T-BANK/Стартовый экран.pdf"; sourceTree = "<group>"; };
-		76AF27D12DF602C60064065D /* Детали поездки.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Детали поездки.pdf"; path = "../../../../../../Downloads/T-BANK/Детали поездки.pdf"; sourceTree = "<group>"; };
-		76AF27D22DF602C60064065D /* Экран долгов текущей поездки.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Экран долгов текущей поездки.pdf"; path = "../../../../../../Downloads/T-BANK/Экран долгов текущей поездки.pdf"; sourceTree = "<group>"; };
-		76AF27D32DF602C60064065D /* Уведомления.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Уведомления.pdf"; path = "../../../../../../Downloads/T-BANK/Уведомления.pdf"; sourceTree = "<group>"; };
-		76AF27D42DF602C70064065D /* Экран долгов завершенной поездки.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Экран долгов завершенной поездки.pdf"; path = "../../../../../../Downloads/T-BANK/Экран долгов завершенной поездки.pdf"; sourceTree = "<group>"; };
-		76AF27D52DF602C70064065D /* Настройки.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Настройки.pdf"; path = "../../../../../../Downloads/T-BANK/Настройки.pdf"; sourceTree = "<group>"; };
-		76AF27D62DF602C70064065D /* Добавление расхода.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Добавление расхода.pdf"; path = "../../../../../../Downloads/T-BANK/Добавление расхода.pdf"; sourceTree = "<group>"; };
-		76AF27D72DF602C70064065D /* Детали погашения долга.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Детали погашения долга.pdf"; path = "../../../../../../Downloads/T-BANK/Детали погашения долга.pdf"; sourceTree = "<group>"; };
-		76AF27D82DF602C70064065D /* Детали расхода.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Детали расхода.pdf"; path = "../../../../../../Downloads/T-BANK/Детали расхода.pdf"; sourceTree = "<group>"; };
-		76AF27D92DF602C70064065D /* Основной экран.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Основной экран.pdf"; path = "../../../../../../Downloads/T-BANK/Основной экран.pdf"; sourceTree = "<group>"; };
-		76AF27DA2DF602C70064065D /* Поездка.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Поездка.pdf"; path = "../../../../../../Downloads/T-BANK/Поездка.pdf"; sourceTree = "<group>"; };
-		76AF27DB2DF602C70064065D /* Создание поездки.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Создание поездки.pdf"; path = "../../../../../../Downloads/T-BANK/Создание поездки.pdf"; sourceTree = "<group>"; };
-		76AF27DC2DF602C70064065D /* Аутенфикация.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Аутенфикация.pdf"; path = "../../../../../../Downloads/T-BANK/Аутенфикация.pdf"; sourceTree = "<group>"; };
 		76BD79872DD0AF8300FB7A75 /* ButtonActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonActionHandler.swift; sourceTree = "<group>"; };
 		76BD798A2DD0AFF500FB7A75 /* ButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModel.swift; sourceTree = "<group>"; };
 		76BD798C2DD0B05800FB7A75 /* ButtonFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonFactory.swift; sourceTree = "<group>"; };
@@ -178,7 +150,6 @@
 		764CD7302DC3EDF600900B78 /* T-Trips */ = {
 			isa = PBXGroup;
 			children = (
-				76AF27CE2DF602AD0064065D /* PDFs */,
 				764CD7312DC3EDF600900B78 /* AppDelegate.swift */,
 				764CD7332DC3EDF600900B78 /* SceneDelegate.swift */,
 				766E62EE2DD1E5F400E70F12 /* MVVM */,
@@ -307,27 +278,6 @@
 			path = ExpenseDetail;
 			sourceTree = "<group>";
 		};
-		76AF27CE2DF602AD0064065D /* PDFs */ = {
-			isa = PBXGroup;
-			children = (
-				76AF27DC2DF602C70064065D /* Аутенфикация.pdf */,
-				76AF27D72DF602C70064065D /* Детали погашения долга.pdf */,
-				76AF27D12DF602C60064065D /* Детали поездки.pdf */,
-				76AF27D82DF602C70064065D /* Детали расхода.pdf */,
-				76AF27D62DF602C70064065D /* Добавление расхода.pdf */,
-				76AF27D52DF602C70064065D /* Настройки.pdf */,
-				76AF27D92DF602C70064065D /* Основной экран.pdf */,
-				76AF27DA2DF602C70064065D /* Поездка.pdf */,
-				76AF27CF2DF602C60064065D /* Регистрация.pdf */,
-				76AF27DB2DF602C70064065D /* Создание поездки.pdf */,
-				76AF27D02DF602C60064065D /* Стартовый экран.pdf */,
-				76AF27D32DF602C60064065D /* Уведомления.pdf */,
-				76AF27D42DF602C70064065D /* Экран долгов завершенной поездки.pdf */,
-				76AF27D22DF602C60064065D /* Экран долгов текущей поездки.pdf */,
-			);
-			path = PDFs;
-			sourceTree = "<group>";
-		};
 		76BD79892DD0AFCE00FB7A75 /* CustomButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -404,22 +354,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76AF27E62DF602C70064065D /* Детали расхода.pdf in Resources */,
-				76AF27E02DF602C70064065D /* Экран долгов текущей поездки.pdf in Resources */,
-				76AF27EA2DF602C70064065D /* Аутенфикация.pdf in Resources */,
-				76AF27E32DF602C70064065D /* Настройки.pdf in Resources */,
-				76AF27E92DF602C70064065D /* Создание поездки.pdf in Resources */,
-				76AF27E22DF602C70064065D /* Экран долгов завершенной поездки.pdf in Resources */,
-				76AF27DF2DF602C70064065D /* Детали поездки.pdf in Resources */,
 				764CD74C2DC3FD0600900B78 /* .swiftlint.yml in Resources */,
-				76AF27E42DF602C70064065D /* Добавление расхода.pdf in Resources */,
-				76AF27DD2DF602C70064065D /* Регистрация.pdf in Resources */,
-				76AF27DE2DF602C70064065D /* Стартовый экран.pdf in Resources */,
-				76AF27E52DF602C70064065D /* Детали погашения долга.pdf in Resources */,
-				76AF27E72DF602C70064065D /* Основной экран.pdf in Resources */,
 				764CD73E2DC3EDFC00900B78 /* Assets.xcassets in Resources */,
-				76AF27E82DF602C70064065D /* Поездка.pdf in Resources */,
-				76AF27E12DF602C70064065D /* Уведомления.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
