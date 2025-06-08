@@ -15,7 +15,7 @@ final class ExpenseDetailViewModel {
     @Published private(set) var dateText: String
     @Published private(set) var payer: String
     @Published private(set) var payee: String
-    @Published private(set) var description: String?
+    @Published private(set) var title: String
 
     // MARK: - Handlers
     var onEdit: (() -> Void)?
@@ -37,7 +37,7 @@ final class ExpenseDetailViewModel {
         self.dateText = formatter.string(from: expense.createdAt)
         self.payer = payerName
         self.payee = payeeName ?? ""
-        self.description = expense.description
+        self.title = expense.title
     }
 
     func editTapped() {

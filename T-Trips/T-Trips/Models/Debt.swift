@@ -8,28 +8,17 @@
 import Foundation
 
 struct Debt: Codable, Identifiable {
-    let id: Int
-    let tripId: Int
-    let userId: UUID
+    let debtId: String
+    let tripId: Int64
+    let fromUserId: Int64
+    let toUserId: Int64
     let amount: Double
-    let status: Status
-    let createdAt: Date
-    let updatedAt: Date?
-
-    enum Status: String, Codable, CaseIterable {
-        case pending = "PENDING"
-        case paid = "PAID"
-        case confirmed = "CONFIRMED"
-        case cancelled = "CANCELLED"
-    }
 
     private enum CodingKeys: String, CodingKey {
-        case id
-        case tripId = "trip_id"
-        case userId = "user_id"
+        case debtId
+        case tripId
+        case fromUserId
+        case toUserId
         case amount
-        case status
-        case createdAt = "created_at"
-        case updatedAt = "updated_at"
     }
 }
