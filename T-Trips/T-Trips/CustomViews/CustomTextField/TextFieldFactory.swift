@@ -27,6 +27,10 @@ final class TextFieldFactory: TextFieldFactoryProtocol {
             textField.textContentType = .password
             textField.passwordRules = nil
             textField.isSecureTextEntry = true
+        case .money:
+            textField.keyboardType = .numberPad
+        case .picker:
+            textField.keyboardType = .default
         }
 
         let customDelegate = CustomTextFieldDelegate(state: model.state)

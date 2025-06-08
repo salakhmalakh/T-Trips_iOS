@@ -84,7 +84,6 @@ final class CustomTableCell: UITableViewCell {
         let amountString = String(format: "%.2f ₽", expense.amount)
         let categoryString = expense.category.rawValue.capitalized
         titleLabel.text = "\(amountString)"
-
         dateLabel.text = "\(categoryString)"
     }
 }

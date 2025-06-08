@@ -15,5 +15,7 @@ struct TextFieldModel {
         case name
         case phoneNumber
         case password
+        case money
+        case picker
     }
 }

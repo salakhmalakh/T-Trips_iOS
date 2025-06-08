@@ -24,23 +24,18 @@ final class TripViewModel {
 
     // MARK: - Data Loading
     private func loadExpenses() {
-        // TODO: replace with real API
-        let now = Date()
-        expenses = (1...5).map { _ in
-            Expense(
-                id: UUID(),
-                tripId: trip.id,
-                category: .food,
-                amount: Double.random(in: 1000...10000),
-                userId: UUID(),
-                description: nil,
-                createdAt: now
-            )
-        }
+        // TODO: заменить на API
+        self.expenses = MockData.expenses
+            .filter { $0.tripId == trip.id }
     }
 
     // MARK: - Actions
     func addExpenseTapped() {
         onAddExpense?()
     }
+    
+    func addExpense(_ expense: Expense) {
+        expenses.append(expense)
+    }
+
 }
