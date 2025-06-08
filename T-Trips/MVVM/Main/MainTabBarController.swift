@@ -23,26 +23,26 @@ final class MainTabBarController: UITabBarController {
             image: UIImage(systemName: "mappin"),
             tag: 0
         )
-        
-        //        let notifVC = NotificationsViewController()
-        //        notifVC.title = "Уведомления"
-        //        let notifNav = UINavigationController(rootViewController: notifVC)
-        //        notifNav.tabBarItem = UITabBarItem(
-        //            title: "Уведомления",
-        //            image: UIImage(systemName: "bell"),
-        //            tag: 1
-        //        )
-        //
-        //        let settingsVC = SettingsViewController()
-        //        settingsVC.title = "Настройки"
-        //        let settingsNav = UINavigationController(rootViewController: settingsVC)
-        //        settingsNav.tabBarItem = UITabBarItem(
-        //            title: "Настройки",
-        //            image: UIImage(systemName: "gearshape"),
-        //            tag: 2
-        //        )
-        // TODO: create new screens and add them into the braces below
-        viewControllers = [tripsNav]
+
+        let notifVC = NotificationsViewController()
+        notifVC.title = "Уведомления"
+        let notifNav = UINavigationController(rootViewController: notifVC)
+        notifNav.tabBarItem = UITabBarItem(
+            title: "Уведомления",
+            image: UIImage(systemName: "bell"),
+            tag: 1
+        )
+
+        let settingsVC = SettingsViewController()
+        settingsVC.title = "Настройки"
+        let settingsNav = UINavigationController(rootViewController: settingsVC)
+        settingsNav.tabBarItem = UITabBarItem(
+            title: "Настройки",
+            image: UIImage(systemName: "gearshape"),
+            tag: 2
+        )
+
+        viewControllers = [tripsNav, notifNav, settingsNav]
         tabBar.tintColor = .systemBlue
     }
 }
