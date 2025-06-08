@@ -43,6 +43,16 @@ final class AddExpenseView: UIView {
         textfield.inputAccessoryView = accessoryToolbar
         return textfield
     }()
+
+    public private(set) lazy var titleTextField: CustomTextField = {
+        let model = TextFieldModel(
+            placeholder: String.addExpenseTitlePlaceholder,
+            state: .name
+        )
+        let textfield = textFieldFactory.makeTextField(with: model)
+        textfield.inputAccessoryView = accessoryToolbar
+        return textfield
+    }()
     
     public private(set) lazy var dateTextField: CustomTextField = {
         let model = TextFieldModel(
@@ -105,6 +115,7 @@ final class AddExpenseView: UIView {
         super.init(frame: frame)
         backgroundColor = .systemBackground
         [
+            titleTextField,
             amountTextField,
             dateTextField,
             categoryTextField,
@@ -120,6 +131,7 @@ final class AddExpenseView: UIView {
         super.init(coder: coder)
         backgroundColor = .systemBackground
         [
+            titleTextField,
             amountTextField,
             dateTextField,
             categoryTextField,
@@ -132,8 +144,13 @@ final class AddExpenseView: UIView {
     }
     
     private func setupConstraints() {
-        amountTextField.snp.makeConstraints { make in
+        titleTextField.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide).offset(CGFloat.topInset)
+            make.leading.trailing.equalToSuperview().inset(CGFloat.horizontalInset)
+            make.height.equalTo(CGFloat.fieldHeight)
+        }
+        amountTextField.snp.makeConstraints { make in
+            make.top.equalTo(titleTextField.snp.bottom).offset(CGFloat.verticalSpacing)
             make.leading.trailing.equalToSuperview().inset(CGFloat.horizontalInset)
             make.height.equalTo(CGFloat.fieldHeight)
         }
@@ -182,6 +199,7 @@ private extension CGFloat {
 }
 
 private extension String {
+    static let addExpenseTitlePlaceholder = "Название"
     static let addExpenseAmountPlaceholder = "Сумма"
     static let addExpenseCategoryPlaceholder = "Категория"
     static let addExpenseDatePlaceholder = "Дата"

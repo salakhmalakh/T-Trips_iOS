@@ -17,11 +17,11 @@ final class AddExpenseViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
 
     private let categories = Expense.Category.allCases
-    private let payers: [String]
-    private let payees: [String]
+    private let payers: [User]
+    private let payees: [User]
 
     // MARK: - Init
-    init(tripId: UUID, payers: [String] = [], payees: [String] = []) {
+    init(tripId: Int64, payers: [User] = [], payees: [User] = []) {
         self.viewModel = AddExpenseViewModel(tripId: tripId)
         self.payers = payers
         self.payees = payees
@@ -98,6 +98,13 @@ final class AddExpenseViewController: UIViewController {
 
     // MARK: - Actions
     private func setupActions() {
+        addExpenseView.titleTextField.addAction(
+            UIAction { [weak self] _ in
+                self?.viewModel.title = self?.addExpenseView.titleTextField.text ?? ""
+            },
+            for: .editingChanged
+        )
+
         addExpenseView.amountTextField.addAction(
             UIAction { [weak self] _ in
                 self?.viewModel.amount = self?.addExpenseView.amountTextField.text ?? ""
@@ -118,8 +125,9 @@ final class AddExpenseViewController: UIViewController {
         addExpenseView.payerTextField.addAction(
             UIAction { [weak self] _ in
                 let row = self?.addExpenseView.payerPicker.selectedRow(inComponent: 0) ?? 0
-                self?.viewModel.payer = self?.payers[row] ?? ""
-                self?.addExpenseView.payerTextField.text = self?.payers[row]
+                let user = self?.payers[row]
+                self?.viewModel.payerId = user?.id
+                self?.addExpenseView.payerTextField.text = "\(user?.firstName ?? "") \(user?.lastName ?? "")"
             },
             for: .editingDidEnd
         )
@@ -127,8 +135,9 @@ final class AddExpenseViewController: UIViewController {
         addExpenseView.payeeTextField.addAction(
             UIAction { [weak self] _ in
                 let row = self?.addExpenseView.payeePicker.selectedRow(inComponent: 0) ?? 0
-                self?.viewModel.payee = self?.payees[row] ?? ""
-                self?.addExpenseView.payeeTextField.text = self?.payees[row]
+                let user = self?.payees[row]
+                self?.viewModel.payeeId = user?.id
+                self?.addExpenseView.payeeTextField.text = "\(user?.firstName ?? "") \(user?.lastName ?? "")"
             },
             for: .editingDidEnd
         )
@@ -167,9 +176,11 @@ extension AddExpenseViewController: UIPickerViewDataSource, UIPickerViewDelegate
         case addExpenseView.categoryPicker:
             return categories[row].localized
         case addExpenseView.payerPicker:
-            return payers[row]
+            let user = payers[row]
+            return "\(user.firstName) \(user.lastName)"
         case addExpenseView.payeePicker:
-            return payees[row]
+            let user = payees[row]
+            return "\(user.firstName) \(user.lastName)"
         default: return nil
         }
     }

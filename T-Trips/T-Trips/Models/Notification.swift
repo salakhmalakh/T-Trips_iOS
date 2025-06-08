@@ -9,8 +9,8 @@ import Foundation
 
 struct NotificationItem: Codable, Identifiable {
     let id: Int
-    let userId: Int
-    let tripId: Int?
+    let userId: Int64
+    let tripId: Int64?
     let type: NotificationType
     let message: String
     let status: Status

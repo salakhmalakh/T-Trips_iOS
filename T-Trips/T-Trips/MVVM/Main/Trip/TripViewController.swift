@@ -56,11 +56,11 @@ final class TripViewController: UIViewController {
         )
         viewModel.onAddExpense = { [weak self] in
             guard let self = self else { return }
-            let names = MockData.users.map { "\($0.name) \($0.surname)" }
+            let users = MockData.users
             let addVC = AddExpenseViewController(
                 tripId: self.viewModel.trip.id,
-                payers: names,
-                payees: names
+                payers: users,
+                payees: users
             )
             addVC.onExpenseAdded = { [weak self] expense in
                 self?.viewModel.addExpense(expense)
@@ -119,7 +119,7 @@ extension TripViewController: UITableViewDataSource, UITableViewDelegate {
         // Кто оплатил
         let payerName: String = {
             if let owner = expense.owner {
-                return "\(owner.name) \(owner.surname)"
+                return "\(owner.firstName) \(owner.lastName)"
             }
             return ""
         }()
@@ -127,7 +127,7 @@ extension TripViewController: UITableViewDataSource, UITableViewDelegate {
         // За кого оплачено — список через запятую
         let payeeName: String = {
             let names = expense.paidForUsers
-                .map { "\($0.name) \($0.surname)" }
+                .map { "\($0.firstName) \($0.lastName)" }
             return names.joined(separator: ", ")
         }()
         

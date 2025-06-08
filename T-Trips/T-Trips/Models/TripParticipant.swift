@@ -8,9 +8,9 @@
 import Foundation
 
 struct TripParticipant: Codable, Identifiable {
-    let id: UUID
-    let tripId: UUID
-    let userId: UUID
+    let id: Int64
+    let tripId: Int64
+    let userId: Int64
     let status: Status
     let joinedAt: Date
     let leftAt: Date?
@@ -22,12 +22,4 @@ struct TripParticipant: Codable, Identifiable {
         case left = "LEFT"
     }
 
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case tripId = "trip_id"
-        case userId = "user_id"
-        case status
-        case joinedAt = "joined_at"
-        case leftAt = "left_at"
-    }
 }
