@@ -13,6 +13,8 @@ struct Debt: Codable, Identifiable {
     let fromUserId: Int64
     let toUserId: Int64
     let amount: Double
+    
+    var id: String { debtId }
 
     private enum CodingKeys: String, CodingKey {
         case debtId
