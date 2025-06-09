@@ -54,3 +54,6 @@
 "transport" = "Transport";
 "other" = "Other";
 "invalidCreds" = "Invalid phone or password";
+"languages" = "Languages";
+"english" = "English";
+"russian" = "Russian";
