@@ -57,6 +57,16 @@ final class AuthViewController: UIViewController {
             )
         }
 
+        viewModel.onLoginFailure = { [weak self] in
+            let alert = UIAlertController(
+                title: nil,
+                message: String.invalidCreds,
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self?.present(alert, animated: true)
+        }
+
         viewModel.onRegister = { [weak self] in
             guard let self = self else { return }
             let registerVC = RegisterViewController()
@@ -92,6 +102,7 @@ final class AuthViewController: UIViewController {
 // MARK: - Constants
 private extension String {
     static let authTitle = "Вход"
+    static let invalidCreds = "Неверный телефон или пароль"
 }
 
 private extension Double {

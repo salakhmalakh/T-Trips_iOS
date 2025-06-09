@@ -22,6 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let nav = UINavigationController(rootViewController: startVC)
         nav.navigationBar.prefersLargeTitles = true
         window.rootViewController = nav
+        let darkMode = UserDefaults.standard.bool(forKey: SettingsViewModel.darkModeKey)
+        window.overrideUserInterfaceStyle = darkMode ? .dark : .light
         window.makeKeyAndVisible()
         
         self.window = window

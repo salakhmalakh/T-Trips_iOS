@@ -21,5 +21,11 @@ final class DebtDetailViewController: UIViewController {
         super.viewDidLoad()
         title = "Долг"
         detailView.infoLabel.text = viewModel.infoText
+        detailView.confirmButton.addAction(
+            UIAction { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            },
+            for: .touchUpInside
+        )
     }
 }
