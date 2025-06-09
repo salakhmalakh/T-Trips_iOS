@@ -51,6 +51,22 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 1 && indexPath.row == 1 {
+            let langVC = LanguagesViewController()
+            navigationController?.pushViewController(langVC, animated: true)
+        }
+    }
+
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.performPressAnimation(pressed: true)
+    }
+
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.performPressAnimation(pressed: false)
+    }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         CGFloat.rowHeight
     }

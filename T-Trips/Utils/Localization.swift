@@ -2,6 +2,6 @@ import Foundation
 
 extension String {
     var localized: String {
-        NSLocalizedString(self, comment: "")
+        Bundle.localizedBundle.localizedString(forKey: self, value: nil, table: nil)
     }
 }

@@ -23,6 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         nav.navigationBar.prefersLargeTitles = true
         window.rootViewController = nav
         let darkMode = UserDefaults.standard.bool(forKey: SettingsViewModel.darkModeKey)
+        LocalizationManager.setup()
         window.overrideUserInterfaceStyle = darkMode ? .dark : .light
         window.makeKeyAndVisible()
         
