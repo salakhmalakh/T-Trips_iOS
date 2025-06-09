@@ -10,7 +10,6 @@ final class CreateTripViewController: UIViewController {
 
     private let participants = MockData.users
     private var selectedUsers: [User] = []
-    private var selectedUsers: [User] = []
     private let participantsPlaceholder = "Участники"
     private var availableParticipants: [User] {
         participants.filter { user in

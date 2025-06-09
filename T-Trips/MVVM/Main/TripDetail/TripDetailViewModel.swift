@@ -9,9 +9,9 @@ final class TripDetailViewModel {
     let description: String
 
     private let formatter: DateFormatter = {
-        let f = DateFormatter()
-        f.dateStyle = .medium
-        return f
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        return formatter
     }()
 
     init(trip: Trip, users: [User]) {
