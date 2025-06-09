@@ -6,6 +6,14 @@ final class CreateTripView: UIView {
     private let buttonFactory = ButtonFactory()
 
     let participantsPicker = UIPickerView()
+    public private(set) lazy var tokensStackView: TokenStackView = {
+        let stack = TokenStackView()
+        stack.axis = .horizontal
+        stack.spacing = CGFloat.tokenSpacing
+        stack.alignment = .center
+        stack.distribution = .fill
+        return stack
+    }()
     public private(set) lazy var startDatePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.datePickerMode = .date
@@ -86,6 +94,10 @@ final class CreateTripView: UIView {
         backgroundColor = .systemBackground
         [titleTextField, startDateTextField, endDateTextField, budgetTextField,
          participantsTextField, descriptionTextField, saveButton].forEach(addSubview)
+        participantsTextField.addSubview(tokensStackView)
+        tokensStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(CGFloat.tokenInset)
+        }
         setupConstraints()
     }
 
@@ -94,6 +106,10 @@ final class CreateTripView: UIView {
         backgroundColor = .systemBackground
         [titleTextField, startDateTextField, endDateTextField, budgetTextField,
          participantsTextField, descriptionTextField, saveButton].forEach(addSubview)
+        participantsTextField.addSubview(tokensStackView)
+        tokensStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(CGFloat.tokenInset)
+        }
         setupConstraints()
     }
 
@@ -142,6 +158,8 @@ private extension CGFloat {
     static let fieldHeight: CGFloat = 50
     static let buttonTop: CGFloat = 24
     static let buttonHeight: CGFloat = 50
+    static let tokenSpacing: CGFloat = 4
+    static let tokenInset: CGFloat = 4
 }
 
 private extension String {
