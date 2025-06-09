@@ -21,6 +21,29 @@
 		760C74C42DF63ED8006FE801 /* Уведомления.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 760C74B62DF63ED8006FE801 /* Уведомления.pdf */; };
 		760C74C52DF63ED8006FE801 /* Детали погашения долга.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 760C74B72DF63ED8006FE801 /* Детали погашения долга.pdf */; };
 		760C74C62DF63ED8006FE801 /* Аутенфикация.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 760C74B82DF63ED8006FE801 /* Аутенфикация.pdf */; };
+		760C74DF2DF64280006FE801 /* CreateTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74C82DF64280006FE801 /* CreateTripView.swift */; };
+		760C74E02DF64280006FE801 /* CreateTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74C92DF64280006FE801 /* CreateTripViewController.swift */; };
+		760C74E12DF64280006FE801 /* CreateTripViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74CA2DF64280006FE801 /* CreateTripViewModel.swift */; };
+		760C74E22DF64280006FE801 /* TripDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74CC2DF64280006FE801 /* TripDetailViewController.swift */; };
+		760C74E32DF64280006FE801 /* TripDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74CD2DF64280006FE801 /* TripDetailView.swift */; };
+		760C74E42DF64280006FE801 /* TripDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74CE2DF64280006FE801 /* TripDetailViewModel.swift */; };
+		760C74E52DF64280006FE801 /* DebtsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74D02DF64280006FE801 /* DebtsViewModel.swift */; };
+		760C74E62DF64280006FE801 /* DebtsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74D12DF64280006FE801 /* DebtsView.swift */; };
+		760C74E72DF64280006FE801 /* DebtsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74D22DF64280006FE801 /* DebtsViewController.swift */; };
+		760C74E82DF64280006FE801 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74D42DF64280006FE801 /* NotificationsView.swift */; };
+		760C74E92DF64280006FE801 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74D52DF64280006FE801 /* NotificationsViewModel.swift */; };
+		760C74EA2DF64280006FE801 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74D62DF64280006FE801 /* NotificationsViewController.swift */; };
+		760C74EB2DF64280006FE801 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74D82DF64280006FE801 /* SettingsView.swift */; };
+		760C74EC2DF64280006FE801 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74D92DF64280006FE801 /* SettingsViewModel.swift */; };
+		760C74ED2DF64280006FE801 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74DA2DF64280006FE801 /* SettingsViewController.swift */; };
+		760C74EE2DF64280006FE801 /* DebtDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74DC2DF64280006FE801 /* DebtDetailViewController.swift */; };
+		760C74EF2DF64280006FE801 /* DebtDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74DD2DF64280006FE801 /* DebtDetailView.swift */; };
+		760C74F02DF64280006FE801 /* DebtDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74DE2DF64280006FE801 /* DebtDetailViewModel.swift */; };
+		760C74F52DF643C3006FE801 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74F22DF643C3006FE801 /* StartView.swift */; };
+		760C74F62DF643C3006FE801 /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74F32DF643C3006FE801 /* StartViewModel.swift */; };
+		760C74F72DF643C3006FE801 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74F42DF643C3006FE801 /* StartViewController.swift */; };
+		760C74F92DF647A2006FE801 /* MockAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74F82DF647A1006FE801 /* MockAPIService.swift */; };
+		760C74FC2DF65043006FE801 /* ParticipantTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74FB2DF65042006FE801 /* ParticipantTokenView.swift */; };
 		762A60972DE468E700F31E34 /* CustomTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762A60962DE468E700F31E34 /* CustomTableCell.swift */; };
 		762A60992DE4690E00F31E34 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762A60982DE4690E00F31E34 /* FilterCell.swift */; };
 		762A609C2DE4AB4900F31E34 /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762A609B2DE4AB4900F31E34 /* AddExpenseView.swift */; };
@@ -58,6 +81,8 @@
 		76AE6E632DE65E1F0061BDA3 /* ExpenseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AE6E622DE65E1F0061BDA3 /* ExpenseDetailView.swift */; };
 		76AE6E652DE65E4C0061BDA3 /* ExpenseDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AE6E642DE65E4C0061BDA3 /* ExpenseDetailViewModel.swift */; };
 		76AE6E672DE65E660061BDA3 /* ExpenseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AE6E662DE65E660061BDA3 /* ExpenseDetailViewController.swift */; };
+		76B8F7442DF72B2E00753078 /* TokenStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B8F7432DF72B2E00753078 /* TokenStackView.swift */; };
+		76B8F7462DF72E9500753078 /* TokenWrappingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B8F7452DF72E9500753078 /* TokenWrappingView.swift */; };
 		76BD79882DD0AF8300FB7A75 /* ButtonActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BD79872DD0AF8300FB7A75 /* ButtonActionHandler.swift */; };
 		76BD798B2DD0AFF500FB7A75 /* ButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BD798A2DD0AFF500FB7A75 /* ButtonModel.swift */; };
 		76BD798D2DD0B05800FB7A75 /* ButtonFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BD798C2DD0B05800FB7A75 /* ButtonFactory.swift */; };
@@ -81,6 +106,29 @@
 		760C74B62DF63ED8006FE801 /* Уведомления.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Уведомления.pdf"; sourceTree = "<group>"; };
 		760C74B72DF63ED8006FE801 /* Детали погашения долга.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Детали погашения долга.pdf"; sourceTree = "<group>"; };
 		760C74B82DF63ED8006FE801 /* Аутенфикация.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Аутенфикация.pdf"; sourceTree = "<group>"; };
+		760C74C82DF64280006FE801 /* CreateTripView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTripView.swift; sourceTree = "<group>"; };
+		760C74C92DF64280006FE801 /* CreateTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTripViewController.swift; sourceTree = "<group>"; };
+		760C74CA2DF64280006FE801 /* CreateTripViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTripViewModel.swift; sourceTree = "<group>"; };
+		760C74CC2DF64280006FE801 /* TripDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripDetailViewController.swift; sourceTree = "<group>"; };
+		760C74CD2DF64280006FE801 /* TripDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripDetailView.swift; sourceTree = "<group>"; };
+		760C74CE2DF64280006FE801 /* TripDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripDetailViewModel.swift; sourceTree = "<group>"; };
+		760C74D02DF64280006FE801 /* DebtsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebtsViewModel.swift; sourceTree = "<group>"; };
+		760C74D12DF64280006FE801 /* DebtsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebtsView.swift; sourceTree = "<group>"; };
+		760C74D22DF64280006FE801 /* DebtsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebtsViewController.swift; sourceTree = "<group>"; };
+		760C74D42DF64280006FE801 /* NotificationsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
+		760C74D52DF64280006FE801 /* NotificationsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
+		760C74D62DF64280006FE801 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		760C74D82DF64280006FE801 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		760C74D92DF64280006FE801 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		760C74DA2DF64280006FE801 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		760C74DC2DF64280006FE801 /* DebtDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebtDetailViewController.swift; sourceTree = "<group>"; };
+		760C74DD2DF64280006FE801 /* DebtDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebtDetailView.swift; sourceTree = "<group>"; };
+		760C74DE2DF64280006FE801 /* DebtDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebtDetailViewModel.swift; sourceTree = "<group>"; };
+		760C74F22DF643C3006FE801 /* StartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
+		760C74F32DF643C3006FE801 /* StartViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
+		760C74F42DF643C3006FE801 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		760C74F82DF647A1006FE801 /* MockAPIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockAPIService.swift; sourceTree = "<group>"; };
+		760C74FB2DF65042006FE801 /* ParticipantTokenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantTokenView.swift; sourceTree = "<group>"; };
 		762A60962DE468E700F31E34 /* CustomTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableCell.swift; sourceTree = "<group>"; };
 		762A60982DE4690E00F31E34 /* FilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		762A609B2DE4AB4900F31E34 /* AddExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
@@ -119,6 +167,8 @@
 		76AE6E622DE65E1F0061BDA3 /* ExpenseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailView.swift; sourceTree = "<group>"; };
 		76AE6E642DE65E4C0061BDA3 /* ExpenseDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailViewModel.swift; sourceTree = "<group>"; };
 		76AE6E662DE65E660061BDA3 /* ExpenseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailViewController.swift; sourceTree = "<group>"; };
+		76B8F7432DF72B2E00753078 /* TokenStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStackView.swift; sourceTree = "<group>"; };
+		76B8F7452DF72E9500753078 /* TokenWrappingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenWrappingView.swift; sourceTree = "<group>"; };
 		76BD79872DD0AF8300FB7A75 /* ButtonActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonActionHandler.swift; sourceTree = "<group>"; };
 		76BD798A2DD0AFF500FB7A75 /* ButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModel.swift; sourceTree = "<group>"; };
 		76BD798C2DD0B05800FB7A75 /* ButtonFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonFactory.swift; sourceTree = "<group>"; };
@@ -158,6 +208,86 @@
 				760C74B82DF63ED8006FE801 /* Аутенфикация.pdf */,
 			);
 			path = PDFs;
+			sourceTree = "<group>";
+		};
+		760C74C72DF64280006FE801 /* CreateTrip */ = {
+			isa = PBXGroup;
+			children = (
+				760C74C82DF64280006FE801 /* CreateTripView.swift */,
+				760C74C92DF64280006FE801 /* CreateTripViewController.swift */,
+				760C74CA2DF64280006FE801 /* CreateTripViewModel.swift */,
+			);
+			path = CreateTrip;
+			sourceTree = "<group>";
+		};
+		760C74CB2DF64280006FE801 /* TripDetail */ = {
+			isa = PBXGroup;
+			children = (
+				760C74CC2DF64280006FE801 /* TripDetailViewController.swift */,
+				760C74CD2DF64280006FE801 /* TripDetailView.swift */,
+				760C74CE2DF64280006FE801 /* TripDetailViewModel.swift */,
+			);
+			path = TripDetail;
+			sourceTree = "<group>";
+		};
+		760C74CF2DF64280006FE801 /* Debts */ = {
+			isa = PBXGroup;
+			children = (
+				760C74D02DF64280006FE801 /* DebtsViewModel.swift */,
+				760C74D12DF64280006FE801 /* DebtsView.swift */,
+				760C74D22DF64280006FE801 /* DebtsViewController.swift */,
+			);
+			path = Debts;
+			sourceTree = "<group>";
+		};
+		760C74D32DF64280006FE801 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				760C74D42DF64280006FE801 /* NotificationsView.swift */,
+				760C74D52DF64280006FE801 /* NotificationsViewModel.swift */,
+				760C74D62DF64280006FE801 /* NotificationsViewController.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		760C74D72DF64280006FE801 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				760C74D82DF64280006FE801 /* SettingsView.swift */,
+				760C74D92DF64280006FE801 /* SettingsViewModel.swift */,
+				760C74DA2DF64280006FE801 /* SettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		760C74DB2DF64280006FE801 /* DebtDetail */ = {
+			isa = PBXGroup;
+			children = (
+				760C74DC2DF64280006FE801 /* DebtDetailViewController.swift */,
+				760C74DD2DF64280006FE801 /* DebtDetailView.swift */,
+				760C74DE2DF64280006FE801 /* DebtDetailViewModel.swift */,
+			);
+			path = DebtDetail;
+			sourceTree = "<group>";
+		};
+		760C74F12DF643C3006FE801 /* Start */ = {
+			isa = PBXGroup;
+			children = (
+				760C74F22DF643C3006FE801 /* StartView.swift */,
+				760C74F32DF643C3006FE801 /* StartViewModel.swift */,
+				760C74F42DF643C3006FE801 /* StartViewController.swift */,
+			);
+			path = Start;
+			sourceTree = "<group>";
+		};
+		760C74FA2DF65042006FE801 /* ParticipantToken */ = {
+			isa = PBXGroup;
+			children = (
+				76B8F7452DF72E9500753078 /* TokenWrappingView.swift */,
+				76B8F7432DF72B2E00753078 /* TokenStackView.swift */,
+				760C74FB2DF65042006FE801 /* ParticipantTokenView.swift */,
+			);
+			path = ParticipantToken;
 			sourceTree = "<group>";
 		};
 		762A60952DE468C400F31E34 /* CustomCells */ = {
@@ -216,6 +346,7 @@
 		766E62EE2DD1E5F400E70F12 /* MVVM */ = {
 			isa = PBXGroup;
 			children = (
+				760C74F12DF643C3006FE801 /* Start */,
 				767A42352DE1010B008970ED /* Main */,
 				766E62EF2DD1E5FE00E70F12 /* Auth */,
 				767A42182DDF816D008970ED /* Register */,
@@ -236,6 +367,7 @@
 		766E62F22DD1E66A00E70F12 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				760C74FA2DF65042006FE801 /* ParticipantToken */,
 				76BD79892DD0AFCE00FB7A75 /* CustomButton */,
 				766E62F32DD22D8500E70F12 /* CustomTextField */,
 			);
@@ -267,6 +399,12 @@
 			isa = PBXGroup;
 			children = (
 				767A42412DE12430008970ED /* MainTabBarController.swift */,
+				760C74C72DF64280006FE801 /* CreateTrip */,
+				760C74DB2DF64280006FE801 /* DebtDetail */,
+				760C74CF2DF64280006FE801 /* Debts */,
+				760C74D32DF64280006FE801 /* Notifications */,
+				760C74D72DF64280006FE801 /* Settings */,
+				760C74CB2DF64280006FE801 /* TripDetail */,
 				762A60952DE468C400F31E34 /* CustomCells */,
 				767A42442DE12492008970ED /* Trips */,
 				767D333A2DE3C12C00F66264 /* Trip */,
@@ -302,6 +440,7 @@
 		767D33372DE37D6900F66264 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				760C74F82DF647A1006FE801 /* MockAPIService.swift */,
 				767D33382DE37D7F00F66264 /* Extentions.swift */,
 				7673177D2DE4D79800017BCB /* Mocks.swift */,
 			);
@@ -451,46 +590,71 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76B8F7462DF72E9500753078 /* TokenWrappingView.swift in Sources */,
 				767A42402DE11525008970ED /* Trip.swift in Sources */,
+				76B8F7442DF72B2E00753078 /* TokenStackView.swift in Sources */,
 				762A609E2DE4AB5400F31E34 /* AddExpenseViewModel.swift in Sources */,
 				76AE6E672DE65E660061BDA3 /* ExpenseDetailViewController.swift in Sources */,
+				760C74EA2DF64280006FE801 /* NotificationsViewController.swift in Sources */,
 				764CD7362DC3EDF600900B78 /* AuthView.swift in Sources */,
 				767D33402DE3C3A300F66264 /* TripViewController.swift in Sources */,
 				767A42372DE1014E008970ED /* TripsView.swift in Sources */,
 				76BD798D2DD0B05800FB7A75 /* ButtonFactory.swift in Sources */,
+				760C74E62DF64280006FE801 /* DebtsView.swift in Sources */,
 				76AE6E632DE65E1F0061BDA3 /* ExpenseDetailView.swift in Sources */,
 				76AE6E652DE65E4C0061BDA3 /* ExpenseDetailViewModel.swift in Sources */,
 				7673177A2DE4D4AB00017BCB /* Debt.swift in Sources */,
+				760C74F02DF64280006FE801 /* DebtDetailViewModel.swift in Sources */,
 				76BD79882DD0AF8300FB7A75 /* ButtonActionHandler.swift in Sources */,
+				760C74ED2DF64280006FE801 /* SettingsViewController.swift in Sources */,
 				767A423B2DE1017E008970ED /* TripsViewController.swift in Sources */,
 				767A42422DE12430008970ED /* MainTabBarController.swift in Sources */,
+				760C74E92DF64280006FE801 /* NotificationsViewModel.swift in Sources */,
 				767D33392DE37D7F00F66264 /* Extentions.swift in Sources */,
 				762A60A02DE4AB6600F31E34 /* AddExpenseViewController.swift in Sources */,
+				760C74F92DF647A2006FE801 /* MockAPIService.swift in Sources */,
 				767A421A2DDF8183008970ED /* RegisterViewModel.swift in Sources */,
 				766E62F52DD22DA200E70F12 /* TextFieldModel.swift in Sources */,
+				760C74E12DF64280006FE801 /* CreateTripViewModel.swift in Sources */,
+				760C74DF2DF64280006FE801 /* CreateTripView.swift in Sources */,
 				766E62F72DD22DCB00E70F12 /* CustomTextField.swift in Sources */,
+				760C74F62DF643C3006FE801 /* StartViewModel.swift in Sources */,
+				760C74E32DF64280006FE801 /* TripDetailView.swift in Sources */,
 				764CD73C2DC3EDF600900B78 /* T_Trips.xcdatamodeld in Sources */,
+				760C74F72DF643C3006FE801 /* StartViewController.swift in Sources */,
+				760C74E52DF64280006FE801 /* DebtsViewModel.swift in Sources */,
 				767A42172DDF7FA6008970ED /* RegisterView.swift in Sources */,
 				766E62F92DD22DE900E70F12 /* TextFieldFactory.swift in Sources */,
+				760C74FC2DF65043006FE801 /* ParticipantTokenView.swift in Sources */,
 				762A609C2DE4AB4900F31E34 /* AddExpenseView.swift in Sources */,
 				766E62FB2DD2317A00E70F12 /* CustomTextFieldDelegate.swift in Sources */,
 				767317802DE4DA0800017BCB /* TripParticipant.swift in Sources */,
+				760C74E22DF64280006FE801 /* TripDetailViewController.swift in Sources */,
 				76BD798F2DD0B07500FB7A75 /* CustomButton.swift in Sources */,
 				764CD7322DC3EDF600900B78 /* AppDelegate.swift in Sources */,
 				762A60972DE468E700F31E34 /* CustomTableCell.swift in Sources */,
 				7673177E2DE4D79800017BCB /* Mocks.swift in Sources */,
+				760C74E02DF64280006FE801 /* CreateTripViewController.swift in Sources */,
 				762A60992DE4690E00F31E34 /* FilterCell.swift in Sources */,
+				760C74E42DF64280006FE801 /* TripDetailViewModel.swift in Sources */,
+				760C74E72DF64280006FE801 /* DebtsViewController.swift in Sources */,
 				767D333C2DE3C38700F66264 /* TripView.swift in Sources */,
+				760C74EE2DF64280006FE801 /* DebtDetailViewController.swift in Sources */,
+				760C74EF2DF64280006FE801 /* DebtDetailView.swift in Sources */,
 				767A42392DE10166008970ED /* TripsViewModel.swift in Sources */,
 				767D333E2DE3C39100F66264 /* TripViewModel.swift in Sources */,
+				760C74E82DF64280006FE801 /* NotificationsView.swift in Sources */,
 				767A421C2DDF826C008970ED /* RegisterViewController.swift in Sources */,
 				767D33422DE3C4AF00F66264 /* Expense.swift in Sources */,
 				76D60E6E2DDF6F8A001C542A /* AuthViewController.swift in Sources */,
+				760C74F52DF643C3006FE801 /* StartView.swift in Sources */,
 				764CD7342DC3EDF600900B78 /* SceneDelegate.swift in Sources */,
+				760C74EB2DF64280006FE801 /* SettingsView.swift in Sources */,
 				7673177C2DE4D4C800017BCB /* Notification.swift in Sources */,
 				76D60E6C2DDF6F6B001C542A /* AuthViewModel.swift in Sources */,
 				76BD798B2DD0AFF500FB7A75 /* ButtonModel.swift in Sources */,
 				767A423E2DE11511008970ED /* User.swift in Sources */,
+				760C74EC2DF64280006FE801 /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

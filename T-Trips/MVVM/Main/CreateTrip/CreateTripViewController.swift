@@ -41,35 +41,7 @@ final class CreateTripViewController: UIViewController {
 
     private func setupBindings() {
         viewModel.$isSaveEnabled
-            .receive(on: RunLoop.main)
-            .sink { [weak self] enabled in
-                self?.createView.saveButton.isEnabled = enabled
-            }
-            .store(in: &cancellables)
-
-        viewModel.$startDate
-            .receive(on: RunLoop.main)
-            .sink { [weak self] date in
-                let formatter = DateFormatter()
-                formatter.dateStyle = .medium
-                self?.createView.startDateTextField.text = formatter.string(from: date)
-            }
-            .store(in: &cancellables)
-
-        viewModel.$endDate
-            .receive(on: RunLoop.main)
-            .sink { [weak self] date in
-                let formatter = DateFormatter()
-                formatter.dateStyle = .medium
-                self?.createView.endDateTextField.text = formatter.string(from: date)
-            }
-            .store(in: &cancellables)
-    }
-
-    private func setupPickers() {
-        createView.participantsPicker.dataSource = self
-        createView.participantsPicker.delegate = self
-        createView.startDatePicker.addTarget(self, action: #selector(startDateChanged(_:)), for: .valueChanged)
+@@ -66,53 +73,76 @@ final class CreateTripViewController: UIViewController {
         createView.endDatePicker.addTarget(self, action: #selector(endDateChanged(_:)), for: .valueChanged)
     }
 
@@ -95,6 +67,10 @@ final class CreateTripViewController: UIViewController {
         }, for: .editingChanged)
 
         createView.participantsTextField.addAction(UIAction { [weak self] _ in
+            let row = self?.createView.participantsPicker.selectedRow(inComponent: 0) ?? 0
+            let user = self?.participants[row]
+            self?.viewModel.participantIds = [user?.id].compactMap { $0 }
+            self?.createView.participantsTextField.text = "\(user?.firstName ?? "") \(user?.lastName ?? "")"
             guard let self = self else { return }
             let row = self.createView.participantsPicker.selectedRow(inComponent: 0)
             guard self.availableParticipants.indices.contains(row) else { return }
@@ -139,9 +115,11 @@ final class CreateTripViewController: UIViewController {
 extension CreateTripViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int { 1 }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        participants.count
         availableParticipants.count
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        let user = participants[row]
         let user = availableParticipants[row]
         return "\(user.firstName) \(user.lastName)"
     }
