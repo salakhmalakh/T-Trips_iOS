@@ -61,3 +61,5 @@
 "passwordMismatch" = "Passwords do not match";
 "phoneIncomplete" = "Phone number is incomplete";
 "phoneExists" = "User with this phone already exists";
+"firstName" = "First Name";
+"lastName" = "Last Name";

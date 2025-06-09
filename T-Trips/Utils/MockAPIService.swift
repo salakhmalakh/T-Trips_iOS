@@ -7,6 +7,7 @@ final class MockAPIService {
     private var expenses: [Expense]
     private var debts: [Debt]
     private var users: [User]
+    private var currentUserId: Int64?
 
     private init() {
         self.trips = MockData.trips
@@ -15,10 +16,21 @@ final class MockAPIService {
         self.users = MockData.users
     }
 
+    var currentUser: User? {
+        users.first { $0.id == currentUserId }
+    }
+
     // MARK: - Trips
     func getUserTrips(status: Trip.Status, completion: @escaping ([Trip]) -> Void) {
         asyncDelay {
-            let result = self.trips.filter { $0.status == status }
+            guard let uid = self.currentUserId else {
+                completion([])
+                return
+            }
+            let result = self.trips.filter { trip in
+                trip.status == status &&
+                (trip.adminId == uid || (trip.participantIds?.contains(uid) ?? false))
+            }
             completion(result)
         }
     }
@@ -102,6 +114,7 @@ final class MockAPIService {
     func authenticate(phone: String, password: String, completion: @escaping (Bool) -> Void) {
         asyncDelay {
             let user = self.users.first { $0.phone == phone && $0.hashPassword == password }
+            self.currentUserId = user?.id
             completion(user != nil)
         }
     }
@@ -124,6 +137,7 @@ final class MockAPIService {
                 active: true
             )
             self.users.append(user)
+            self.currentUserId = user.id
             completion(true)
         }
     }
@@ -151,4 +165,38 @@ struct ExpenseDtoForCreate {
     let amount: Double
     let title: String
     let paidForUserIds: [Int64]
+}
+
+// MARK: - User management
+extension MockAPIService {
+    func updateCurrentUser(firstName: String, lastName: String, phone: String, completion: @escaping (User?) -> Void) {
+        asyncDelay {
+            guard let id = self.currentUserId, let index = self.users.firstIndex(where: { $0.id == id }) else {
+                completion(nil)
+                return
+            }
+            let user = User(
+                id: id,
+                phone: phone,
+                firstName: firstName,
+                lastName: lastName,
+                hashPassword: self.users[index].hashPassword,
+                status: self.users[index].status,
+                role: self.users[index].role,
+                active: self.users[index].active
+            )
+            self.users[index] = user
+            completion(user)
+        }
+    }
+
+    func getNotifications(completion: @escaping ([NotificationItem]) -> Void) {
+        asyncDelay {
+            guard let id = self.currentUserId else {
+                completion([])
+                return
+            }
+            completion(MockData.notifications.filter { $0.userId == id })
+        }
+    }
 }

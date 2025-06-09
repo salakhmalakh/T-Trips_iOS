@@ -54,7 +54,8 @@ final class TripsViewController: UIViewController {
 
         viewModel.onAddTrip = { [weak self] in
             guard let self = self else { return }
-            let createVC = CreateTripViewController()
+            let adminId = MockAPIService.shared.currentUser?.id ?? 0
+            let createVC = CreateTripViewController(adminId: adminId)
             createVC.onTripCreated = { [weak self] trip in
                 self?.viewModel.addTrip(trip)
             }
