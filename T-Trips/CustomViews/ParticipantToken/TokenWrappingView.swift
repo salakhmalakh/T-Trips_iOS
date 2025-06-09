@@ -2,12 +2,14 @@ import UIKit
 
 final class TokenWrappingView: UIView {
     var spacing: CGFloat = 4
+    /// additional space reserved at the end of each line
+    var trailingSpace: CGFloat = 0
     var onHeightChange: (() -> Void)?
     private var contentHeight: CGFloat = 0
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        let maxWidth = bounds.width
+        let maxWidth = bounds.width - trailingSpace
         var origin = CGPoint(x: 0, y: 0)
         var rowHeight: CGFloat = 0
 
