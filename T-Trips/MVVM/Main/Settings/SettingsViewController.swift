@@ -15,8 +15,11 @@ final class SettingsViewController: UIViewController {
     }
 
     private func setupTable() {
-        settingsView.tableView.dataSource = self
-        settingsView.tableView.delegate = self
+        let table = settingsView.tableView
+        table.dataSource = self
+        table.delegate = self
+        table.register(SettingsCell.self, forCellReuseIdentifier: SettingsCell.reuseId)
+        table.separatorStyle = .none
     }
 }
 
@@ -26,21 +29,30 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         section == 0 ? 1 : 2
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.backgroundColor = .secondarySystemBackground
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: SettingsCell.reuseId,
+            for: indexPath
+        ) as? SettingsCell else {
+            return UITableViewCell()
+        }
+
         if indexPath.section == 0 {
-            cell.textLabel?.text = "Редактировать данные"
+            cell.configure(text: "Редактировать данные")
         } else if indexPath.row == 0 {
-            cell.textLabel?.text = "Темная тема"
             let switcher = UISwitch()
             switcher.isOn = viewModel.darkMode
             switcher.addTarget(self, action: #selector(themeChanged(_:)), for: .valueChanged)
-            cell.accessoryView = switcher
+            cell.configure(text: "Темная тема", accessoryView: switcher)
         } else {
-            cell.textLabel?.text = "Язык"
-            cell.accessoryType = .disclosureIndicator
+            let arrow = UIImageView(image: UIImage(systemName: "chevron.right"))
+            arrow.tintColor = .tertiaryLabel
+            cell.configure(text: "Язык", accessoryView: arrow)
         }
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        CGFloat.rowHeight
     }
 
     @objc private func themeChanged(_ sender: UISwitch) {
@@ -51,3 +63,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         window.overrideUserInterfaceStyle = sender.isOn ? .dark : .light
     }
 }
+
+private extension CGFloat {
+    static let rowHeight: CGFloat = 60
+}
+
