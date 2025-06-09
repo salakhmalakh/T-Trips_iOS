@@ -33,7 +33,7 @@ final class ParticipantTokenView: UIView {
         let local = convert(point, to: removeButton)
         return removeButton.point(inside: local, with: event)
     }
-  
+ 
     private func setupConstraints() {
         nameLabel.snp.makeConstraints { make in
             make.top.bottom.leading.equalToSuperview().inset(CGFloat.contentInset)

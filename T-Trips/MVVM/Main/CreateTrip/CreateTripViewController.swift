@@ -10,7 +10,13 @@ final class CreateTripViewController: UIViewController {
 
     private let participants = MockData.users
     private var selectedUsers: [User] = []
+    private var selectedUsers: [User] = []
     private let participantsPlaceholder = "Участники"
+    private var availableParticipants: [User] {
+        participants.filter { user in
+            !selectedUsers.contains(where: { $0.id == user.id })
+        }
+    }
 
     init(adminId: Int64 = 0) {
         self.viewModel = CreateTripViewModel(adminId: adminId)
@@ -90,16 +96,14 @@ final class CreateTripViewController: UIViewController {
         }, for: .editingChanged)
 
         createView.participantsTextField.addAction(UIAction { [weak self] _ in
-            guard let self = self else { return }
+                      guard let self = self else { return }
             let row = self.createView.participantsPicker.selectedRow(inComponent: 0)
-            let user = self.participants[row]
-            guard !self.selectedUsers.contains(where: { $0.id == user.id }) else {
-                self.createView.endEditing(true)
-                return
-            }
+            guard self.availableParticipants.indices.contains(row) else { return }
+            let user = self.availableParticipants[row]
             self.selectedUsers.append(user)
             self.viewModel.participantIds = self.selectedUsers.map { $0.id }
             self.addToken(for: user)
+            self.createView.participantsPicker.reloadAllComponents()
             self.createView.participantsTextField.text = ""
             self.createView.participantsTextField.placeholder = self.selectedUsers.isEmpty ? self.participantsPlaceholder : nil
         }, for: .editingDidEnd)
@@ -124,19 +128,22 @@ final class CreateTripViewController: UIViewController {
                 self.viewModel.participantIds = self.selectedUsers.map { $0.id }
                 token.removeFromSuperview()
                 self.createView.participantsTextField.placeholder = self.selectedUsers.isEmpty ? self.participantsPlaceholder : nil
+                self.createView.participantsPicker.reloadAllComponents()
+                self.createView.tokensView.setNeedsLayout()
             }
         }
-        createView.tokensStackView.addArrangedSubview(token)
+        createView.tokensView.addSubview(token)
+        createView.tokensView.setNeedsLayout()
     }
 }
 
 extension CreateTripViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int { 1 }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        participants.count
+        availableParticipants.count
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let user = participants[row]
+        let user = availableParticipants[row]
         return "\(user.firstName) \(user.lastName)"
     }
 }
