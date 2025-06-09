@@ -5,7 +5,13 @@ final class CreateTripView: UIView {
     private let textFieldFactory = TextFieldFactory()
     private let buttonFactory = ButtonFactory()
 
-    let participantsPicker = UIPickerView()
+    let suggestionsTableView: UITableView = {
+        let table = UITableView()
+        table.isHidden = true
+        table.layer.borderWidth = 0.5
+        table.layer.borderColor = UIColor.lightGray.cgColor
+        return table
+    }()
     public private(set) lazy var tokensView: TokenWrappingView = {
         let view = TokenWrappingView()
         view.spacing = CGFloat.tokenSpacing
@@ -15,6 +21,7 @@ final class CreateTripView: UIView {
         return view
     }()
     private var participantsHeightConstraint: Constraint?
+    private var suggestionsHeightConstraint: Constraint?
     public private(set) lazy var startDatePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.datePickerMode = .date
@@ -69,9 +76,8 @@ final class CreateTripView: UIView {
     }()
 
     public private(set) lazy var participantsTextField: CustomTextField = {
-        let model = TextFieldModel(placeholder: String.participantsPlaceholder, state: .picker)
+        let model = TextFieldModel(placeholder: String.participantsPlaceholder, state: .name)
         let tf = textFieldFactory.makeTextField(with: model)
-        tf.inputView = participantsPicker
         tf.inputAccessoryView = accessoryToolbar
         return tf
     }()
@@ -94,7 +100,7 @@ final class CreateTripView: UIView {
         super.init(frame: frame)
         backgroundColor = .systemBackground
         [titleTextField, startDateTextField, endDateTextField, budgetTextField,
-         participantsTextField, descriptionTextField, saveButton].forEach(addSubview)
+         participantsTextField, suggestionsTableView, descriptionTextField, saveButton].forEach(addSubview)
         participantsTextField.addSubview(tokensView)
         tokensView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(CGFloat.tokenInset)
@@ -107,7 +113,7 @@ final class CreateTripView: UIView {
         super.init(coder: coder)
         backgroundColor = .systemBackground
         [titleTextField, startDateTextField, endDateTextField, budgetTextField,
-         participantsTextField, descriptionTextField, saveButton].forEach(addSubview)
+         participantsTextField, suggestionsTableView, descriptionTextField, saveButton].forEach(addSubview)
         participantsTextField.addSubview(tokensView)
         tokensView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(CGFloat.tokenInset)
@@ -139,8 +145,13 @@ final class CreateTripView: UIView {
             make.leading.trailing.equalTo(titleTextField)
             participantsHeightConstraint = make.height.equalTo(CGFloat.fieldHeight).constraint
         }
+        suggestionsTableView.snp.makeConstraints { make in
+            make.top.equalTo(participantsTextField.snp.bottom)
+            make.leading.trailing.equalTo(participantsTextField)
+            suggestionsHeightConstraint = make.height.equalTo(0).constraint
+        }
         descriptionTextField.snp.makeConstraints { make in
-            make.top.equalTo(participantsTextField.snp.bottom).offset(CGFloat.verticalSpacing)
+            make.top.equalTo(suggestionsTableView.snp.bottom).offset(CGFloat.verticalSpacing)
             make.leading.trailing.height.equalTo(titleTextField)
         }
         saveButton.snp.makeConstraints { make in
@@ -154,6 +165,11 @@ final class CreateTripView: UIView {
         let height = max(tokensView.intrinsicContentSize.height + 2 * CGFloat.tokenInset,
                          CGFloat.fieldHeight)
         participantsHeightConstraint?.update(offset: height)
+        layoutIfNeeded()
+    }
+
+    func updateSuggestionsHeight(_ height: CGFloat) {
+        suggestionsHeightConstraint?.update(offset: height)
         layoutIfNeeded()
     }
 
