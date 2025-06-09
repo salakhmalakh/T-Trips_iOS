@@ -29,6 +29,11 @@ final class ParticipantTokenView: UIView {
         super.init(coder: coder)
     }
 
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        let local = convert(point, to: removeButton)
+        return removeButton.point(inside: local, with: event)
+    }
+  
     private func setupConstraints() {
         nameLabel.snp.makeConstraints { make in
             make.top.bottom.leading.equalToSuperview().inset(CGFloat.contentInset)

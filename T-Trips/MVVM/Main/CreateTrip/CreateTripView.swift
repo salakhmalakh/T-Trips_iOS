@@ -6,8 +6,8 @@ final class CreateTripView: UIView {
     private let buttonFactory = ButtonFactory()
 
     let participantsPicker = UIPickerView()
-    public private(set) lazy var tokensStackView: UIStackView = {
-        let stack = UIStackView()
+    public private(set) lazy var tokensStackView: TokenStackView = {
+        let stack = TokenStackView()
         stack.axis = .horizontal
         stack.spacing = CGFloat.tokenSpacing
         stack.alignment = .center
