@@ -19,6 +19,7 @@ final class AuthViewModel {
     // MARK: - Callbacks
     var onLoginSuccess: (() -> Void)?
     var onRegister: (() -> Void)?
+    var onLoginFailure: (() -> Void)?
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -38,7 +39,11 @@ final class AuthViewModel {
     func login() {
         MockAPIService.shared.authenticate(phone: phone, password: password) { [weak self] success in
             DispatchQueue.main.async {
-                if success { self?.onLoginSuccess?() }
+                if success {
+                    self?.onLoginSuccess?()
+                } else {
+                    self?.onLoginFailure?()
+                }
             }
         }
     }

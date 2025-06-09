@@ -44,5 +44,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
     @objc private func themeChanged(_ sender: UISwitch) {
         viewModel.darkMode = sender.isOn
+        guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let delegate = scene.delegate as? SceneDelegate,
+              let window = delegate.window else { return }
+        window.overrideUserInterfaceStyle = sender.isOn ? .dark : .light
     }
 }

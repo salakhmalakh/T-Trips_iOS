@@ -60,6 +60,15 @@ extension DebtsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return .tvRowHeight
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let debt = viewModel.debts[indexPath.row]
+        let vm = DebtDetailViewModel(debt: debt)
+        let vc = DebtDetailViewController(viewModel: vm)
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 private extension CGFloat {
