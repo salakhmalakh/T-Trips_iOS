@@ -21,7 +21,6 @@ final class CreateTripView: UIView {
         }
         return view
     }()
-
     private var suggestionsHeightConstraint: Constraint?
     public private(set) lazy var startDatePicker: UIDatePicker = {
         let picker = UIDatePicker()
@@ -142,17 +141,12 @@ final class CreateTripView: UIView {
             make.top.equalTo(participantsTextField.snp.bottom).offset(CGFloat.tokenTop)
             make.leading.trailing.equalTo(participantsTextField).inset(CGFloat.tokenInset)
         }
-        suggestionsTableView.snp.makeConstraints { make in
+            suggestionsTableView.snp.makeConstraints { make in
             make.top.equalTo(participantsTextField.snp.bottom)
             make.leading.trailing.equalTo(participantsTextField)
             suggestionsHeightConstraint = make.height.equalTo(0).constraint
         }
-        suggestionsTableView.snp.makeConstraints { make in
-            make.top.equalTo(participantsTextField.snp.bottom)
-            make.leading.trailing.equalTo(participantsTextField)
-            suggestionsHeightConstraint = make.height.equalTo(0).constraint
-        }
-        descriptionTextField.snp.makeConstraints { make in
+            descriptionTextField.snp.makeConstraints { make in
             make.top.equalTo(tokensView.snp.bottom).offset(CGFloat.verticalSpacing)
             make.leading.trailing.height.equalTo(titleTextField)
         }
@@ -161,11 +155,6 @@ final class CreateTripView: UIView {
             make.leading.trailing.equalToSuperview().inset(CGFloat.horizontalInset)
             make.height.equalTo(CGFloat.buttonHeight)
         }
-    }
-
-    func updateSuggestionsHeight(_ height: CGFloat) {
-        suggestionsHeightConstraint?.update(offset: height)
-        layoutIfNeeded()
     }
 
     func updateSuggestionsHeight(_ height: CGFloat) {

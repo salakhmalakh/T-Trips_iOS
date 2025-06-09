@@ -103,7 +103,12 @@ final class CreateTripViewController: UIViewController {
 
         createView.participantsTextField.addAction(UIAction { [weak self] _ in
             self?.filterParticipants()
+        }, for: .editingDidBegin)
+      
+        createView.participantsTextField.addAction(UIAction { [weak self] _ in
+            self?.filterParticipants()
         }, for: .editingChanged)
+      
         createView.participantsTextField.addAction(UIAction { [weak self] _ in
             self?.createView.suggestionsTableView.isHidden = true
             self?.createView.updateSuggestionsHeight(0)
@@ -157,6 +162,7 @@ final class CreateTripViewController: UIViewController {
             $0.firstName.lowercased().contains(text) || $0.lastName.lowercased().contains(text)
         }
         createView.suggestionsTableView.isHidden = filteredParticipants.isEmpty
+        createView.bringSubviewToFront(createView.suggestionsTableView)
         createView.suggestionsTableView.reloadData()
         let height = min(CGFloat(filteredParticipants.count) * 44, 132)
         createView.updateSuggestionsHeight(height)
