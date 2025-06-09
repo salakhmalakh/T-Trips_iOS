@@ -83,6 +83,7 @@
 		76AE6E672DE65E660061BDA3 /* ExpenseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AE6E662DE65E660061BDA3 /* ExpenseDetailViewController.swift */; };
 		76B8F7442DF72B2E00753078 /* TokenStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B8F7432DF72B2E00753078 /* TokenStackView.swift */; };
 		76B8F7462DF72E9500753078 /* TokenWrappingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B8F7452DF72E9500753078 /* TokenWrappingView.swift */; };
+		76B8F7482DF77A3D00753078 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B8F7472DF77A3D00753078 /* SettingsCell.swift */; };
 		76BD79882DD0AF8300FB7A75 /* ButtonActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BD79872DD0AF8300FB7A75 /* ButtonActionHandler.swift */; };
 		76BD798B2DD0AFF500FB7A75 /* ButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BD798A2DD0AFF500FB7A75 /* ButtonModel.swift */; };
 		76BD798D2DD0B05800FB7A75 /* ButtonFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BD798C2DD0B05800FB7A75 /* ButtonFactory.swift */; };
@@ -169,6 +170,7 @@
 		76AE6E662DE65E660061BDA3 /* ExpenseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailViewController.swift; sourceTree = "<group>"; };
 		76B8F7432DF72B2E00753078 /* TokenStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStackView.swift; sourceTree = "<group>"; };
 		76B8F7452DF72E9500753078 /* TokenWrappingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenWrappingView.swift; sourceTree = "<group>"; };
+		76B8F7472DF77A3D00753078 /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		76BD79872DD0AF8300FB7A75 /* ButtonActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonActionHandler.swift; sourceTree = "<group>"; };
 		76BD798A2DD0AFF500FB7A75 /* ButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModel.swift; sourceTree = "<group>"; };
 		76BD798C2DD0B05800FB7A75 /* ButtonFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonFactory.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 		760C74D72DF64280006FE801 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				76B8F7472DF77A3D00753078 /* SettingsCell.swift */,
 				760C74D82DF64280006FE801 /* SettingsView.swift */,
 				760C74D92DF64280006FE801 /* SettingsViewModel.swift */,
 				760C74DA2DF64280006FE801 /* SettingsViewController.swift */,
@@ -622,6 +625,7 @@
 				760C74E32DF64280006FE801 /* TripDetailView.swift in Sources */,
 				764CD73C2DC3EDF600900B78 /* T_Trips.xcdatamodeld in Sources */,
 				760C74F72DF643C3006FE801 /* StartViewController.swift in Sources */,
+				76B8F7482DF77A3D00753078 /* SettingsCell.swift in Sources */,
 				760C74E52DF64280006FE801 /* DebtsViewModel.swift in Sources */,
 				767A42172DDF7FA6008970ED /* RegisterView.swift in Sources */,
 				766E62F92DD22DE900E70F12 /* TextFieldFactory.swift in Sources */,
