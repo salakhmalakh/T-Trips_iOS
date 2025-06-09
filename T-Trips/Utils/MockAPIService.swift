@@ -81,6 +81,22 @@ final class MockAPIService {
                 paidForUserIds: dto.paidForUserIds
             )
             self.expenses.append(expense)
+
+            let payees = dto.paidForUserIds.filter { $0 != ownerId }
+            if !payees.isEmpty {
+                let partAmount = dto.amount / Double(dto.paidForUserIds.count)
+                for uid in payees {
+                    let debt = Debt(
+                        debtId: UUID().uuidString,
+                        tripId: tripId,
+                        fromUserId: uid,
+                        toUserId: ownerId,
+                        amount: partAmount
+                    )
+                    self.debts.append(debt)
+                }
+            }
+
             completion(expense)
         }
     }
