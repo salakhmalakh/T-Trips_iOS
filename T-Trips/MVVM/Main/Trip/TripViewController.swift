@@ -57,11 +57,11 @@ final class TripViewController: UIViewController {
         )
         viewModel.onAddExpense = { [weak self] in
             guard let self = self else { return }
-            let users = MockData.users
+            let ids = self.viewModel.trip.participantIds ?? []
+            let participants = MockData.users.filter { ids.contains($0.id) }
             let addVC = AddExpenseViewController(
                 tripId: self.viewModel.trip.id,
-                payers: users,
-                payees: users
+                participants: participants
             )
             addVC.onExpenseAdded = { [weak self] expense in
                 self?.viewModel.addExpense(expense)
@@ -176,6 +176,12 @@ extension TripViewController: UITableViewDataSource, UITableViewDelegate {
         let detailVC = ExpenseDetailViewController(viewModel: detailVM)
         detailVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(detailVC, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            viewModel.deleteExpense(at: indexPath.row)
+        }
     }
 }
 

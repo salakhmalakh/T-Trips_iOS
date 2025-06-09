@@ -40,4 +40,13 @@ final class TripViewModel {
         expenses.append(expense)
     }
 
+    func deleteExpense(at index: Int) {
+        guard expenses.indices.contains(index), let id = expenses[index].id else { return }
+        MockAPIService.shared.deleteExpense(id: id) { [weak self] in
+            DispatchQueue.main.async {
+                self?.expenses.remove(at: index)
+            }
+        }
+    }
+
 }
