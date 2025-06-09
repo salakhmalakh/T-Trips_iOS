@@ -53,7 +53,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section == 1 && indexPath.row == 1 {
+        if indexPath.section == 0 {
+            let editVC = EditProfileViewController()
+            navigationController?.pushViewController(editVC, animated: true)
+        } else if indexPath.section == 1 && indexPath.row == 1 {
             let langVC = LanguagesViewController()
             navigationController?.pushViewController(langVC, animated: true)
         }
