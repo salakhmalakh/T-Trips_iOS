@@ -96,11 +96,11 @@ final class CreateTripView: UIView {
         return button
     }()
 
-    override init(frame: CGRect) {
+     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemBackground
         [titleTextField, startDateTextField, endDateTextField, budgetTextField,
-         participantsTextField, tokensView, suggestionsTableView, descriptionTextField, saveButton].forEach(addSubview)
+        participantsTextField, tokensView, suggestionsTableView, descriptionTextField, saveButton].forEach(addSubview)
         tokensView.trailingSpace = CGFloat.inputSpace
         setupConstraints()
     }
@@ -109,7 +109,7 @@ final class CreateTripView: UIView {
         super.init(coder: coder)
         backgroundColor = .systemBackground
         [titleTextField, startDateTextField, endDateTextField, budgetTextField,
-         participantsTextField, tokensView, suggestionsTableView, descriptionTextField, saveButton].forEach(addSubview)
+        participantsTextField, tokensView, suggestionsTableView, descriptionTextField, saveButton].forEach(addSubview)
         tokensView.trailingSpace = CGFloat.inputSpace
         setupConstraints()
     }
@@ -141,12 +141,12 @@ final class CreateTripView: UIView {
             make.top.equalTo(participantsTextField.snp.bottom).offset(CGFloat.tokenTop)
             make.leading.trailing.equalTo(participantsTextField).inset(CGFloat.tokenInset)
         }
-        suggestionsTableView.snp.makeConstraints { make in
+            suggestionsTableView.snp.makeConstraints { make in
             make.top.equalTo(participantsTextField.snp.bottom)
             make.leading.trailing.equalTo(participantsTextField)
             suggestionsHeightConstraint = make.height.equalTo(0).constraint
         }
-        descriptionTextField.snp.makeConstraints { make in
+            descriptionTextField.snp.makeConstraints { make in
             make.top.equalTo(tokensView.snp.bottom).offset(CGFloat.verticalSpacing)
             make.leading.trailing.height.equalTo(titleTextField)
         }

@@ -104,9 +104,11 @@ final class CreateTripViewController: UIViewController {
         createView.participantsTextField.addAction(UIAction { [weak self] _ in
             self?.filterParticipants()
         }, for: .editingDidBegin)
+      
         createView.participantsTextField.addAction(UIAction { [weak self] _ in
             self?.filterParticipants()
         }, for: .editingChanged)
+      
         createView.participantsTextField.addAction(UIAction { [weak self] _ in
             self?.createView.suggestionsTableView.isHidden = true
             self?.createView.updateSuggestionsHeight(0)
