@@ -37,8 +37,8 @@ final class LocalizationManager {
 
 private var bundleKey: UInt8 = 0
 
-private extension Bundle {
-    class func setLanguage(_ language: String) {
+extension Bundle {
+    fileprivate class func setLanguage(_ language: String) {
         guard let path = Bundle.main.path(forResource: language, ofType: "lproj"),
               let bundle = Bundle(path: path) else {
             objc_setAssociatedObject(Bundle.main, &bundleKey, nil, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
