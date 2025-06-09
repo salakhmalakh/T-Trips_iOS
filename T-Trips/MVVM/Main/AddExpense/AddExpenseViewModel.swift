@@ -36,7 +36,8 @@ final class AddExpenseViewModel {
                     Double(amount) != nil &&
                     !category.isEmpty &&
                     payerId != nil &&
-                    payeeId != nil
+                    payeeId != nil &&
+                    payerId != payeeId
             }
             .receive(on: RunLoop.main)
             .assign(to: \ .isAddEnabled, on: self)
@@ -47,7 +48,8 @@ final class AddExpenseViewModel {
         guard
             let value = Double(amount),
             let payerId = payerId,
-            let payeeId = payeeId
+            let payeeId = payeeId,
+            payerId != payeeId
         else { return }
 
         let dto = ExpenseDtoForCreate(

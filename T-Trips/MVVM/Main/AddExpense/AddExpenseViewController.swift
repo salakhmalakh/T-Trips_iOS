@@ -17,14 +17,14 @@ final class AddExpenseViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
 
     private let categories = Expense.Category.allCases
-    private let payers: [User]
-    private let payees: [User]
+    private let participants: [User]
+    private var payers: [User] { participants }
+    private var payees: [User] { participants.filter { $0.id != viewModel.payerId } }
 
     // MARK: - Init
-    init(tripId: Int64, payers: [User] = [], payees: [User] = []) {
+    init(tripId: Int64, participants: [User] = []) {
         self.viewModel = AddExpenseViewModel(tripId: tripId)
-        self.payers = payers
-        self.payees = payees
+        self.participants = participants
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -42,6 +42,7 @@ final class AddExpenseViewController: UIViewController {
         title = "Добавить расход"
         setupBindings()
         setupPickers()
+        refreshPayeePicker()
         setupActions()
     }
 
@@ -75,7 +76,10 @@ final class AddExpenseViewController: UIViewController {
             for: .editingDidBegin
         )
         addExpenseView.payeeTextField.addAction(
-            UIAction { [weak self] _ in self?.addExpenseView.payeeTextField.becomeFirstResponder() },
+            UIAction { [weak self] _ in
+                self?.refreshPayeePicker()
+                self?.addExpenseView.payeeTextField.becomeFirstResponder()
+            },
             for: .editingDidBegin
         )
         addExpenseView.dateTextField.addAction(
@@ -128,6 +132,7 @@ final class AddExpenseViewController: UIViewController {
                 let user = self?.payers[row]
                 self?.viewModel.payerId = user?.id
                 self?.addExpenseView.payerTextField.text = "\(user?.firstName ?? "") \(user?.lastName ?? "")"
+                self?.refreshPayeePicker()
             },
             for: .editingDidEnd
         )
@@ -135,9 +140,10 @@ final class AddExpenseViewController: UIViewController {
         addExpenseView.payeeTextField.addAction(
             UIAction { [weak self] _ in
                 let row = self?.addExpenseView.payeePicker.selectedRow(inComponent: 0) ?? 0
-                let user = self?.payees[row]
-                self?.viewModel.payeeId = user?.id
-                self?.addExpenseView.payeeTextField.text = "\(user?.firstName ?? "") \(user?.lastName ?? "")"
+                guard let self = self else { return }
+                let user = self.payees[row]
+                self.viewModel.payeeId = user.id
+                self.addExpenseView.payeeTextField.text = "\(user.firstName) \(user.lastName)"
             },
             for: .editingDidEnd
         )
@@ -153,6 +159,28 @@ final class AddExpenseViewController: UIViewController {
             self.onExpenseAdded?(expense)
             
             self.navigationController?.popViewController(animated: true)
+        }
+    }
+
+    private func refreshPayeePicker() {
+        addExpenseView.payeePicker.reloadAllComponents()
+        let row = addExpenseView.payeePicker.selectedRow(inComponent: 0)
+        if viewModel.payerId != nil {
+            if payees.indices.contains(row) {
+                let user = payees[row]
+                viewModel.payeeId = user.id
+                addExpenseView.payeeTextField.text = "\(user.firstName) \(user.lastName)"
+            } else if let first = payees.first {
+                addExpenseView.payeePicker.selectRow(0, inComponent: 0, animated: false)
+                viewModel.payeeId = first.id
+                addExpenseView.payeeTextField.text = "\(first.firstName) \(first.lastName)"
+            } else {
+                viewModel.payeeId = nil
+                addExpenseView.payeeTextField.text = ""
+            }
+        } else {
+            viewModel.payeeId = nil
+            addExpenseView.payeeTextField.text = ""
         }
     }
 }
@@ -185,6 +213,8 @@ extension AddExpenseViewController: UIPickerViewDataSource, UIPickerViewDelegate
         }
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        // no-op: handled on end editing
+        if pickerView == addExpenseView.payerPicker {
+            refreshPayeePicker()
+        }
     }
 }
