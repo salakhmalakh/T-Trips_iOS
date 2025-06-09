@@ -87,7 +87,7 @@ final class TripViewController: UIViewController {
             self?.showDebts()
         }
         let exit = UIAction(title: String.exitTitle, attributes: .destructive) { [weak self] _ in
-            self?.exitTrip()
+            self?.confirmExit()
         }
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -109,8 +109,21 @@ final class TripViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
 
-    private func exitTrip() {
-        navigationController?.popViewController(animated: true)
+    private func confirmExit() {
+        let alert = UIAlertController(
+            title: nil,
+            message: String.exitConfirmation,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: String.cancelTitle, style: .cancel))
+        alert.addAction(
+            UIAlertAction(title: String.confirmButtonTitle, style: .destructive) { [weak self] _ in
+                self?.viewModel.leaveTrip {
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            }
+        )
+        present(alert, animated: true)
     }
 }
 
@@ -221,5 +234,6 @@ private extension String {
     static var exitTitle: String { "logout".localized }
     static var cancelTitle: String { "cancelButtonTitle".localized }
     static var deleteConfirmation: String { "deleteConfirmation".localized }
+    static var exitConfirmation: String { "leaveTripConfirmation".localized }
     static var confirmButtonTitle: String { "confirmButtonTitle".localized }
 }

@@ -110,6 +110,36 @@ final class MockAPIService {
         }
     }
 
+    func leaveTrip(tripId: Int64, userId: Int64, completion: @escaping (Trip?) -> Void) {
+        asyncDelay {
+            guard let index = self.trips.firstIndex(where: { $0.id == tripId }) else {
+                completion(nil)
+                return
+            }
+            var participantIds = self.trips[index].participantIds ?? []
+            participantIds.removeAll { $0 == userId }
+
+            var adminId = self.trips[index].adminId
+            if adminId == userId, let newAdmin = participantIds.first {
+                adminId = newAdmin
+            }
+
+            let updatedTrip = Trip(
+                id: self.trips[index].id,
+                adminId: adminId,
+                title: self.trips[index].title,
+                startDate: self.trips[index].startDate,
+                endDate: self.trips[index].endDate,
+                budget: self.trips[index].budget,
+                description: self.trips[index].description,
+                status: self.trips[index].status,
+                participantIds: participantIds
+            )
+            self.trips[index] = updatedTrip
+            completion(updatedTrip)
+        }
+    }
+
     // MARK: - Auth
     func authenticate(phone: String, password: String, completion: @escaping (Bool) -> Void) {
         asyncDelay {
@@ -198,5 +228,9 @@ extension MockAPIService {
             }
             completion(MockData.notifications.filter { $0.userId == id })
         }
+    }
+
+    func logout() {
+        currentUserId = nil
     }
 }
