@@ -176,6 +176,7 @@ extension CreateTripViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "suggestCell") ?? UITableViewCell(style: .default, reuseIdentifier: "suggestCell")
+        cell.backgroundColor = .secondarySystemBackground
         let user = filteredParticipants[indexPath.row]
         cell.textLabel?.text = "\(user.firstName) \(user.lastName)"
         return cell
