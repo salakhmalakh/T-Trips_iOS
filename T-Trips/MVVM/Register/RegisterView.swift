@@ -132,12 +132,12 @@ private extension CGFloat {
 }
 
 private extension String {
-    static let fullName: String = "Имя, Фамилия"
-    static let phone: String = "Телефон"
-    static let password: String = "Пароль"
-    static let confirmPassword: String = "Подтвердите пароль"
-    static let register: String = "Зарегистрироваться"
-    static let gotAnAccount: String = "Уже есть аккаунт"
+    static var fullName: String { "fullName".localized }
+    static var phone: String { "phone".localized }
+    static var password: String { "password".localized }
+    static var confirmPassword: String { "confirmPassword".localized }
+    static var register: String { "register".localized }
+    static var gotAnAccount: String { "gotAnAccount".localized }
 }
 
 private extension UIImage {

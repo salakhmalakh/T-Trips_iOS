@@ -115,10 +115,10 @@ private extension CGFloat {
 }
 
 private extension String {
-    static let phone: String = "Телефон"
-    static let password: String = "Пароль"
-    static let login: String = "Войти"
-    static let register: String = "Зарегистрироваться"
+    static var phone: String { "phone".localized }
+    static var password: String { "password".localized }
+    static var login: String { "login".localized }
+    static var register: String { "register".localized }
 }
 
 private extension UIImage {

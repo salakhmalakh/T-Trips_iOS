@@ -184,5 +184,5 @@ private extension CGFloat {
 }
 
 private extension String {
-    static let tripsTitle = "Поездки"
+    static var tripsTitle: String { "trips".localized }
 }

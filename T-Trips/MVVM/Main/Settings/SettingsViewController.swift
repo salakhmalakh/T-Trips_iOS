@@ -10,7 +10,7 @@ final class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Настройки"
+        title = "settings".localized
         setupTable()
     }
 
@@ -37,16 +37,16 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
         if indexPath.section == 0 {
-            cell.configure(text: "Редактировать данные")
+            cell.configure(text: "editData".localized)
         } else if indexPath.row == 0 {
             let switcher = UISwitch()
             switcher.isOn = viewModel.darkMode
             switcher.addTarget(self, action: #selector(themeChanged(_:)), for: .valueChanged)
-            cell.configure(text: "Темная тема", accessoryView: switcher)
+            cell.configure(text: "darkTheme".localized, accessoryView: switcher)
         } else {
             let arrow = UIImageView(image: UIImage(systemName: "chevron.right"))
             arrow.tintColor = .tertiaryLabel
-            cell.configure(text: "Язык", accessoryView: arrow)
+            cell.configure(text: "language".localized, accessoryView: arrow)
         }
         return cell
     }

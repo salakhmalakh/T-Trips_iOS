@@ -39,7 +39,7 @@ final class AddExpenseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Добавить расход"
+        title = "addExpenseTitle".localized
         setupBindings()
         setupPickers()
         refreshPayeePicker()

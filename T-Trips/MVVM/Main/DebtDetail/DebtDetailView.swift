@@ -5,7 +5,7 @@ final class DebtDetailView: UIView {
     let infoLabel = UILabel()
     let confirmButton: CustomButton = {
         let button = CustomButton()
-        let model = ButtonFactory().makeConfiguration(title: "Подтвердить", state: .primary, isEnabled: true) { }
+        let model = ButtonFactory().makeConfiguration(title: "confirmButtonTitle".localized, state: .primary, isEnabled: true) { }
         button.configure(with: model)
         return button
     }()

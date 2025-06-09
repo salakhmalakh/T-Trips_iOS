@@ -42,8 +42,9 @@
 		760C74F52DF643C3006FE801 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74F22DF643C3006FE801 /* StartView.swift */; };
 		760C74F62DF643C3006FE801 /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74F32DF643C3006FE801 /* StartViewModel.swift */; };
 		760C74F72DF643C3006FE801 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74F42DF643C3006FE801 /* StartViewController.swift */; };
-		760C74F92DF647A2006FE801 /* MockAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74F82DF647A1006FE801 /* MockAPIService.swift */; };
-		760C74FC2DF65043006FE801 /* ParticipantTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74FB2DF65042006FE801 /* ParticipantTokenView.swift */; };
+                760C74F92DF647A2006FE801 /* MockAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74F82DF647A1006FE801 /* MockAPIService.swift */; };
+                FF195912128E4480BB7D2F25 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A06DB9FEBA540F9AF340769 /* Localization.swift */; };
+                760C74FC2DF65043006FE801 /* ParticipantTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74FB2DF65042006FE801 /* ParticipantTokenView.swift */; };
 		762A60972DE468E700F31E34 /* CustomTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762A60962DE468E700F31E34 /* CustomTableCell.swift */; };
 		762A60992DE4690E00F31E34 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762A60982DE4690E00F31E34 /* FilterCell.swift */; };
 		762A609C2DE4AB4900F31E34 /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762A609B2DE4AB4900F31E34 /* AddExpenseView.swift */; };
@@ -55,7 +56,9 @@
 		764CD73C2DC3EDF600900B78 /* T_Trips.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 764CD73A2DC3EDF600900B78 /* T_Trips.xcdatamodeld */; };
 		764CD73E2DC3EDFC00900B78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 764CD73D2DC3EDFC00900B78 /* Assets.xcassets */; };
 		764CD74A2DC3F7B800900B78 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 764CD7492DC3F7B800900B78 /* SnapKit */; };
-		764CD74C2DC3FD0600900B78 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 764CD74B2DC3FD0600900B78 /* .swiftlint.yml */; };
+                764CD74C2DC3FD0600900B78 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 764CD74B2DC3FD0600900B78 /* .swiftlint.yml */; };
+                F5418646A8BF4F7880F3D09B /* Localizable.strings (en) in Resources */ = {isa = PBXBuildFile; fileRef = FD07FC1C77D94F17842EB4C5 /* Localizable.strings */; };
+                C714E09E0D6047288CCEB3F4 /* Localizable.strings (ru) in Resources */ = {isa = PBXBuildFile; fileRef = 9FA2E71BCC264539BB7A97DF /* Localizable.strings */; };
 		766E62F52DD22DA200E70F12 /* TextFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766E62F42DD22DA100E70F12 /* TextFieldModel.swift */; };
 		766E62F72DD22DCB00E70F12 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766E62F62DD22DCB00E70F12 /* CustomTextField.swift */; };
 		766E62F92DD22DE900E70F12 /* TextFieldFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766E62F82DD22DE900E70F12 /* TextFieldFactory.swift */; };
@@ -141,15 +144,18 @@
 		764CD73B2DC3EDF600900B78 /* T_Trips.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = T_Trips.xcdatamodel; sourceTree = "<group>"; };
 		764CD73D2DC3EDFC00900B78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		764CD7422DC3EDFC00900B78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		764CD74B2DC3FD0600900B78 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		766E62F42DD22DA100E70F12 /* TextFieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldModel.swift; sourceTree = "<group>"; };
+                764CD74B2DC3FD0600900B78 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+                FD07FC1C77D94F17842EB4C5 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+                9FA2E71BCC264539BB7A97DF /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+                766E62F42DD22DA100E70F12 /* TextFieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldModel.swift; sourceTree = "<group>"; };
 		766E62F62DD22DCB00E70F12 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		766E62F82DD22DE900E70F12 /* TextFieldFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldFactory.swift; sourceTree = "<group>"; };
 		766E62FA2DD2317A00E70F12 /* CustomTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldDelegate.swift; sourceTree = "<group>"; };
 		767317792DE4D4AB00017BCB /* Debt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debt.swift; sourceTree = "<group>"; };
 		7673177B2DE4D4C800017BCB /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
-		7673177D2DE4D79800017BCB /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
-		7673177F2DE4DA0800017BCB /* TripParticipant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripParticipant.swift; sourceTree = "<group>"; };
+                7673177D2DE4D79800017BCB /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
+                3A06DB9FEBA540F9AF340769 /* Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
+                7673177F2DE4DA0800017BCB /* TripParticipant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripParticipant.swift; sourceTree = "<group>"; };
 		767A42162DDF7FA6008970ED /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		767A42192DDF8183008970ED /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		767A421B2DDF826C008970ED /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -312,9 +318,11 @@
 		764CD7252DC3EDF600900B78 = {
 			isa = PBXGroup;
 			children = (
-				760C74AA2DF63ED7006FE801 /* PDFs */,
-				764CD74B2DC3FD0600900B78 /* .swiftlint.yml */,
-				764CD7302DC3EDF600900B78 /* T-Trips */,
+                               760C74AA2DF63ED7006FE801 /* PDFs */,
+                               764CD74B2DC3FD0600900B78 /* .swiftlint.yml */,
+                                FD07FC1C77D94F17842EB4C5 /* Localizable.strings */,
+                                9FA2E71BCC264539BB7A97DF /* Localizable.strings */,
+                               764CD7302DC3EDF600900B78 /* T-Trips */,
 				764CD72F2DC3EDF600900B78 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -441,9 +449,10 @@
 			isa = PBXGroup;
 			children = (
 				760C74F82DF647A1006FE801 /* MockAPIService.swift */,
-				767D33382DE37D7F00F66264 /* Extentions.swift */,
-				7673177D2DE4D79800017BCB /* Mocks.swift */,
-			);
+                               767D33382DE37D7F00F66264 /* Extentions.swift */,
+                               7673177D2DE4D79800017BCB /* Mocks.swift */,
+                                3A06DB9FEBA540F9AF340769 /* Localization.swift */,
+                       );
 			path = Utils;
 			sourceTree = "<group>";
 		};
@@ -556,10 +565,12 @@
 				760C74BE2DF63ED8006FE801 /* Экран долгов текущей поездки.pdf in Resources */,
 				764CD73E2DC3EDFC00900B78 /* Assets.xcassets in Resources */,
 				760C74C32DF63ED8006FE801 /* Поездка.pdf in Resources */,
-				760C74BB2DF63ED8006FE801 /* Стартовый экран.pdf in Resources */,
-				760C74BD2DF63ED8006FE801 /* Добавление расхода.pdf in Resources */,
-				760C74C42DF63ED8006FE801 /* Уведомления.pdf in Resources */,
-			);
+                                760C74BB2DF63ED8006FE801 /* Стартовый экран.pdf in Resources */,
+                                760C74BD2DF63ED8006FE801 /* Добавление расхода.pdf in Resources */,
+                                760C74C42DF63ED8006FE801 /* Уведомления.pdf in Resources */,
+                                F5418646A8BF4F7880F3D09B /* Localizable.strings (en) in Resources */,
+                                C714E09E0D6047288CCEB3F4 /* Localizable.strings (ru) in Resources */,
+                        );
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
@@ -612,8 +623,9 @@
 				760C74E92DF64280006FE801 /* NotificationsViewModel.swift in Sources */,
 				767D33392DE37D7F00F66264 /* Extentions.swift in Sources */,
 				762A60A02DE4AB6600F31E34 /* AddExpenseViewController.swift in Sources */,
-				760C74F92DF647A2006FE801 /* MockAPIService.swift in Sources */,
-				767A421A2DDF8183008970ED /* RegisterViewModel.swift in Sources */,
+                                760C74F92DF647A2006FE801 /* MockAPIService.swift in Sources */,
+                                FF195912128E4480BB7D2F25 /* Localization.swift in Sources */,
+                                767A421A2DDF8183008970ED /* RegisterViewModel.swift in Sources */,
 				766E62F52DD22DA200E70F12 /* TextFieldModel.swift in Sources */,
 				760C74E12DF64280006FE801 /* CreateTripViewModel.swift in Sources */,
 				760C74DF2DF64280006FE801 /* CreateTripView.swift in Sources */,

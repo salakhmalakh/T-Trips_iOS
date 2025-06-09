@@ -35,19 +35,19 @@ extension Expense.Category {
     var localized: String {
         switch self {
         case .tickets:
-            return "Билеты"
+            return "tickets".localized
         case .longing:
-            return "Проживание"
+            return "longing".localized
         case .food:
-            return "Еда"
+            return "food".localized
         case .entertainment:
-            return "Развлечения"
+            return "entertainment".localized
         case .insurance:
-            return "Страховка"
+            return "insurance".localized
         case .transport:
-            return "Транспорт"
+            return "transport".localized
         case .other:
-            return "Другое"
+            return "other".localized
         }
     }
 }
