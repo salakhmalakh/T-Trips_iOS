@@ -56,4 +56,12 @@ extension DebtsViewController: UITableViewDataSource, UITableViewDelegate {
         cell.configure(with: text)
         return cell
     }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return .tvRowHeight
+    }
+}
+
+private extension CGFloat {
+    static let tvRowHeight: CGFloat = 100
 }

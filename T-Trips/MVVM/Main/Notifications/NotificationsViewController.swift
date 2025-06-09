@@ -42,4 +42,12 @@ extension NotificationsViewController: UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.performPressAnimation(pressed: false)
     }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return .tvRowHeight
+    }
+}
+
+private extension CGFloat {
+    static let tvRowHeight: CGFloat = 100
 }
