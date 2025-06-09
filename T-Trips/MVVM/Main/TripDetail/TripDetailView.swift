@@ -8,13 +8,13 @@ final class TripDetailView: UIView {
     let budgetLabel = UILabel()
     let participantsTitleLabel: UILabel = {
         let lbl = UILabel()
-        lbl.text = "Участники"
+        lbl.text = "participantsTitle".localized
         return lbl
     }()
     let participantsLabel = UILabel()
     let descriptionTitleLabel: UILabel = {
         let lbl = UILabel()
-        lbl.text = "Описание"
+        lbl.text = "tripDescriptionTitle".localized
         return lbl
     }()
     let descriptionLabel = UILabel()

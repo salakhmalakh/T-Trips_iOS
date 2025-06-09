@@ -181,11 +181,11 @@ private extension CGFloat {
 }
 
 private extension String {
-    static let titlePlaceholder = "Название"
-    static let startDatePlaceholder = "Дата начала"
-    static let endDatePlaceholder = "Дата конца"
-    static let budgetPlaceholder = "Бюджет"
-    static let participantsPlaceholder = "Участники"
-    static let descriptionPlaceholder = "Описание"
-    static let saveButtonTitle = "Сохранить"
+    static var titlePlaceholder: String { "titlePlaceholder".localized }
+    static var startDatePlaceholder: String { "startDatePlaceholder".localized }
+    static var endDatePlaceholder: String { "endDatePlaceholder".localized }
+    static var budgetPlaceholder: String { "budgetPlaceholder".localized }
+    static var participantsPlaceholder: String { "participantsPlaceholder".localized }
+    static var descriptionPlaceholder: String { "descriptionPlaceholder".localized }
+    static var saveButtonTitle: String { "saveButtonTitle".localized }
 }

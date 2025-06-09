@@ -22,7 +22,7 @@ final class DebtsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Долги"
+        title = "debts".localized
         setupBindings()
         setupTable()
     }

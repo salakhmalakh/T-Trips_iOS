@@ -195,8 +195,8 @@ private extension CGFloat {
 }
 
 private extension String {
-    static let tripTitile = "Поездка"
-    static let detailsTitle = "Детали"
-    static let debtsTitle = "Долги"
-    static let exitTitle = "Выйти"
+    static var tripTitile: String { "trip".localized }
+    static var detailsTitle: String { "details".localized }
+    static var debtsTitle: String { "debts".localized }
+    static var exitTitle: String { "logout".localized }
 }

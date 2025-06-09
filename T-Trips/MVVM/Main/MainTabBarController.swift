@@ -16,28 +16,28 @@ final class MainTabBarController: UITabBarController {
     // MARK: - filling up the TabBar
     private func setupViewControllers() {
         let tripsVC = TripsViewController()
-        tripsVC.title = "Поездки"
+        tripsVC.title = "trips".localized
         let tripsNav = UINavigationController(rootViewController: tripsVC)
         tripsNav.tabBarItem = UITabBarItem(
-            title: "Поездки",
+            title: "trips".localized,
             image: UIImage(systemName: "mappin"),
             tag: 0
         )
 
         let notifVC = NotificationsViewController()
-        notifVC.title = "Уведомления"
+        notifVC.title = "notifications".localized
         let notifNav = UINavigationController(rootViewController: notifVC)
         notifNav.tabBarItem = UITabBarItem(
-            title: "Уведомления",
+            title: "notifications".localized,
             image: UIImage(systemName: "bell"),
             tag: 1
         )
 
         let settingsVC = SettingsViewController()
-        settingsVC.title = "Настройки"
+        settingsVC.title = "settings".localized
         let settingsNav = UINavigationController(rootViewController: settingsVC)
         settingsNav.tabBarItem = UITabBarItem(
-            title: "Настройки",
+            title: "settings".localized,
             image: UIImage(systemName: "gearshape"),
             tag: 2
         )

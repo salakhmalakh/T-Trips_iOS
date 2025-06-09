@@ -12,7 +12,7 @@ final class ExpenseDetailView: UIView {
     // MARK: - UI Components
     let categoryTitleLabel: UILabel = {
         let lbl = UILabel()
-        lbl.text = "Категория"
+        lbl.text = "categoryTitle".localized
         lbl.font = .systemFont(ofSize: CGFloat.titleFontSize, weight: .regular)
         lbl.textColor = UIColor.label.withAlphaComponent(CGFloat.titleAlpha)
         return lbl
@@ -27,7 +27,7 @@ final class ExpenseDetailView: UIView {
 
     let amountTitleLabel: UILabel = {
         let lbl = UILabel()
-        lbl.text = "Сумма"
+        lbl.text = "amountTitle".localized
         lbl.font = .systemFont(ofSize: CGFloat.titleFontSize, weight: .regular)
         lbl.textColor = UIColor.label.withAlphaComponent(CGFloat.titleAlpha)
         return lbl
@@ -42,7 +42,7 @@ final class ExpenseDetailView: UIView {
 
     let dateTitleLabel: UILabel = {
         let lbl = UILabel()
-        lbl.text = "Дата"
+        lbl.text = "dateTitle".localized
         lbl.font = .systemFont(ofSize: CGFloat.titleFontSize, weight: .regular)
         lbl.textColor = UIColor.label.withAlphaComponent(CGFloat.titleAlpha)
         return lbl
@@ -57,7 +57,7 @@ final class ExpenseDetailView: UIView {
 
     let payerTitleLabel: UILabel = {
         let lbl = UILabel()
-        lbl.text = "Кто оплатил"
+        lbl.text = "payerTitle".localized
         lbl.font = .systemFont(ofSize: CGFloat.titleFontSize, weight: .regular)
         lbl.textColor = UIColor.label.withAlphaComponent(CGFloat.titleAlpha)
         return lbl
@@ -72,7 +72,7 @@ final class ExpenseDetailView: UIView {
 
     let payeeTitleLabel: UILabel = {
         let lbl = UILabel()
-        lbl.text = "За кого оплачено"
+        lbl.text = "payeeTitle".localized
         lbl.font = .systemFont(ofSize: CGFloat.titleFontSize, weight: .regular)
         lbl.textColor = UIColor.label.withAlphaComponent(CGFloat.titleAlpha)
         return lbl
@@ -192,5 +192,5 @@ private extension CGFloat {
 }
 
 private extension String {
-    static let deleteButtonTitle = "Удалить"
+    static var deleteButtonTitle: String { "deleteButtonTitle".localized }
 }
