@@ -21,6 +21,7 @@ final class CreateTripView: UIView {
         }
         return view
     }()
+
     private var suggestionsHeightConstraint: Constraint?
     public private(set) lazy var startDatePicker: UIDatePicker = {
         let picker = UIDatePicker()
@@ -96,11 +97,11 @@ final class CreateTripView: UIView {
         return button
     }()
 
-    override init(frame: CGRect) {
+     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemBackground
         [titleTextField, startDateTextField, endDateTextField, budgetTextField,
-         participantsTextField, tokensView, suggestionsTableView, descriptionTextField, saveButton].forEach(addSubview)
+        participantsTextField, tokensView, suggestionsTableView, descriptionTextField, saveButton].forEach(addSubview)
         tokensView.trailingSpace = CGFloat.inputSpace
         setupConstraints()
     }
@@ -109,7 +110,7 @@ final class CreateTripView: UIView {
         super.init(coder: coder)
         backgroundColor = .systemBackground
         [titleTextField, startDateTextField, endDateTextField, budgetTextField,
-         participantsTextField, tokensView, suggestionsTableView, descriptionTextField, saveButton].forEach(addSubview)
+        participantsTextField, tokensView, suggestionsTableView, descriptionTextField, saveButton].forEach(addSubview)
         tokensView.trailingSpace = CGFloat.inputSpace
         setupConstraints()
     }
@@ -146,6 +147,11 @@ final class CreateTripView: UIView {
             make.leading.trailing.equalTo(participantsTextField)
             suggestionsHeightConstraint = make.height.equalTo(0).constraint
         }
+        suggestionsTableView.snp.makeConstraints { make in
+            make.top.equalTo(participantsTextField.snp.bottom)
+            make.leading.trailing.equalTo(participantsTextField)
+            suggestionsHeightConstraint = make.height.equalTo(0).constraint
+        }
         descriptionTextField.snp.makeConstraints { make in
             make.top.equalTo(tokensView.snp.bottom).offset(CGFloat.verticalSpacing)
             make.leading.trailing.height.equalTo(titleTextField)
@@ -155,6 +161,11 @@ final class CreateTripView: UIView {
             make.leading.trailing.equalToSuperview().inset(CGFloat.horizontalInset)
             make.height.equalTo(CGFloat.buttonHeight)
         }
+    }
+
+    func updateSuggestionsHeight(_ height: CGFloat) {
+        suggestionsHeightConstraint?.update(offset: height)
+        layoutIfNeeded()
     }
 
     func updateSuggestionsHeight(_ height: CGFloat) {
