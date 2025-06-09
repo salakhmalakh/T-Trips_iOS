@@ -40,7 +40,36 @@ final class CreateTripView: UIView {
     public private(set) lazy var titleTextField: CustomTextField = {
         let model = TextFieldModel(placeholder: String.titlePlaceholder, state: .name)
         let tf = textFieldFactory.makeTextField(with: model)
-@@ -64,92 +73,113 @@ final class CreateTripView: UIView {
+        tf.inputAccessoryView = accessoryToolbar
+        return tf
+    }()
+
+    public private(set) lazy var startDateTextField: CustomTextField = {
+        let model = TextFieldModel(placeholder: String.startDatePlaceholder, state: .picker)
+        let tf = textFieldFactory.makeTextField(with: model)
+        tf.inputView = startDatePicker
+        tf.inputAccessoryView = accessoryToolbar
+        return tf
+    }()
+
+    public private(set) lazy var endDateTextField: CustomTextField = {
+        let model = TextFieldModel(placeholder: String.endDatePlaceholder, state: .picker)
+        let tf = textFieldFactory.makeTextField(with: model)
+        tf.inputView = endDatePicker
+        tf.inputAccessoryView = accessoryToolbar
+        return tf
+    }()
+
+    public private(set) lazy var budgetTextField: CustomTextField = {
+        let model = TextFieldModel(placeholder: String.budgetPlaceholder, state: .money)
+        let tf = textFieldFactory.makeTextField(with: model)
+        tf.keyboardType = .decimalPad
+        tf.inputAccessoryView = accessoryToolbar
+        return tf
+    }()
+
+    public private(set) lazy var participantsTextField: CustomTextField = {
+        let model = TextFieldModel(placeholder: String.participantsPlaceholder, state: .picker)
         let tf = textFieldFactory.makeTextField(with: model)
         tf.inputView = participantsPicker
         tf.inputAccessoryView = accessoryToolbar
@@ -107,7 +136,6 @@ final class CreateTripView: UIView {
         }
         participantsTextField.snp.makeConstraints { make in
             make.top.equalTo(budgetTextField.snp.bottom).offset(CGFloat.verticalSpacing)
-            make.leading.trailing.height.equalTo(titleTextField)
             make.leading.trailing.equalTo(titleTextField)
             participantsHeightConstraint = make.height.equalTo(CGFloat.fieldHeight).constraint
         }
