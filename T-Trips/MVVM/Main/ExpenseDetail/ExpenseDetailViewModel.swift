@@ -33,7 +33,7 @@ final class ExpenseDetailViewModel {
         payeeName: String? = nil
     ) {
         self.category = expense.category.localized
-        self.amountText = String(format: "%.2f ₽", expense.amount)
+        self.amountText = expense.amount.rubleString
         self.dateText = formatter.string(from: expense.createdAt ?? Date(timeIntervalSinceNow: 0))
         self.payer = payerName
         self.payee = payeeName ?? ""

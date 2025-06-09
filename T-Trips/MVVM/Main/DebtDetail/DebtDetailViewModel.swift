@@ -15,7 +15,7 @@ final class DebtDetailViewModel {
         let fromName = [fromUser?.firstName, fromUser?.lastName].compactMap { $0 }.joined(separator: " ")
         let toName = [toUser?.firstName, toUser?.lastName].compactMap { $0 }.joined(separator: " ")
         participantsText = "\(fromName) → \(toName)"
-        amountText = String(format: "%.2f ₽", debt.amount)
+        amountText = debt.amount.rubleString
         showsPayButton = MockAPIService.shared.currentUser?.id == debt.fromUserId
     }
 }
