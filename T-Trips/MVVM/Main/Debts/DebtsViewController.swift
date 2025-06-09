@@ -65,6 +65,10 @@ extension DebtsViewController: UITableViewDataSource, UITableViewDelegate {
         let debt = viewModel.debts[indexPath.row]
         let vm = DebtDetailViewModel(debt: debt)
         let vc = DebtDetailViewController(viewModel: vm)
+        vm.onPay = { [weak self] in
+            self?.viewModel.payDebt(at: indexPath.row)
+            self?.navigationController?.popViewController(animated: true)
+        }
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
