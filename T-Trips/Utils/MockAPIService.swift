@@ -105,6 +105,28 @@ final class MockAPIService {
             completion(user != nil)
         }
     }
+
+    func register(phone: String, firstName: String, lastName: String, password: String, completion: @escaping (Bool) -> Void) {
+        asyncDelay {
+            guard self.users.first(where: { $0.phone == phone }) == nil else {
+                completion(false)
+                return
+            }
+            let newId = (self.users.map { $0.id }.max() ?? 0) + 1
+            let user = User(
+                id: newId,
+                phone: phone,
+                firstName: firstName,
+                lastName: lastName,
+                hashPassword: password,
+                status: .active,
+                role: .user,
+                active: true
+            )
+            self.users.append(user)
+            completion(true)
+        }
+    }
 }
 
 private extension MockAPIService {

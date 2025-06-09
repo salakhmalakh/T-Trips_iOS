@@ -39,7 +39,24 @@ final class RegisterViewController: UIViewController {
             .store(in: &cancellables)
 
         viewModel.onRegisterSuccess = { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
+            guard let scene =
+                UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                let delegate = scene.delegate as? SceneDelegate,
+                let window = delegate.window else { return }
+            let mainTab = MainTabBarController()
+            window.rootViewController = mainTab
+            window.makeKeyAndVisible()
+            UIView.transition(
+                with: window,
+                duration: .transitionDuration,
+                options: .transitionCrossDissolve,
+                animations: nil
+            )
+        }
+        viewModel.onRegisterFailure = { [weak self] message in
+            let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self?.present(alert, animated: true)
         }
         viewModel.onLogin = { [weak self] in
             self?.navigationController?.popViewController(animated: true)
@@ -50,13 +67,13 @@ final class RegisterViewController: UIViewController {
     private func setupActions() {
         registerView.fullNameTextField.addAction(
             UIAction { [weak self] _ in
-                self?.viewModel.firstName = self?.registerView.fullNameTextField.text ?? ""
+                self?.viewModel.fullName = self?.registerView.fullNameTextField.text ?? ""
             },
             for: .editingChanged
         )
         registerView.phoneTextField.addAction(
             UIAction { [weak self] _ in
-                self?.viewModel.lastName = self?.registerView.phoneTextField.text ?? ""
+                self?.viewModel.phone = self?.registerView.phoneTextField.text ?? ""
             },
             for: .editingChanged
         )
@@ -80,4 +97,8 @@ final class RegisterViewController: UIViewController {
             self?.viewModel.login()
         }
     }
+}
+
+private extension Double {
+    static let transitionDuration = 0.2
 }

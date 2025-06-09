@@ -22,11 +22,14 @@ final class TextFieldFactory: TextFieldFactoryProtocol {
             textField.keyboardType = .default
         case .phoneNumber:
             textField.keyboardType = .numberPad
-        case .password:
+       case .password:
             textField.keyboardType = .default
-            textField.textContentType = .password
+            textField.textContentType = .oneTimeCode
             textField.passwordRules = nil
             textField.isSecureTextEntry = true
+            // Disable password suggestions
+            textField.inputAssistantItem.leadingBarButtonGroups = []
+            textField.inputAssistantItem.trailingBarButtonGroups = []
         case .money:
             textField.keyboardType = .numberPad
         case .picker:

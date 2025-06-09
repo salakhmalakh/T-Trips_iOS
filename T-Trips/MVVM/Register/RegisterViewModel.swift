@@ -10,8 +10,8 @@ import Combine
 
 final class RegisterViewModel {
     // MARK: - Inputs
-    @Published var firstName: String = ""
-    @Published var lastName: String = ""
+    @Published var fullName: String = ""
+    @Published var phone: String = ""
     @Published var password: String = ""
     @Published var confirmPassword: String = ""
 
@@ -20,6 +20,7 @@ final class RegisterViewModel {
 
     // MARK: - Callbacks
     var onRegisterSuccess: (() -> Void)?
+    var onRegisterFailure: ((String) -> Void)?
     var onLogin: (() -> Void)?
 
     private var cancellables = Set<AnyCancellable>()
@@ -27,14 +28,14 @@ final class RegisterViewModel {
     // MARK: - Init
     init() {
         Publishers.CombineLatest4(
-            $firstName,
-            $lastName,
+            $fullName,
+            $phone,
             $password,
             $confirmPassword
         )
-        .map { first, last, pass, confirm in
-            return !first.isEmpty &&
-            !last.isEmpty &&
+        .map { name, phone, pass, confirm in
+            return !name.isEmpty &&
+            !phone.isEmpty &&
             pass.count >= .minPasswordLength &&
             confirm.count >= .minPasswordLength
         }
@@ -45,8 +46,39 @@ final class RegisterViewModel {
 
     // MARK: - Actions
     func register() {
-        // TODO: API call
-        onRegisterSuccess?()
+        let digits = phone.filter { $0.isNumber }
+        guard digits.count == Int.phoneLength else {
+            onRegisterFailure?(String.phoneIncomplete)
+            return
+        }
+        guard password.count >= Int.minPasswordLength else {
+            onRegisterFailure?(String.passwordTooShort)
+            return
+        }
+        guard password == confirmPassword else {
+            onRegisterFailure?(String.passwordMismatch)
+            return
+        }
+
+        let parts = fullName.split(separator: " ", maxSplits: 1).map(String.init)
+        let first = parts.first ?? ""
+        let last = parts.count > 1 ? parts[1] : ""
+        let phoneNormalized = "+" + digits
+
+        MockAPIService.shared.register(
+            phone: phoneNormalized,
+            firstName: first,
+            lastName: last,
+            password: password
+        ) { [weak self] success in
+            DispatchQueue.main.async {
+                if success {
+                    self?.onRegisterSuccess?()
+                } else {
+                    self?.onRegisterFailure?(String.phoneExists)
+                }
+            }
+        }
     }
 
     func login() {
@@ -57,4 +89,12 @@ final class RegisterViewModel {
 // MARK: - Constants
 private extension Int {
     static let minPasswordLength = 8
+    static let phoneLength = 11
+}
+
+private extension String {
+    static var passwordTooShort: String { "passwordTooShort".localized }
+    static var passwordMismatch: String { "passwordMismatch".localized }
+    static var phoneIncomplete: String { "phoneIncomplete".localized }
+    static var phoneExists: String { "phoneExists".localized }
 }
