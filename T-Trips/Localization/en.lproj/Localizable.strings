@@ -57,3 +57,7 @@
 "languages" = "Languages";
 "english" = "English";
 "russian" = "Russian";
+"passwordTooShort" = "Password must be at least 8 characters";
+"passwordMismatch" = "Passwords do not match";
+"phoneIncomplete" = "Phone number is incomplete";
+"phoneExists" = "User with this phone already exists";
