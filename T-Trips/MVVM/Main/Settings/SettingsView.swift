@@ -2,7 +2,11 @@ import UIKit
 import SnapKit
 
 final class SettingsView: UIView {
-    let tableView = UITableView(frame: .zero, style: .insetGrouped)
+    let tableView: UITableView = {
+        let table = UITableView()
+        table.backgroundColor = .systemBackground
+        return table
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
