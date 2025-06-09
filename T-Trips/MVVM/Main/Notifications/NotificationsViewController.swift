@@ -12,7 +12,7 @@ final class NotificationsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Уведомления"
+        title = "notifications".localized
         setupTable()
     }
 

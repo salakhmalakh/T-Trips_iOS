@@ -101,8 +101,8 @@ final class AuthViewController: UIViewController {
 
 // MARK: - Constants
 private extension String {
-    static let authTitle = "Вход"
-    static let invalidCreds = "Неверный телефон или пароль"
+    static var authTitle: String { "login".localized }
+    static var invalidCreds: String { "invalidCreds".localized }
 }
 
 private extension Double {

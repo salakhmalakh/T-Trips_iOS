@@ -199,11 +199,11 @@ private extension CGFloat {
 }
 
 private extension String {
-    static let addExpenseTitlePlaceholder = "Название"
-    static let addExpenseAmountPlaceholder = "Сумма"
-    static let addExpenseCategoryPlaceholder = "Категория"
-    static let addExpenseDatePlaceholder = "Дата"
-    static let addExpensePayerPlaceholder = "Кто оплатил"
-    static let addExpensePayeePlaceholder = "За кого"
-    static let addExpenseButtonTitle = "Добавить"
+    static var addExpenseTitlePlaceholder: String { "addExpenseTitlePlaceholder".localized }
+    static var addExpenseAmountPlaceholder: String { "addExpenseAmountPlaceholder".localized }
+    static var addExpenseCategoryPlaceholder: String { "addExpenseCategoryPlaceholder".localized }
+    static var addExpenseDatePlaceholder: String { "addExpenseDatePlaceholder".localized }
+    static var addExpensePayerPlaceholder: String { "addExpensePayerPlaceholder".localized }
+    static var addExpensePayeePlaceholder: String { "addExpensePayeePlaceholder".localized }
+    static var addExpenseButtonTitle: String { "addExpenseButtonTitle".localized }
 }

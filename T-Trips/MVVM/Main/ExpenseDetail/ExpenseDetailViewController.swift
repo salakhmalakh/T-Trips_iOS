@@ -81,7 +81,7 @@ final class ExpenseDetailViewController: UIViewController {
 
 // MARK: - Constants
 private extension String {
-    static let detailTitle = "Детали расхода"
-    static let editButtonTitle = "Редактировать"
-    static let deleteButtonTitle = "Удалить"
+    static var detailTitle: String { "expenseDetailTitle".localized }
+    static var editButtonTitle: String { "editButtonTitle".localized }
+    static var deleteButtonTitle: String { "deleteButtonTitle".localized }
 }

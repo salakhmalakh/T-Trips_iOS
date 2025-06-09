@@ -13,9 +13,9 @@ final class TripsViewModel {
         case active = 0, planning, completed
         var title: String {
             switch self {
-            case .active: return "Активные"
-            case .planning: return "Запланированные"
-            case .completed: return "Завершенные"
+            case .active: return "active".localized
+            case .planning: return "planning".localized
+            case .completed: return "completed".localized
             }
         }
     }
