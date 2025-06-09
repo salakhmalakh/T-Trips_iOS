@@ -174,6 +174,10 @@ extension TripViewController: UITableViewDataSource, UITableViewDelegate {
             payeeName: payeeName
         )
         let detailVC = ExpenseDetailViewController(viewModel: detailVM)
+        detailVM.onDelete = { [weak self] in
+            self?.viewModel.deleteExpense(at: indexPath.row)
+            self?.navigationController?.popViewController(animated: true)
+        }
         detailVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(detailVC, animated: true)
     }
