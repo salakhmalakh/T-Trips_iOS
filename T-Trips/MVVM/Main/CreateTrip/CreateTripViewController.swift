@@ -10,6 +10,7 @@ final class CreateTripViewController: UIViewController {
 
     private let participants = MockData.users
     private var selectedUsers: [User] = []
+    private var selectedUsers: [User] = []
     private let participantsPlaceholder = "Участники"
     private var availableParticipants: [User] {
         participants.filter { user in
@@ -95,7 +96,7 @@ final class CreateTripViewController: UIViewController {
         }, for: .editingChanged)
 
         createView.participantsTextField.addAction(UIAction { [weak self] _ in
-            guard let self = self else { return }
+                      guard let self = self else { return }
             let row = self.createView.participantsPicker.selectedRow(inComponent: 0)
             guard self.availableParticipants.indices.contains(row) else { return }
             let user = self.availableParticipants[row]
