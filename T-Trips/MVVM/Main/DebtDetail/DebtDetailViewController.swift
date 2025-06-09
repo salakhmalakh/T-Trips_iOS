@@ -20,8 +20,10 @@ final class DebtDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Долг"
-        detailView.infoLabel.text = viewModel.infoText
-        detailView.confirmButton.addAction(
+        detailView.participantsLabel.text = viewModel.participantsText
+        detailView.amountLabel.text = viewModel.amountText
+        detailView.payButton.isHidden = !viewModel.showsPayButton
+        detailView.payButton.addAction(
             UIAction { [weak self] _ in
                 self?.navigationController?.popViewController(animated: true)
             },
