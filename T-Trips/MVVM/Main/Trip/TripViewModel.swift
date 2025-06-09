@@ -13,6 +13,10 @@ final class TripViewModel {
     @Published private(set) var expenses: [Expense] = []
     let trip: Trip
 
+    var isAdmin: Bool {
+        MockAPIService.shared.currentUser?.id == trip.adminId
+    }
+
     // MARK: - Handlers
     var onAddExpense: (() -> Void)?
 
@@ -41,6 +45,7 @@ final class TripViewModel {
     }
 
     func deleteExpense(at index: Int) {
+        guard isAdmin else { return }
         guard expenses.indices.contains(index), let id = expenses[index].id else { return }
         MockAPIService.shared.deleteExpense(id: id) { [weak self] in
             DispatchQueue.main.async {

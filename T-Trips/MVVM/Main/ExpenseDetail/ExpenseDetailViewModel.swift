@@ -16,6 +16,7 @@ final class ExpenseDetailViewModel {
     @Published private(set) var payer: String
     @Published private(set) var payee: String
     @Published private(set) var title: String
+    let isAdmin: Bool
 
     // MARK: - Handlers
     var onEdit: (() -> Void)?
@@ -30,7 +31,8 @@ final class ExpenseDetailViewModel {
     init(
         expense: Expense,
         payerName: String,
-        payeeName: String? = nil
+        payeeName: String? = nil,
+        isAdmin: Bool
     ) {
         self.category = expense.category.localized
         self.amountText = expense.amount.rubleString
@@ -38,6 +40,7 @@ final class ExpenseDetailViewModel {
         self.payer = payerName
         self.payee = payeeName ?? ""
         self.title = expense.title
+        self.isAdmin = isAdmin
     }
 
     func editTapped() {

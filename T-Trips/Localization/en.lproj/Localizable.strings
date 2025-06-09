@@ -43,6 +43,8 @@
 "payerTitle" = "Paid by";
 "payeeTitle" = "Paid for";
 "confirmButtonTitle" = "Confirm";
+"cancelButtonTitle" = "Cancel";
+"deleteConfirmation" = "Are you sure you want to delete?";
 "tripDetailsTitle" = "Trip Details";
 "participantsTitle" = "Participants";
 "tripDescriptionTitle" = "Description";

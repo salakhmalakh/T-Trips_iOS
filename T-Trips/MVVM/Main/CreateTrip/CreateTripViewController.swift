@@ -129,13 +129,24 @@ final class CreateTripViewController: UIViewController {
         let token = ParticipantTokenView(name: "\(user.firstName) \(user.lastName)")
         token.onRemove = { [weak self, weak token] in
             guard let self = self, let token = token else { return }
-            if let index = self.selectedUsers.firstIndex(where: { $0.id == user.id }) {
-                self.selectedUsers.remove(at: index)
-                self.viewModel.participantIds = self.selectedUsers.map { $0.id }
-                token.removeFromSuperview()
-                self.createView.participantsTextField.placeholder = self.selectedUsers.isEmpty ? self.participantsPlaceholder : nil
-                self.createView.tokensView.setNeedsLayout()
-            }
+            let alert = UIAlertController(
+                title: nil,
+                message: String.deleteConfirmation,
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: String.cancelTitle, style: .cancel))
+            alert.addAction(
+                UIAlertAction(title: String.confirmButtonTitle, style: .destructive) { _ in
+                    if let index = self.selectedUsers.firstIndex(where: { $0.id == user.id }) {
+                        self.selectedUsers.remove(at: index)
+                        self.viewModel.participantIds = self.selectedUsers.map { $0.id }
+                        token.removeFromSuperview()
+                        self.createView.participantsTextField.placeholder = self.selectedUsers.isEmpty ? self.participantsPlaceholder : nil
+                        self.createView.tokensView.setNeedsLayout()
+                    }
+                }
+            )
+            self.present(alert, animated: true)
         }
         createView.tokensView.addSubview(token)
         createView.tokensView.setNeedsLayout()
@@ -191,4 +202,11 @@ extension CreateTripViewController: UITableViewDataSource, UITableViewDelegate {
         addParticipant(user)
         createView.suggestionsTableView.reloadData()
     }
+}
+
+// MARK: - Constants
+private extension String {
+    static var cancelTitle: String { "cancelButtonTitle".localized }
+    static var deleteConfirmation: String { "deleteConfirmation".localized }
+    static var confirmButtonTitle: String { "confirmButtonTitle".localized }
 }

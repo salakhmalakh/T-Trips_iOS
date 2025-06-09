@@ -33,6 +33,7 @@ final class ExpenseDetailViewController: UIViewController {
         title = String.detailTitle
         bindViewModel()
         setupActions()
+        detailView.deleteButton.isHidden = !viewModel.isAdmin
     }
 
     private func bindViewModel() {
@@ -74,8 +75,23 @@ final class ExpenseDetailViewController: UIViewController {
 
     private func setupActions() {
         detailView.deleteButton.addAction(
-            UIAction { [weak self] _ in self?.viewModel.deleteTapped() }, for: .touchUpInside
+            UIAction { [weak self] _ in self?.confirmDeletion() }, for: .touchUpInside
         )
+    }
+
+    private func confirmDeletion() {
+        let alert = UIAlertController(
+            title: nil,
+            message: String.deleteConfirmation,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: String.cancelTitle, style: .cancel))
+        alert.addAction(
+            UIAlertAction(title: String.confirmButtonTitle, style: .destructive) { [weak self] _ in
+                self?.viewModel.deleteTapped()
+            }
+        )
+        present(alert, animated: true)
     }
 }
 
@@ -84,4 +100,7 @@ private extension String {
     static var detailTitle: String { "expenseDetailTitle".localized }
     static var editButtonTitle: String { "editButtonTitle".localized }
     static var deleteButtonTitle: String { "deleteButtonTitle".localized }
+    static var cancelTitle: String { "cancelButtonTitle".localized }
+    static var deleteConfirmation: String { "deleteConfirmation".localized }
+    static var confirmButtonTitle: String { "confirmButtonTitle".localized }
 }

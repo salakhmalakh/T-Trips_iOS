@@ -171,7 +171,8 @@ extension TripViewController: UITableViewDataSource, UITableViewDelegate {
         let detailVM = ExpenseDetailViewModel(
             expense: expense,
             payerName: payerName,
-            payeeName: payeeName
+            payeeName: payeeName,
+            isAdmin: viewModel.isAdmin
         )
         let detailVC = ExpenseDetailViewController(viewModel: detailVM)
         detailVM.onDelete = { [weak self] in
@@ -182,10 +183,29 @@ extension TripViewController: UITableViewDataSource, UITableViewDelegate {
         navigationController?.pushViewController(detailVC, animated: true)
     }
 
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        viewModel.isAdmin
+    }
+
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            viewModel.deleteExpense(at: indexPath.row)
+            confirmDeletion(at: indexPath)
         }
+    }
+
+    private func confirmDeletion(at indexPath: IndexPath) {
+        let alert = UIAlertController(
+            title: nil,
+            message: String.deleteConfirmation,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: String.cancelTitle, style: .cancel))
+        alert.addAction(
+            UIAlertAction(title: String.confirmButtonTitle, style: .destructive) { [weak self] _ in
+                self?.viewModel.deleteExpense(at: indexPath.row)
+            }
+        )
+        present(alert, animated: true)
     }
 }
 
@@ -199,4 +219,7 @@ private extension String {
     static var detailsTitle: String { "details".localized }
     static var debtsTitle: String { "debts".localized }
     static var exitTitle: String { "logout".localized }
+    static var cancelTitle: String { "cancelButtonTitle".localized }
+    static var deleteConfirmation: String { "deleteConfirmation".localized }
+    static var confirmButtonTitle: String { "confirmButtonTitle".localized }
 }
