@@ -36,7 +36,11 @@ final class DebtsViewController: UIViewController {
         viewModel.$debts
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in
-                self?.debtsView.tableView.reloadData()
+                guard let self = self else { return }
+                self.debtsView.tableView.reloadData()
+                let empty = self.viewModel.debts.isEmpty
+                self.debtsView.emptyLabel.isHidden = !empty
+                self.debtsView.tableView.isHidden = empty
             }
             .store(in: &cancellables)
     }

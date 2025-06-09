@@ -104,7 +104,8 @@ final class TripViewController: UIViewController {
     }
 
     private func showDebts() {
-        let vc = DebtsViewController(tripId: viewModel.trip.id)
+        let uid = MockAPIService.shared.currentUser?.id
+        let vc = DebtsViewController(tripId: viewModel.trip.id, userId: uid)
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
