@@ -54,4 +54,11 @@ final class TripViewModel {
         }
     }
 
+    func leaveTrip(completion: @escaping () -> Void) {
+        guard let userId = MockAPIService.shared.currentUser?.id else { return }
+        MockAPIService.shared.leaveTrip(tripId: trip.id, userId: userId) { _ in
+            DispatchQueue.main.async { completion() }
+        }
+    }
+
 }

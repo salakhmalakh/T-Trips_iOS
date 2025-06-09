@@ -66,3 +66,5 @@
 "firstName" = "Имя";
 "lastName" = "Фамилия";
 "payButtonTitle" = "Оплатить";
+"logoutConfirmation" = "Вы уверены, что хотите выйти?";
+"leaveTripConfirmation" = "Вы уверены, что хотите выйти из поездки?";

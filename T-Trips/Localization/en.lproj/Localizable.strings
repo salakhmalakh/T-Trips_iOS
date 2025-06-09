@@ -66,3 +66,5 @@
 "firstName" = "First Name";
 "lastName" = "Last Name";
 "payButtonTitle" = "Pay";
+"logoutConfirmation" = "Are you sure you want to logout?";
+"leaveTripConfirmation" = "Are you sure you want to leave this trip?";
