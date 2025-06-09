@@ -48,12 +48,11 @@ extension DebtsViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableCell.reuseId, for: indexPath) as? CustomTableCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: DebtCell.reuseId, for: indexPath) as? DebtCell else {
             return UITableViewCell()
         }
         let debt = viewModel.debts[indexPath.row]
-        let text = "\(debt.fromUserId) -> \(debt.toUserId) \(debt.amount)₽"
-        cell.configure(with: text)
+        cell.configure(with: debt)
         return cell
     }
 

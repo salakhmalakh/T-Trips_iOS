@@ -4,7 +4,7 @@ import SnapKit
 final class DebtsView: UIView {
     let tableView: UITableView = {
         let table = UITableView()
-        table.register(CustomTableCell.self, forCellReuseIdentifier: CustomTableCell.reuseId)
+        table.register(DebtCell.self, forCellReuseIdentifier: DebtCell.reuseId)
         return table
     }()
 
