@@ -15,7 +15,7 @@ final class AddExpenseViewModel {
     @Published var category: String = ""
     @Published var date = Date()
     @Published var payerId: Int64?
-    @Published var payeeId: Int64?
+    @Published var payeeIds: [Int64] = []
 
     // MARK: - Outputs
     @Published private(set) var isAddEnabled = false
@@ -29,15 +29,15 @@ final class AddExpenseViewModel {
     init(tripId: Int64) {
         self.tripId = tripId
         Publishers.CombineLatest4($title, $amount, $category, $payerId)
-            .combineLatest($payeeId)
-            .map { combined, payeeId in
+            .combineLatest($payeeIds)
+            .map { combined, payeeIds in
                 let (title, amount, category, payerId) = combined
+                guard let payerId = payerId else { return false }
                 return !title.isEmpty &&
                     Double(amount) != nil &&
                     !category.isEmpty &&
-                    payerId != nil &&
-                    payeeId != nil &&
-                    payerId != payeeId
+                    !payeeIds.isEmpty &&
+                    !payeeIds.contains(payerId)
             }
             .receive(on: RunLoop.main)
             .assign(to: \ .isAddEnabled, on: self)
@@ -48,15 +48,15 @@ final class AddExpenseViewModel {
         guard
             let value = Double(amount),
             let payerId = payerId,
-            let payeeId = payeeId,
-            payerId != payeeId
+            !payeeIds.isEmpty,
+            !payeeIds.contains(payerId)
         else { return }
 
         let dto = ExpenseDtoForCreate(
             category: Expense.Category(rawValue: category.uppercased()) ?? .other,
             amount: value,
             title: title,
-            paidForUserIds: [payeeId]
+            paidForUserIds: payeeIds
         )
 
         MockAPIService.shared.createExpense(tripId: tripId, dto: dto, ownerId: payerId) { [weak self] expense in

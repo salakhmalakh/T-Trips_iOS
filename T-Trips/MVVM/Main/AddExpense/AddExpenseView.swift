@@ -15,7 +15,23 @@ final class AddExpenseView: UIView {
     // MARK: - Pickers & Input Views
     let categoryPicker = UIPickerView()
     let payerPicker = UIPickerView()
-    let payeePicker = UIPickerView()
+    let suggestionsTableView: UITableView = {
+        let table = UITableView()
+        table.isHidden = true
+        table.layer.borderWidth = 0.5
+        table.layer.borderColor = UIColor.lightGray.cgColor
+        return table
+    }()
+    public private(set) lazy var tokensView: TokenWrappingView = {
+        let view = TokenWrappingView()
+        view.spacing = CGFloat.tokenSpacing
+        view.onHeightChange = { [weak self] in
+            self?.setNeedsLayout()
+            self?.layoutIfNeeded()
+        }
+        return view
+    }()
+    private var suggestionsHeightConstraint: Constraint?
     public private(set) lazy var datePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.datePickerMode = .date
@@ -93,7 +109,6 @@ final class AddExpenseView: UIView {
             state: .name
         )
         let textfield = textFieldFactory.makeTextField(with: model)
-        textfield.inputView = payeePicker
         textfield.inputAccessoryView = accessoryToolbar
         return textfield
     }()
@@ -121,8 +136,11 @@ final class AddExpenseView: UIView {
             categoryTextField,
             payerTextField,
             payeeTextField,
+            tokensView,
+            suggestionsTableView,
             addButton
         ].forEach(addSubview)
+        tokensView.trailingSpace = CGFloat.inputSpace
         setupConstraints()
         configurePickers()
     }
@@ -137,8 +155,11 @@ final class AddExpenseView: UIView {
             categoryTextField,
             payerTextField,
             payeeTextField,
+            tokensView,
+            suggestionsTableView,
             addButton
         ].forEach(addSubview)
+        tokensView.trailingSpace = CGFloat.inputSpace
         setupConstraints()
         configurePickers()
     }
@@ -168,10 +189,20 @@ final class AddExpenseView: UIView {
         }
         payeeTextField.snp.makeConstraints { make in
             make.top.equalTo(payerTextField.snp.bottom).offset(CGFloat.verticalSpacing)
-            make.leading.trailing.height.equalTo(amountTextField)
+            make.leading.trailing.equalTo(amountTextField)
+            make.height.equalTo(CGFloat.fieldHeight)
+        }
+        tokensView.snp.makeConstraints { make in
+            make.top.equalTo(payeeTextField.snp.bottom).offset(CGFloat.tokenTop)
+            make.leading.trailing.equalTo(payeeTextField).inset(CGFloat.tokenInset)
+        }
+        suggestionsTableView.snp.makeConstraints { make in
+            make.top.equalTo(payeeTextField.snp.bottom)
+            make.leading.trailing.equalTo(payeeTextField)
+            suggestionsHeightConstraint = make.height.equalTo(0).constraint
         }
         addButton.snp.makeConstraints { make in
-            make.top.equalTo(payeeTextField.snp.bottom).offset(CGFloat.buttonTopOffset)
+            make.top.equalTo(tokensView.snp.bottom).offset(CGFloat.buttonTopOffset)
             make.leading.trailing.equalToSuperview().inset(CGFloat.horizontalInset)
             make.height.equalTo(CGFloat.buttonHeight)
         }
@@ -180,6 +211,11 @@ final class AddExpenseView: UIView {
     private func configurePickers() {
         datePicker.datePickerMode = .date
         if #available(iOS 14.0, *) { datePicker.preferredDatePickerStyle = .wheels }
+    }
+
+    func updateSuggestionsHeight(_ height: CGFloat) {
+        suggestionsHeightConstraint?.update(offset: height)
+        layoutIfNeeded()
     }
     
     @objc private func dismissInput() {
@@ -196,6 +232,10 @@ private extension CGFloat {
     static let buttonTopOffset: CGFloat = 24
     static let buttonHeight: CGFloat = 50
     static let pickerRowHeight: CGFloat = 44
+    static let tokenSpacing: CGFloat = 4
+    static let tokenInset: CGFloat = 4
+    static let inputSpace: CGFloat = 60
+    static let tokenTop: CGFloat = 4
 }
 
 private extension String {
