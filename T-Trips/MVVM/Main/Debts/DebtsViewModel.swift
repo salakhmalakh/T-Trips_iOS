@@ -21,4 +21,14 @@ final class DebtsViewModel {
             }
         }
     }
+
+    func payDebt(at index: Int) {
+        guard debts.indices.contains(index) else { return }
+        let id = debts[index].debtId
+        MockAPIService.shared.deleteDebt(id: id) { [weak self] in
+            DispatchQueue.main.async {
+                self?.debts.remove(at: index)
+            }
+        }
+    }
 }

@@ -9,6 +9,8 @@ final class DebtDetailViewModel {
     /// Should pay button be displayed
     let showsPayButton: Bool
 
+    var onPay: (() -> Void)?
+
     init(debt: Debt) {
         let fromUser = MockData.users.first { $0.id == debt.fromUserId }
         let toUser = MockData.users.first { $0.id == debt.toUserId }
@@ -17,5 +19,9 @@ final class DebtDetailViewModel {
         participantsText = "\(fromName) → \(toName)"
         amountText = debt.amount.rubleString
         showsPayButton = MockAPIService.shared.currentUser?.id == debt.fromUserId
+    }
+
+    func payTapped() {
+        onPay?()
     }
 }

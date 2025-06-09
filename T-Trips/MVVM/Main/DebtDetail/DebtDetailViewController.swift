@@ -25,7 +25,7 @@ final class DebtDetailViewController: UIViewController {
         detailView.payButton.isHidden = !viewModel.showsPayButton
         detailView.payButton.addAction(
             UIAction { [weak self] _ in
-                self?.navigationController?.popViewController(animated: true)
+                self?.viewModel.payTapped()
             },
             for: .touchUpInside
         )

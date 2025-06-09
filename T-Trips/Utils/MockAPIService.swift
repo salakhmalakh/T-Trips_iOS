@@ -103,6 +103,13 @@ final class MockAPIService {
         }
     }
 
+    func deleteDebt(id: String, completion: @escaping () -> Void) {
+        asyncDelay {
+            self.debts.removeAll { $0.debtId == id }
+            completion()
+        }
+    }
+
     // MARK: - Participants
     func findParticipant(phone: String, completion: @escaping (User?) -> Void) {
         asyncDelay {
