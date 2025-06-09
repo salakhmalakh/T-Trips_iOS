@@ -21,7 +21,7 @@ final class CustomTableCell: UITableViewCell {
         selectionStyle = .none
         
         // Configure contentView
-        contentView.backgroundColor = .systemBackground
+        contentView.backgroundColor = .secondarySystemBackground
         contentView.layer.cornerRadius = .cornerRadius
         contentView.layer.masksToBounds = true
         

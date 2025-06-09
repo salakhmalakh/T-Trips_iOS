@@ -15,7 +15,7 @@ final class FilterCell: UICollectionViewCell {
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .systemBackground
+        contentView.backgroundColor = .secondarySystemBackground
         contentView.layer.cornerRadius = .cornerRadius
         contentView.layer.masksToBounds = true
 

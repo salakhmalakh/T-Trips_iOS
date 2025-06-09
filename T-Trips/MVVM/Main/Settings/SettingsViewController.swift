@@ -27,6 +27,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
+        cell.backgroundColor = .secondarySystemBackground
         if indexPath.section == 0 {
             cell.textLabel?.text = "Редактировать данные"
         } else if indexPath.row == 0 {
