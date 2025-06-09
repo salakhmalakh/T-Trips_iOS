@@ -63,3 +63,4 @@
 "phoneExists" = "User with this phone already exists";
 "firstName" = "First Name";
 "lastName" = "Last Name";
+"payButtonTitle" = "Pay";

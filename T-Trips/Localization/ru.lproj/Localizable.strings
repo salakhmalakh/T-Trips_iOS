@@ -63,3 +63,4 @@
 "phoneExists" = "Пользователь с таким номером уже существует";
 "firstName" = "Имя";
 "lastName" = "Фамилия";
+"payButtonTitle" = "Оплатить";
