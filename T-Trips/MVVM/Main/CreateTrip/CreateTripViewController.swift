@@ -10,6 +10,7 @@ final class CreateTripViewController: UIViewController {
 
     private let participants = MockData.users
     private var selectedUsers: [User] = []
+    private var filteredParticipants: [User] = []
     private let participantsPlaceholder = "Участники"
     private var availableParticipants: [User] {
         participants.filter { user in
@@ -36,6 +37,7 @@ final class CreateTripViewController: UIViewController {
         title = "Создание поездки"
         setupBindings()
         setupPickers()
+        setupSuggestions()
         setupActions()
     }
 
@@ -67,10 +69,15 @@ final class CreateTripViewController: UIViewController {
     }
 
     private func setupPickers() {
-        createView.participantsPicker.dataSource = self
-        createView.participantsPicker.delegate = self
         createView.startDatePicker.addTarget(self, action: #selector(startDateChanged(_:)), for: .valueChanged)
         createView.endDatePicker.addTarget(self, action: #selector(endDateChanged(_:)), for: .valueChanged)
+    }
+
+    private func setupSuggestions() {
+        let table = createView.suggestionsTableView
+        table.dataSource = self
+        table.delegate = self
+        table.register(UITableViewCell.self, forCellReuseIdentifier: "suggestCell")
     }
 
     @objc private func startDateChanged(_ picker: UIDatePicker) {
@@ -95,16 +102,14 @@ final class CreateTripViewController: UIViewController {
         }, for: .editingChanged)
 
         createView.participantsTextField.addAction(UIAction { [weak self] _ in
-            guard let self = self else { return }
-            let row = self.createView.participantsPicker.selectedRow(inComponent: 0)
-            guard self.availableParticipants.indices.contains(row) else { return }
-            let user = self.availableParticipants[row]
-            self.selectedUsers.append(user)
-            self.viewModel.participantIds = self.selectedUsers.map { $0.id }
-            self.addToken(for: user)
-            self.createView.participantsPicker.reloadAllComponents()
-            self.createView.participantsTextField.text = ""
-            self.createView.participantsTextField.placeholder = self.selectedUsers.isEmpty ? self.participantsPlaceholder : nil
+            self?.filterParticipants()
+        }, for: .editingDidBegin)
+        createView.participantsTextField.addAction(UIAction { [weak self] _ in
+            self?.filterParticipants()
+        }, for: .editingChanged)
+        createView.participantsTextField.addAction(UIAction { [weak self] _ in
+            self?.createView.suggestionsTableView.isHidden = true
+            self?.createView.updateSuggestionsHeight(0)
         }, for: .editingDidEnd)
 
         createView.saveButton.addAction(UIAction { [weak self] _ in
@@ -127,22 +132,60 @@ final class CreateTripViewController: UIViewController {
                 self.viewModel.participantIds = self.selectedUsers.map { $0.id }
                 token.removeFromSuperview()
                 self.createView.participantsTextField.placeholder = self.selectedUsers.isEmpty ? self.participantsPlaceholder : nil
-                self.createView.participantsPicker.reloadAllComponents()
                 self.createView.tokensView.setNeedsLayout()
             }
         }
         createView.tokensView.addSubview(token)
         createView.tokensView.setNeedsLayout()
     }
+
+    private func addParticipant(_ user: User) {
+        selectedUsers.append(user)
+        viewModel.participantIds = selectedUsers.map { $0.id }
+        addToken(for: user)
+        createView.participantsTextField.text = ""
+        createView.participantsTextField.placeholder = selectedUsers.isEmpty ? participantsPlaceholder : nil
+        createView.updateSuggestionsHeight(0)
+    }
+
+    private func filterParticipants() {
+        let text = createView.participantsTextField.text?.lowercased() ?? ""
+        guard !text.isEmpty else {
+            filteredParticipants = []
+            createView.updateSuggestionsHeight(0)
+            createView.suggestionsTableView.isHidden = true
+            return
+        }
+        filteredParticipants = availableParticipants.filter {
+            $0.firstName.lowercased().contains(text) || $0.lastName.lowercased().contains(text)
+        }
+        createView.suggestionsTableView.isHidden = filteredParticipants.isEmpty
+        createView.bringSubviewToFront(createView.suggestionsTableView)
+        createView.suggestionsTableView.reloadData()
+        let height = min(CGFloat(filteredParticipants.count) * 44, 132)
+        createView.updateSuggestionsHeight(height)
+    }
 }
 
-extension CreateTripViewController: UIPickerViewDataSource, UIPickerViewDelegate {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int { 1 }
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        availableParticipants.count
+extension CreateTripViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        filteredParticipants.count
     }
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let user = availableParticipants[row]
-        return "\(user.firstName) \(user.lastName)"
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "suggestCell") ?? UITableViewCell(style: .default, reuseIdentifier: "suggestCell")
+        let user = filteredParticipants[indexPath.row]
+        cell.textLabel?.text = "\(user.firstName) \(user.lastName)"
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let user = filteredParticipants[indexPath.row]
+        filteredParticipants.removeAll()
+        createView.suggestionsTableView.isHidden = true
+        createView.updateSuggestionsHeight(0)
+        addParticipant(user)
+        createView.suggestionsTableView.reloadData()
     }
 }

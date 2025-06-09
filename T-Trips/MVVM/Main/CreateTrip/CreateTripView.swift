@@ -5,16 +5,23 @@ final class CreateTripView: UIView {
     private let textFieldFactory = TextFieldFactory()
     private let buttonFactory = ButtonFactory()
 
-    let participantsPicker = UIPickerView()
+    let suggestionsTableView: UITableView = {
+        let table = UITableView()
+        table.isHidden = true
+        table.layer.borderWidth = 0.5
+        table.layer.borderColor = UIColor.lightGray.cgColor
+        return table
+    }()
     public private(set) lazy var tokensView: TokenWrappingView = {
         let view = TokenWrappingView()
         view.spacing = CGFloat.tokenSpacing
         view.onHeightChange = { [weak self] in
-            self?.updateParticipantsHeight()
+            self?.setNeedsLayout()
+            self?.layoutIfNeeded()
         }
         return view
     }()
-    private var participantsHeightConstraint: Constraint?
+    private var suggestionsHeightConstraint: Constraint?
     public private(set) lazy var startDatePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.datePickerMode = .date
@@ -69,9 +76,8 @@ final class CreateTripView: UIView {
     }()
 
     public private(set) lazy var participantsTextField: CustomTextField = {
-        let model = TextFieldModel(placeholder: String.participantsPlaceholder, state: .picker)
+        let model = TextFieldModel(placeholder: String.participantsPlaceholder, state: .name)
         let tf = textFieldFactory.makeTextField(with: model)
-        tf.inputView = participantsPicker
         tf.inputAccessoryView = accessoryToolbar
         return tf
     }()
@@ -94,11 +100,7 @@ final class CreateTripView: UIView {
         super.init(frame: frame)
         backgroundColor = .systemBackground
         [titleTextField, startDateTextField, endDateTextField, budgetTextField,
-         participantsTextField, descriptionTextField, saveButton].forEach(addSubview)
-        participantsTextField.addSubview(tokensView)
-        tokensView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(CGFloat.tokenInset)
-        }
+         participantsTextField, tokensView, suggestionsTableView, descriptionTextField, saveButton].forEach(addSubview)
         tokensView.trailingSpace = CGFloat.inputSpace
         setupConstraints()
     }
@@ -107,11 +109,7 @@ final class CreateTripView: UIView {
         super.init(coder: coder)
         backgroundColor = .systemBackground
         [titleTextField, startDateTextField, endDateTextField, budgetTextField,
-         participantsTextField, descriptionTextField, saveButton].forEach(addSubview)
-        participantsTextField.addSubview(tokensView)
-        tokensView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(CGFloat.tokenInset)
-        }
+         participantsTextField, tokensView, suggestionsTableView, descriptionTextField, saveButton].forEach(addSubview)
         tokensView.trailingSpace = CGFloat.inputSpace
         setupConstraints()
     }
@@ -137,10 +135,19 @@ final class CreateTripView: UIView {
         participantsTextField.snp.makeConstraints { make in
             make.top.equalTo(budgetTextField.snp.bottom).offset(CGFloat.verticalSpacing)
             make.leading.trailing.equalTo(titleTextField)
-            participantsHeightConstraint = make.height.equalTo(CGFloat.fieldHeight).constraint
+            make.height.equalTo(CGFloat.fieldHeight)
+        }
+        tokensView.snp.makeConstraints { make in
+            make.top.equalTo(participantsTextField.snp.bottom).offset(CGFloat.tokenTop)
+            make.leading.trailing.equalTo(participantsTextField).inset(CGFloat.tokenInset)
+        }
+        suggestionsTableView.snp.makeConstraints { make in
+            make.top.equalTo(participantsTextField.snp.bottom)
+            make.leading.trailing.equalTo(participantsTextField)
+            suggestionsHeightConstraint = make.height.equalTo(0).constraint
         }
         descriptionTextField.snp.makeConstraints { make in
-            make.top.equalTo(participantsTextField.snp.bottom).offset(CGFloat.verticalSpacing)
+            make.top.equalTo(tokensView.snp.bottom).offset(CGFloat.verticalSpacing)
             make.leading.trailing.height.equalTo(titleTextField)
         }
         saveButton.snp.makeConstraints { make in
@@ -150,10 +157,8 @@ final class CreateTripView: UIView {
         }
     }
 
-    private func updateParticipantsHeight() {
-        let height = max(tokensView.intrinsicContentSize.height + 2 * CGFloat.tokenInset,
-                         CGFloat.fieldHeight)
-        participantsHeightConstraint?.update(offset: height)
+    func updateSuggestionsHeight(_ height: CGFloat) {
+        suggestionsHeightConstraint?.update(offset: height)
         layoutIfNeeded()
     }
 
@@ -172,6 +177,7 @@ private extension CGFloat {
     static let tokenSpacing: CGFloat = 4
     static let tokenInset: CGFloat = 4
     static let inputSpace: CGFloat = 60
+    static let tokenTop: CGFloat = 4
 }
 
 private extension String {
