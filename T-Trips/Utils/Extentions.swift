@@ -45,3 +45,16 @@ extension JSONDecoder {
         return decoder
     }
 }
+
+// MARK: - Money formatting
+extension Double {
+    /// Formats the double as a ruble amount with the sign before the number.
+    /// If there are no kopeks, the fractional part is omitted.
+    var rubleString: String {
+        if truncatingRemainder(dividingBy: 1) == 0 {
+            return String(format: "₽%.0f", self)
+        } else {
+            return String(format: "₽%.2f", self)
+        }
+    }
+}

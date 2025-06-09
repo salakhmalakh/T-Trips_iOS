@@ -58,7 +58,7 @@ final class DebtCell: UITableViewCell {
         let fromName = [fromUser?.firstName, fromUser?.lastName].compactMap { $0 }.joined(separator: " ")
         let toName = [toUser?.firstName, toUser?.lastName].compactMap { $0 }.joined(separator: " ")
         participantsLabel.text = "\(fromName) → \(toName)"
-        amountLabel.text = String(format: "%.2f ₽", debt.amount)
+        amountLabel.text = debt.amount.rubleString
     }
 }
 

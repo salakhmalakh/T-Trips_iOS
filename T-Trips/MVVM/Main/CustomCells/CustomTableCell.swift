@@ -81,7 +81,7 @@ final class CustomTableCell: UITableViewCell {
 
     // MARK: - Configure for Expense
     func configure(with expense: Expense) {
-        let amountString = String(format: "%.2f ₽", expense.amount)
+        let amountString = expense.amount.rubleString
         let categoryString = expense.category.localized
         titleLabel.text = "\(amountString)"
         dateLabel.text = "\(categoryString)"

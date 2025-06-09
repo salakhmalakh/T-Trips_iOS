@@ -18,7 +18,7 @@ final class TripDetailViewModel {
         title = trip.title
         startText = formatter.string(from: trip.startDate)
         endText = formatter.string(from: trip.endDate)
-        budgetText = String(format: "%.2f ₽", trip.budget)
+        budgetText = trip.budget.rubleString
         let names = users.filter { trip.participantIds?.contains($0.id) ?? false }
             .map { "\($0.firstName) \($0.lastName)" }
         participants = names.joined(separator: ", ")
