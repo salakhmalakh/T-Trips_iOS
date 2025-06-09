@@ -43,6 +43,8 @@
 "payerTitle" = "Кто оплатил";
 "payeeTitle" = "За кого оплачено";
 "confirmButtonTitle" = "Подтвердить";
+"cancelButtonTitle" = "Отмена";
+"deleteConfirmation" = "Вы уверены, что хотите удалить?";
 "tripDetailsTitle" = "Детали поездки";
 "participantsTitle" = "Участники";
 "tripDescriptionTitle" = "Описание";
