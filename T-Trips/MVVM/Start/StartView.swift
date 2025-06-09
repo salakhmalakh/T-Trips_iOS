@@ -10,7 +10,7 @@ final class StartView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground
+        backgroundColor = .primaryColor
         addSubview(logoImageView)
         setupConstraints()
     }
@@ -37,7 +37,7 @@ private extension CGFloat {
 }
 
 private extension UIImage {
-    static let tLogo = UIImage(named: "shieldT") ?? UIImage()
+    static let tLogo = UIImage(named: "whiteShieldT") ?? UIImage()
 }
 
 private extension UIColor {
