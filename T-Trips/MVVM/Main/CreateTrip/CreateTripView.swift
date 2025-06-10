@@ -104,6 +104,7 @@ final class CreateTripView: UIView {
         tv.layer.borderWidth = CGFloat.borderWidth
         tv.layer.borderColor = UIColor.borderColor.cgColor
         tv.layer.cornerRadius = CGFloat.cornerRadius
+        tv.backgroundColor = .appBackground
         tv.textContainerInset = UIEdgeInsets.textViewPadding
         tv.isScrollEnabled = true
         tv.inputAccessoryView = accessoryToolbar
