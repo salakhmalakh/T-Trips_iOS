@@ -8,15 +8,8 @@ final class CreateTripViewController: UIViewController {
     private let viewModel: CreateTripViewModel
     private var cancellables = Set<AnyCancellable>()
 
-    private var participants: [User] = []
     private var selectedUsers: [User] = []
-    private var filteredParticipants: [User] = []
     private let participantsPlaceholder = "Участники"
-    private var availableParticipants: [User] {
-        participants.filter { user in
-            !selectedUsers.contains(where: { $0.id == user.id })
-        }
-    }
 
     init() {
         self.viewModel = CreateTripViewModel()
@@ -35,22 +28,9 @@ final class CreateTripViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = nil
-        loadParticipants()
         setupBindings()
         setupPickers()
-        setupSuggestions()
         setupActions()
-    }
-
-    private func loadParticipants() {
-        NetworkAPIService.shared.getAllUsers { [weak self] users in
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.participants = users
-                /// Refresh suggestions if the user has already typed something
-                self.filterParticipants()
-            }
-        }
     }
 
     private func setupBindings() {
@@ -85,13 +65,6 @@ final class CreateTripViewController: UIViewController {
         createView.endDatePicker.addTarget(self, action: #selector(endDateChanged(_:)), for: .valueChanged)
     }
 
-    private func setupSuggestions() {
-        let table = createView.suggestionsTableView
-        table.dataSource = self
-        table.delegate = self
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "suggestCell")
-    }
-
     @objc private func startDateChanged(_ picker: UIDatePicker) {
         viewModel.startDate = picker.date
     }
@@ -112,16 +85,10 @@ final class CreateTripViewController: UIViewController {
         createView.descriptionTextView.delegate = self
 
         createView.participantsTextField.addAction(UIAction { [weak self] _ in
-            self?.filterParticipants()
-        }, for: .editingDidBegin)
-      
+            self?.findParticipant()
+        }, for: .editingDidEndOnExit)
         createView.participantsTextField.addAction(UIAction { [weak self] _ in
-            self?.filterParticipants()
-        }, for: .editingChanged)
-      
-        createView.participantsTextField.addAction(UIAction { [weak self] _ in
-            self?.createView.suggestionsTableView.isHidden = true
-            self?.createView.updateSuggestionsHeight(0)
+            self?.findParticipant()
         }, for: .editingDidEnd)
 
         createView.saveButton.addAction(UIAction { [weak self] _ in
@@ -168,55 +135,21 @@ final class CreateTripViewController: UIViewController {
         addToken(for: user)
         createView.participantsTextField.text = ""
         createView.participantsTextField.placeholder = selectedUsers.isEmpty ? participantsPlaceholder : nil
-        createView.updateSuggestionsHeight(0)
     }
 
-    private func filterParticipants() {
-        let text = createView.participantsTextField.text?.lowercased() ?? ""
-        guard !text.isEmpty else {
-            filteredParticipants = []
-            createView.updateSuggestionsHeight(0)
-            createView.suggestionsTableView.isHidden = true
-            return
-        }
-
-        NetworkAPIService.shared.searchUsers(query: text) { [weak self] users in
+    private func findParticipant() {
+        let text = createView.participantsTextField.text ?? ""
+        let digits = text.filter { $0.isNumber }
+        guard !digits.isEmpty else { return }
+        let phone = "+" + digits
+        NetworkAPIService.shared.findParticipant(phone: phone) { [weak self] user in
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.filteredParticipants = users.filter { user in
-                    !self.selectedUsers.contains(where: { $0.id == user.id })
+                if let user = user, !self.selectedUsers.contains(where: { $0.id == user.id }) {
+                    self.addParticipant(user)
                 }
-                self.createView.suggestionsTableView.isHidden = self.filteredParticipants.isEmpty
-                self.createView.bringSubviewToFront(self.createView.suggestionsTableView)
-                self.createView.suggestionsTableView.reloadData()
-                let height = min(CGFloat(self.filteredParticipants.count) * 44, 132)
-                self.createView.updateSuggestionsHeight(height)
             }
         }
-    }
-}
-
-extension CreateTripViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        filteredParticipants.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "suggestCell") ?? UITableViewCell(style: .default, reuseIdentifier: "suggestCell")
-        cell.backgroundColor = .secondarySystemBackground
-        let user = filteredParticipants[indexPath.row]
-        cell.textLabel?.text = "\(user.firstName) \(user.lastName)"
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let user = filteredParticipants[indexPath.row]
-        filteredParticipants.removeAll()
-        createView.suggestionsTableView.isHidden = true
-        createView.updateSuggestionsHeight(0)
-        addParticipant(user)
-        createView.suggestionsTableView.reloadData()
     }
 }
 
