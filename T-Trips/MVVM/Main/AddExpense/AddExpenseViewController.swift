@@ -211,8 +211,11 @@ final class AddExpenseViewController: UIViewController {
             addExpenseView.suggestionsTableView.isHidden = true
             return
         }
-        filteredPayees = availablePayees.filter {
-            $0.firstName.lowercased().contains(text) || $0.lastName.lowercased().contains(text)
+        filteredPayees = availablePayees.filter { user in
+            let first = user.firstName.lowercased()
+            let last = user.lastName.lowercased()
+            let full = "\(first) \(last)"
+            return first.contains(text) || last.contains(text) || full.contains(text)
         }
         addExpenseView.suggestionsTableView.isHidden = filteredPayees.isEmpty
         addExpenseView.bringSubviewToFront(addExpenseView.suggestionsTableView)
