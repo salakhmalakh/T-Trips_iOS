@@ -43,6 +43,7 @@ final class CreateTripViewModel {
 
         NetworkAPIService.shared.createTrip(dto, adminId: adminId) { [weak self] trip in
             DispatchQueue.main.async {
+                guard let trip = trip else { return }
                 self?.onTripCreated?(trip)
             }
         }
