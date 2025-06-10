@@ -1,3 +1,4 @@
+// swiftlint:disable type_body_length
 import Foundation
 
 /// Service for communicating with the real backend.
@@ -439,3 +440,4 @@ final class NetworkAPIService {
         task.resume()
     }
 }
+// swiftlint:enable type_body_length
