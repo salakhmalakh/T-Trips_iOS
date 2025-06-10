@@ -10,6 +10,7 @@ final class NetworkAPIService {
     private let baseURL = URL(string: "http://82.202.136.132:8082")!
     private let session: URLSession
     private(set) var currentUser: User?
+    private(set) var tokenPair: JwtTokenPair?
 
     init(session: URLSession = .shared) {
         self.session = session
@@ -46,10 +47,9 @@ final class NetworkAPIService {
                 completion(false)
                 return
             }
-
             if let data = data,
-               let user = try? JSONDecoder.apiDecoder.decode(User.self, from: data) {
-                self.currentUser = user
+               let pair = try? JSONDecoder.apiDecoder.decode(JwtTokenPair.self, from: data) {
+                self.tokenPair = pair
             } else {
                 self.logError(request: request, response: response, data: data, error: error)
             }
@@ -140,7 +140,7 @@ final class NetworkAPIService {
         task.resume()
     }
 
-    func createTrip(_ dto: TripDtoForCreate, adminId: Int64, completion: @escaping (Trip?) -> Void) {
+    func createTrip(_ dto: TripDtoForCreate, completion: @escaping (Trip?) -> Void) {
         let url = baseURL.appendingPathComponent("/api/v1/trips")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -152,8 +152,7 @@ final class NetworkAPIService {
             "status": dto.status.rawValue,
             "budget": dto.budget,
             "description": dto.description as Any,
-            "participantIds": dto.participantIds,
-            "adminId": adminId
+            "participantIds": dto.participantIds
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: payload, options: [])
 
@@ -311,7 +310,7 @@ final class NetworkAPIService {
         task.resume()
     }
 
-    func deleteDebt(id: String, completion: @escaping () -> Void) {
+    func payDebt(id: String, completion: @escaping () -> Void) {
         let url = baseURL.appendingPathComponent("/api/v1/debts/\(id)")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"

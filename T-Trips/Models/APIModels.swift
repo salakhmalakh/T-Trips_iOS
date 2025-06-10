@@ -32,3 +32,14 @@ struct RegisterRequest: Codable {
     let surname: String
 }
 
+/// Response with JWT access and refresh tokens.
+struct JwtTokenPair: Codable {
+    let accessToken: String
+    let refreshToken: String
+}
+
+/// Request payload for token refresh endpoint.
+struct RefreshTokenRequest: Codable {
+    let refreshToken: String
+}
+

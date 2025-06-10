@@ -13,8 +13,14 @@ struct Debt: Codable, Identifiable {
     let fromUserId: Int64
     let toUserId: Int64
     let amount: Double
-    
+    var debtStatus: Status
+
     var id: String { debtId }
+
+    enum Status: String, Codable, CaseIterable {
+        case pending = "PENDING"
+        case payed = "PAYED"
+    }
 
     private enum CodingKeys: String, CodingKey {
         case debtId
@@ -22,5 +28,6 @@ struct Debt: Codable, Identifiable {
         case fromUserId
         case toUserId
         case amount
+        case debtStatus
     }
 }

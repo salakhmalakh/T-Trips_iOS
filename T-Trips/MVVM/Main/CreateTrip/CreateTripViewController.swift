@@ -18,8 +18,8 @@ final class CreateTripViewController: UIViewController {
         }
     }
 
-    init(adminId: Int64 = 0) {
-        self.viewModel = CreateTripViewModel(adminId: adminId)
+    init() {
+        self.viewModel = CreateTripViewModel()
         super.init(nibName: nil, bundle: nil)
     }
 
