@@ -2,8 +2,12 @@ import Foundation
 
 /// View model for the debt detail screen
 final class DebtDetailViewModel {
-    /// Text with participants (debtor -> creditor)
-    let participantsText: String
+    /// Creditor full name
+    let creditorName: String
+    /// Creditor phone or requisites
+    let creditorPhone: String
+    /// Trip title
+    let tripTitle: String
     /// Text with amount value
     let amountText: String
     /// Should pay button be displayed
@@ -12,11 +16,14 @@ final class DebtDetailViewModel {
     var onPay: (() -> Void)?
 
     init(debt: Debt, canPay: Bool) {
-        let fromUser = MockData.users.first { $0.id == debt.fromUserId }
-        let toUser = MockData.users.first { $0.id == debt.toUserId }
-        let fromName = [fromUser?.firstName, fromUser?.lastName].compactMap { $0 }.joined(separator: " ")
-        let toName = [toUser?.firstName, toUser?.lastName].compactMap { $0 }.joined(separator: " ")
-        participantsText = "\(fromName) → \(toName)"
+        let creditor = MockData.users.first { $0.id == debt.toUserId }
+        let trip = MockData.trips.first { $0.id == debt.tripId }
+
+        creditorName = [creditor?.firstName, creditor?.lastName]
+            .compactMap { $0 }
+            .joined(separator: " ")
+        creditorPhone = creditor?.phone ?? ""
+        tripTitle = trip?.title ?? ""
         amountText = debt.amount.rubleString
         showsPayButton = canPay && (MockAPIService.shared.currentUser?.id == debt.fromUserId)
     }

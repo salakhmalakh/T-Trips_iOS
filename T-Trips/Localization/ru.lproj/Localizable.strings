@@ -69,3 +69,5 @@
 "payButtonTitle" = "Оплатить";
 "logoutConfirmation" = "Вы уверены, что хотите выйти?";
 "leaveTripConfirmation" = "Вы уверены, что хотите выйти из поездки?";
+"requisitesTitle" = "Реквизиты";
+"tripNameTitle" = "Поездка";
