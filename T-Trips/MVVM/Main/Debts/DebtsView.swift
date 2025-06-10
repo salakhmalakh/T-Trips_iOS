@@ -4,6 +4,7 @@ import SnapKit
 final class DebtsView: UIView {
     let tableView: UITableView = {
         let table = UITableView()
+        table.backgroundColor = .appBackground
         table.register(DebtCell.self, forCellReuseIdentifier: DebtCell.reuseId)
         return table
     }()

@@ -43,19 +43,12 @@ final class CreateTripView: UIView {
         return picker
     }()
 
-    private lazy var accessoryToolbar: UIToolbar = {
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let flex = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let done = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(endEditingNow))
-        toolbar.setItems([flex, done], animated: false)
-        return toolbar
-    }()
+
 
     public private(set) lazy var titleTextField: CustomTextField = {
         let model = TextFieldModel(placeholder: String.titlePlaceholder, state: .name)
         let tf = textFieldFactory.makeTextField(with: model)
-        tf.inputAccessoryView = accessoryToolbar
+        // accessory view removed to dismiss via tap gesture
         return tf
     }()
 
@@ -63,7 +56,7 @@ final class CreateTripView: UIView {
         let model = TextFieldModel(placeholder: String.startDatePlaceholder, state: .picker)
         let tf = textFieldFactory.makeTextField(with: model)
         tf.inputView = startDatePicker
-        tf.inputAccessoryView = accessoryToolbar
+        // accessory view removed to dismiss via tap gesture
         return tf
     }()
 
@@ -71,7 +64,7 @@ final class CreateTripView: UIView {
         let model = TextFieldModel(placeholder: String.endDatePlaceholder, state: .picker)
         let tf = textFieldFactory.makeTextField(with: model)
         tf.inputView = endDatePicker
-        tf.inputAccessoryView = accessoryToolbar
+        // accessory view removed to dismiss via tap gesture
         return tf
     }()
 
@@ -87,14 +80,14 @@ final class CreateTripView: UIView {
         let model = TextFieldModel(placeholder: String.budgetPlaceholder, state: .money)
         let tf = textFieldFactory.makeTextField(with: model)
         tf.keyboardType = .decimalPad
-        tf.inputAccessoryView = accessoryToolbar
+        // accessory view removed to dismiss via tap gesture
         return tf
     }()
 
     public private(set) lazy var participantsTextField: CustomTextField = {
         let model = TextFieldModel(placeholder: String.participantsPlaceholder, state: .name)
         let tf = textFieldFactory.makeTextField(with: model)
-        tf.inputAccessoryView = accessoryToolbar
+        // accessory view removed to dismiss via tap gesture
         return tf
     }()
 
@@ -107,7 +100,7 @@ final class CreateTripView: UIView {
         tv.backgroundColor = .appBackground
         tv.textContainerInset = UIEdgeInsets.textViewPadding
         tv.isScrollEnabled = true
-        tv.inputAccessoryView = accessoryToolbar
+        // accessory view removed to dismiss via tap gesture
         return tv
     }()
 
@@ -189,10 +182,6 @@ final class CreateTripView: UIView {
     func updateSuggestionsHeight(_ height: CGFloat) {
         suggestionsHeightConstraint?.update(offset: height)
         layoutIfNeeded()
-    }
-
-    @objc private func endEditingNow() {
-        endEditing(true)
     }
 }
 
