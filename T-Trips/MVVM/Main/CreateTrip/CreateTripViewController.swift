@@ -44,7 +44,12 @@ final class CreateTripViewController: UIViewController {
 
     private func loadParticipants() {
         NetworkAPIService.shared.getAllUsers { [weak self] users in
-            DispatchQueue.main.async { self?.participants = users }
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.participants = users
+                /// Refresh suggestions if the user has already typed something
+                self.filterParticipants()
+            }
         }
     }
 
