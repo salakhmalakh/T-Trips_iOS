@@ -149,15 +149,6 @@ final class CreateTripViewController: UIViewController {
                 if let user = users.first(where: { $0.phone == phone }),
                    !self.selectedUsers.contains(where: { $0.id == user.id }) {
                     self.addParticipant(user)
-                } else {
-                    NetworkAPIService.shared.findParticipant(phone: phone) { [weak self] user in
-                        DispatchQueue.main.async { [weak self] in
-                            guard let self = self, let user = user else { return }
-                            if !self.selectedUsers.contains(where: { $0.id == user.id }) {
-                                self.addParticipant(user)
-                            }
-                        }
-                    }
                 }
             }
         }

@@ -186,6 +186,7 @@ final class MockAPIService {
     }
 
     // MARK: - Participants
+    /// Finds a user by phone from the in-memory list.
     func findParticipant(phone: String, completion: @escaping (User?) -> Void) {
         asyncDelay {
             completion(self.users.first { $0.phone == phone })
