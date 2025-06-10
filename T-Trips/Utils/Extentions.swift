@@ -69,3 +69,10 @@ extension UIColor {
         }
     }
 }
+
+// MARK: - Notification Names
+extension Notification.Name {
+    static let expenseAdded = Notification.Name("expenseAdded")
+    static let debtCreated = Notification.Name("debtCreated")
+    static let tripUpdated = Notification.Name("tripUpdated")
+}

@@ -37,6 +37,7 @@ final class CustomTextField: UITextField {
         layer.borderColor = UIColor.borderColor.cgColor
         layer.cornerRadius = CGFloat.cornerRadius
         layer.masksToBounds = true
+        backgroundColor = .appBackground
     }
 
     // MARK: - Delegate
