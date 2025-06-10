@@ -37,7 +37,12 @@ final class NetworkAPIService {
         task.resume()
     }
 
-    func register(phone: String, firstName: String, lastName: String, password: String, completion: @escaping (Bool) -> Void) {
+    enum RegisterError: Error {
+        case phoneExists
+        case unknown
+    }
+
+    func register(phone: String, firstName: String, lastName: String, password: String, completion: @escaping (Result<Void, RegisterError>) -> Void) {
         let url = baseURL.appendingPathComponent("/auth/register")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -51,12 +56,18 @@ final class NetworkAPIService {
         request.httpBody = try? JSONEncoder().encode(body)
 
         let task = session.dataTask(with: request) { data, response, error in
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200..<300).contains(httpResponse.statusCode) else {
-                completion(false)
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(.failure(.unknown))
                 return
             }
-            completion(true)
+            switch httpResponse.statusCode {
+            case 200..<300:
+                completion(.success(()))
+            case 409:
+                completion(.failure(.phoneExists))
+            default:
+                completion(.failure(.unknown))
+            }
         }
         task.resume()
     }

@@ -70,12 +70,15 @@ final class RegisterViewModel {
             firstName: first,
             lastName: last,
             password: password
-        ) { [weak self] success in
+        ) { [weak self] result in
             DispatchQueue.main.async {
-                if success {
+                switch result {
+                case .success:
                     self?.onRegisterSuccess?()
-                } else {
+                case .failure(.phoneExists):
                     self?.onRegisterFailure?(String.phoneExists)
+                case .failure:
+                    self?.onRegisterFailure?(String.registrationFailed)
                 }
             }
         }
@@ -97,4 +100,5 @@ private extension String {
     static var passwordMismatch: String { "passwordMismatch".localized }
     static var phoneIncomplete: String { "phoneIncomplete".localized }
     static var phoneExists: String { "phoneExists".localized }
+    static var registrationFailed: String { "registrationFailed".localized }
 }

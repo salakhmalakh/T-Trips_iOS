@@ -64,6 +64,7 @@
 "passwordMismatch" = "Passwords do not match";
 "phoneIncomplete" = "Phone number is incomplete";
 "phoneExists" = "User with this phone already exists";
+"registrationFailed" = "Registration failed. Please try again";
 "firstName" = "First Name";
 "lastName" = "Last Name";
 "payButtonTitle" = "Pay";
