@@ -243,6 +243,9 @@ final class MockAPIService {
         asyncDelay {
             let user = self.users.first { $0.phone == phone && $0.hashPassword == password }
             self.currentUserId = user?.id
+            if user != nil {
+                self.scheduleUnreadNotifications()
+            }
             completion(user != nil)
         }
     }
@@ -357,6 +360,21 @@ extension MockAPIService {
                 return
             }
             completion(self.notifications.filter { $0.userId == id })
+        }
+    }
+
+    func scheduleUnreadNotifications() {
+        guard let uid = currentUserId else { return }
+        let items = notifications.filter { $0.userId == uid && $0.status == .unread }
+        for item in items {
+            let title: String
+            switch item.type {
+            case .expenseAdded: title = "Expense Added"
+            case .debtCreated: title = "Debt Created"
+            case .tripUpdated: title = "Trip Updated"
+            case .invitation: title = "Invitation"
+            }
+            NotificationManager.shared.schedule(title: title, body: item.message)
         }
     }
 
