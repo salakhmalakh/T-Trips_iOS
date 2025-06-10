@@ -16,6 +16,12 @@ final class NetworkAPIService {
         self.session = session
     }
 
+    private func addAuthHeader(_ request: inout URLRequest) {
+        if let token = tokenPair?.accessToken {
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+    }
+
     private func logError(request: URLRequest, response: URLResponse?, data: Data?, error: Error?) {
         var parts: [String] = []
         if let url = request.url { parts.append("URL: \(url.absoluteString)") }
@@ -101,6 +107,7 @@ final class NetworkAPIService {
         var request = URLRequest(url: components.url!)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        addAuthHeader(&request)
 
         let task = session.dataTask(with: request) { data, response, error in
             guard
@@ -123,6 +130,7 @@ final class NetworkAPIService {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        addAuthHeader(&request)
 
         let task = session.dataTask(with: request) { data, response, error in
             guard
@@ -145,6 +153,7 @@ final class NetworkAPIService {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        addAuthHeader(&request)
         let payload: [String: Any] = [
             "title": dto.title,
             "startDate": ISO8601DateFormatter().string(from: dto.startDate),
@@ -177,6 +186,7 @@ final class NetworkAPIService {
         var request = URLRequest(url: url)
         request.httpMethod = "PATCH"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        addAuthHeader(&request)
         request.httpBody = try? JSONEncoder().encode(trip)
 
         let task = session.dataTask(with: request) { data, response, error in
@@ -200,6 +210,7 @@ final class NetworkAPIService {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        addAuthHeader(&request)
         request.httpBody = try? JSONEncoder().encode(["userId": userId])
 
         let task = session.dataTask(with: request) { data, response, error in
@@ -224,6 +235,7 @@ final class NetworkAPIService {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        addAuthHeader(&request)
 
         let task = session.dataTask(with: request) { data, response, error in
             guard
@@ -246,6 +258,7 @@ final class NetworkAPIService {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        addAuthHeader(&request)
 
         request.httpBody = try? JSONEncoder().encode(dto)
 
@@ -269,6 +282,7 @@ final class NetworkAPIService {
         let url = baseURL.appendingPathComponent("/api/v1/trips/\(tripId)/expenses/\(id)")
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
+        addAuthHeader(&request)
 
         let task = session.dataTask(with: request) { _, response, error in
             guard let httpResponse = response as? HTTPURLResponse,
@@ -293,6 +307,7 @@ final class NetworkAPIService {
         var request = URLRequest(url: components.url!)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        addAuthHeader(&request)
 
         let task = session.dataTask(with: request) { data, response, error in
             guard
@@ -314,6 +329,7 @@ final class NetworkAPIService {
         let url = baseURL.appendingPathComponent("/api/v1/debts/\(id)")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
+        addAuthHeader(&request)
 
         let task = session.dataTask(with: request) { _, response, error in
             guard let httpResponse = response as? HTTPURLResponse,
@@ -334,6 +350,7 @@ final class NetworkAPIService {
         var request = URLRequest(url: components.url!)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        addAuthHeader(&request)
 
         let task = session.dataTask(with: request) { data, response, error in
             guard
@@ -361,6 +378,7 @@ final class NetworkAPIService {
         var request = URLRequest(url: url)
         request.httpMethod = "PATCH"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        addAuthHeader(&request)
         let body: [String: String] = [
             "name": firstName,
             "surname": lastName,
@@ -389,6 +407,7 @@ final class NetworkAPIService {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        addAuthHeader(&request)
 
         let task = session.dataTask(with: request) { data, response, error in
             guard
@@ -411,6 +430,7 @@ final class NetworkAPIService {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        addAuthHeader(&request)
         request.httpBody = try? JSONEncoder().encode(["accept": accept])
 
         let task = session.dataTask(with: request) { _, response, error in
@@ -429,6 +449,7 @@ final class NetworkAPIService {
         let url = baseURL.appendingPathComponent("/api/v1/auth/logout")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
+        addAuthHeader(&request)
 
         let task = session.dataTask(with: request) { _, response, error in
             if let httpResponse = response as? HTTPURLResponse,
