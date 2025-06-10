@@ -19,7 +19,16 @@ final class AddExpenseViewController: UIViewController {
     private let categories = Expense.Category.allCases
     private let participants: [User]
     private var payers: [User] { participants }
-    private var payees: [User] { participants.filter { $0.id != viewModel.payerId } }
+    private var selectedPayees: [User] = []
+    private var tokenMap: [Int64: ParticipantTokenView] = [:]
+    private var filteredPayees: [User] = []
+    private let payeesPlaceholder = "addExpensePayeePlaceholder".localized
+    private var availablePayees: [User] {
+        participants.filter { user in
+            user.id != viewModel.payerId &&
+            !selectedPayees.contains(where: { $0.id == user.id })
+        }
+    }
 
     // MARK: - Init
     init(tripId: Int64, participants: [User] = []) {
@@ -42,7 +51,7 @@ final class AddExpenseViewController: UIViewController {
         title = "addExpenseTitle".localized
         setupBindings()
         setupPickers()
-        refreshPayeePicker()
+        setupSuggestions()
         setupActions()
     }
 
@@ -75,13 +84,16 @@ final class AddExpenseViewController: UIViewController {
             UIAction { [weak self] _ in self?.addExpenseView.payerTextField.becomeFirstResponder() },
             for: .editingDidBegin
         )
-        addExpenseView.payeeTextField.addAction(
-            UIAction { [weak self] _ in
-                self?.refreshPayeePicker()
-                self?.addExpenseView.payeeTextField.becomeFirstResponder()
-            },
-            for: .editingDidBegin
-        )
+        addExpenseView.payeeTextField.addAction(UIAction { [weak self] _ in
+            self?.filterPayees()
+        }, for: .editingDidBegin)
+        addExpenseView.payeeTextField.addAction(UIAction { [weak self] _ in
+            self?.filterPayees()
+        }, for: .editingChanged)
+        addExpenseView.payeeTextField.addAction(UIAction { [weak self] _ in
+            self?.addExpenseView.suggestionsTableView.isHidden = true
+            self?.addExpenseView.updateSuggestionsHeight(0)
+        }, for: .editingDidEnd)
         addExpenseView.dateTextField.addAction(
             UIAction { [weak self] _ in self?.addExpenseView.dateTextField.becomeFirstResponder() },
             for: .editingDidBegin
@@ -91,9 +103,14 @@ final class AddExpenseViewController: UIViewController {
         addExpenseView.categoryPicker.delegate = self
         addExpenseView.payerPicker.dataSource = self
         addExpenseView.payerPicker.delegate = self
-        addExpenseView.payeePicker.dataSource = self
-        addExpenseView.payeePicker.delegate = self
         addExpenseView.datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
+    }
+
+    private func setupSuggestions() {
+        let table = addExpenseView.suggestionsTableView
+        table.dataSource = self
+        table.delegate = self
+        table.register(UITableViewCell.self, forCellReuseIdentifier: "suggestCell")
     }
 
     @objc private func dateChanged(_ picker: UIDatePicker) {
@@ -132,21 +149,11 @@ final class AddExpenseViewController: UIViewController {
                 let user = self?.payers[row]
                 self?.viewModel.payerId = user?.id
                 self?.addExpenseView.payerTextField.text = "\(user?.firstName ?? "") \(user?.lastName ?? "")"
-                self?.refreshPayeePicker()
+                self?.removePayeeIfNeeded()
             },
             for: .editingDidEnd
         )
 
-        addExpenseView.payeeTextField.addAction(
-            UIAction { [weak self] _ in
-                let row = self?.addExpenseView.payeePicker.selectedRow(inComponent: 0) ?? 0
-                guard let self = self else { return }
-                let user = self.payees[row]
-                self.viewModel.payeeId = user.id
-                self.addExpenseView.payeeTextField.text = "\(user.firstName) \(user.lastName)"
-            },
-            for: .editingDidEnd
-        )
 
         addExpenseView.addButton.addAction(
             UIAction { [weak self] _ in self?.viewModel.addExpense() },
@@ -162,26 +169,56 @@ final class AddExpenseViewController: UIViewController {
         }
     }
 
-    private func refreshPayeePicker() {
-        addExpenseView.payeePicker.reloadAllComponents()
-        let row = addExpenseView.payeePicker.selectedRow(inComponent: 0)
-        if viewModel.payerId != nil {
-            if payees.indices.contains(row) {
-                let user = payees[row]
-                viewModel.payeeId = user.id
-                addExpenseView.payeeTextField.text = "\(user.firstName) \(user.lastName)"
-            } else if let first = payees.first {
-                addExpenseView.payeePicker.selectRow(0, inComponent: 0, animated: false)
-                viewModel.payeeId = first.id
-                addExpenseView.payeeTextField.text = "\(first.firstName) \(first.lastName)"
-            } else {
-                viewModel.payeeId = nil
-                addExpenseView.payeeTextField.text = ""
-            }
-        } else {
-            viewModel.payeeId = nil
-            addExpenseView.payeeTextField.text = ""
+    private func removePayeeIfNeeded() {
+        guard let payerId = viewModel.payerId else { return }
+        if let token = tokenMap[payerId] {
+            token.onRemove?()
         }
+    }
+
+    private func addToken(for user: User) {
+        let token = ParticipantTokenView(name: "\(user.firstName) \(user.lastName)")
+        token.onRemove = { [weak self, weak token] in
+            guard let self = self, let token = token else { return }
+            if let index = self.selectedPayees.firstIndex(where: { $0.id == user.id }) {
+                self.selectedPayees.remove(at: index)
+                self.viewModel.payeeIds = self.selectedPayees.map { $0.id }
+                self.tokenMap[user.id] = nil
+                token.removeFromSuperview()
+                self.addExpenseView.payeeTextField.placeholder = self.selectedPayees.isEmpty ? self.payeesPlaceholder : nil
+                self.addExpenseView.tokensView.setNeedsLayout()
+            }
+        }
+        tokenMap[user.id] = token
+        addExpenseView.tokensView.addSubview(token)
+        addExpenseView.tokensView.setNeedsLayout()
+    }
+
+    private func addPayee(_ user: User) {
+        selectedPayees.append(user)
+        viewModel.payeeIds = selectedPayees.map { $0.id }
+        addToken(for: user)
+        addExpenseView.payeeTextField.text = ""
+        addExpenseView.payeeTextField.placeholder = selectedPayees.isEmpty ? payeesPlaceholder : nil
+        addExpenseView.updateSuggestionsHeight(0)
+    }
+
+    private func filterPayees() {
+        let text = addExpenseView.payeeTextField.text?.lowercased() ?? ""
+        guard !text.isEmpty else {
+            filteredPayees = []
+            addExpenseView.updateSuggestionsHeight(0)
+            addExpenseView.suggestionsTableView.isHidden = true
+            return
+        }
+        filteredPayees = availablePayees.filter {
+            $0.firstName.lowercased().contains(text) || $0.lastName.lowercased().contains(text)
+        }
+        addExpenseView.suggestionsTableView.isHidden = filteredPayees.isEmpty
+        addExpenseView.bringSubviewToFront(addExpenseView.suggestionsTableView)
+        addExpenseView.suggestionsTableView.reloadData()
+        let height = min(CGFloat(filteredPayees.count) * 44, 132)
+        addExpenseView.updateSuggestionsHeight(height)
     }
 }
 
@@ -194,8 +231,6 @@ extension AddExpenseViewController: UIPickerViewDataSource, UIPickerViewDelegate
             return categories.count
         case addExpenseView.payerPicker:
             return payers.count
-        case addExpenseView.payeePicker:
-            return payees.count
         default: return 0
         }
     }
@@ -206,15 +241,36 @@ extension AddExpenseViewController: UIPickerViewDataSource, UIPickerViewDelegate
         case addExpenseView.payerPicker:
             let user = payers[row]
             return "\(user.firstName) \(user.lastName)"
-        case addExpenseView.payeePicker:
-            let user = payees[row]
-            return "\(user.firstName) \(user.lastName)"
         default: return nil
         }
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == addExpenseView.payerPicker {
-            refreshPayeePicker()
+            removePayeeIfNeeded()
         }
+    }
+}
+
+extension AddExpenseViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        filteredPayees.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "suggestCell") ?? UITableViewCell(style: .default, reuseIdentifier: "suggestCell")
+        cell.backgroundColor = .secondarySystemBackground
+        let user = filteredPayees[indexPath.row]
+        cell.textLabel?.text = "\(user.firstName) \(user.lastName)"
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let user = filteredPayees[indexPath.row]
+        filteredPayees.removeAll()
+        addExpenseView.suggestionsTableView.isHidden = true
+        addExpenseView.updateSuggestionsHeight(0)
+        addPayee(user)
+        addExpenseView.suggestionsTableView.reloadData()
     }
 }
