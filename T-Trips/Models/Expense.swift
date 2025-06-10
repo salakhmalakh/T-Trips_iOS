@@ -50,4 +50,24 @@ extension Expense.Category {
             return "other".localized
         }
     }
+
+    /// SF Symbol name associated with the expense category
+    var symbolName: String {
+        switch self {
+        case .tickets:
+            return "ticket.fill"
+        case .longing:
+            return "bed.double.fill"
+        case .food:
+            return "fork.knife"
+        case .entertainment:
+            return "gamecontroller.fill"
+        case .insurance:
+            return "shield.fill"
+        case .transport:
+            return "car.fill"
+        case .other:
+            return "ellipsis.circle"
+        }
+    }
 }

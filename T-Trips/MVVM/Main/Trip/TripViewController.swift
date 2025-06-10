@@ -31,6 +31,7 @@ final class TripViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = .tripTitile
+        tripView.headerLabel.text = viewModel.trip.title.uppercased()
         if viewModel.trip.status == .completed {
             tripView.addExpenseButton.isHidden = true
         }
