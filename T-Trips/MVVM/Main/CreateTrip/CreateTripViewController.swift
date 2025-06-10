@@ -97,9 +97,7 @@ final class CreateTripViewController: UIViewController {
             self?.viewModel.budget = self?.createView.budgetTextField.text ?? ""
         }, for: .editingChanged)
 
-        createView.descriptionTextField.addAction(UIAction { [weak self] _ in
-            self?.viewModel.description = self?.createView.descriptionTextField.text ?? ""
-        }, for: .editingChanged)
+        createView.descriptionTextView.delegate = self
 
         createView.participantsTextField.addAction(UIAction { [weak self] _ in
             self?.filterParticipants()
@@ -201,6 +199,12 @@ extension CreateTripViewController: UITableViewDataSource, UITableViewDelegate {
         createView.updateSuggestionsHeight(0)
         addParticipant(user)
         createView.suggestionsTableView.reloadData()
+    }
+}
+
+extension CreateTripViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        viewModel.description = textView.text
     }
 }
 

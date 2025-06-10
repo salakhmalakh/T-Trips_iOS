@@ -8,6 +8,13 @@ final class TripDetailView: UIView {
     let titleLabel = UILabel()
     let startLabel = UILabel()
     let endLabel = UILabel()
+    private lazy var datesStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [startLabel, endLabel])
+        stack.axis = .horizontal
+        stack.spacing = CGFloat.datesSpacing
+        stack.distribution = .fillEqually
+        return stack
+    }()
     let budgetLabel = UILabel()
 
     let participantsTitleLabel: UILabel = {
@@ -31,7 +38,7 @@ final class TripDetailView: UIView {
         backgroundColor = .systemBackground
 
         addSubview(containerView)
-        [titleLabel, startLabel, endLabel, budgetLabel,
+        [titleLabel, datesStackView, budgetLabel,
          participantsTitleLabel, participantsLabel,
          descriptionTitleLabel, descriptionLabel].forEach(containerView.addSubview)
 
@@ -44,7 +51,7 @@ final class TripDetailView: UIView {
         backgroundColor = .systemBackground
 
         addSubview(containerView)
-        [titleLabel, startLabel, endLabel, budgetLabel,
+        [titleLabel, datesStackView, budgetLabel,
          participantsTitleLabel, participantsLabel,
          descriptionTitleLabel, descriptionLabel].forEach(containerView.addSubview)
 
@@ -61,16 +68,12 @@ final class TripDetailView: UIView {
             make.top.equalToSuperview().offset(CGFloat.topInset)
             make.leading.trailing.equalToSuperview().inset(CGFloat.horizontalInset)
         }
-        startLabel.snp.makeConstraints { make in
+        datesStackView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(CGFloat.sectionSpacing)
             make.leading.trailing.equalTo(titleLabel)
         }
-        endLabel.snp.makeConstraints { make in
-            make.top.equalTo(startLabel.snp.bottom).offset(CGFloat.sectionSpacing)
-            make.leading.trailing.equalTo(titleLabel)
-        }
         budgetLabel.snp.makeConstraints { make in
-            make.top.equalTo(endLabel.snp.bottom).offset(CGFloat.sectionSpacing)
+            make.top.equalTo(datesStackView.snp.bottom).offset(CGFloat.sectionSpacing)
             make.leading.trailing.equalTo(titleLabel)
         }
         participantsTitleLabel.snp.makeConstraints { make in
@@ -146,6 +149,7 @@ private extension CGFloat {
     static let cornerRadius: CGFloat = 12
     static let shadowRadius: CGFloat = 4
     static let titleAlpha: CGFloat = 0.6
+    static let datesSpacing: CGFloat = 8
 }
 
 private extension UIEdgeInsets {

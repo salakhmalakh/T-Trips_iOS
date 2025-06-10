@@ -67,6 +67,14 @@ final class CreateTripView: UIView {
         return tf
     }()
 
+    private lazy var datesStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [startDateTextField, endDateTextField])
+        stack.axis = .horizontal
+        stack.spacing = CGFloat.datesSpacing
+        stack.distribution = .fillEqually
+        return stack
+    }()
+
     public private(set) lazy var budgetTextField: CustomTextField = {
         let model = TextFieldModel(placeholder: String.budgetPlaceholder, state: .money)
         let tf = textFieldFactory.makeTextField(with: model)
@@ -82,11 +90,16 @@ final class CreateTripView: UIView {
         return tf
     }()
 
-    public private(set) lazy var descriptionTextField: CustomTextField = {
-        let model = TextFieldModel(placeholder: String.descriptionPlaceholder, state: .name)
-        let tf = textFieldFactory.makeTextField(with: model)
-        tf.inputAccessoryView = accessoryToolbar
-        return tf
+    public private(set) lazy var descriptionTextView: UITextView = {
+        let tv = UITextView()
+        tv.font = UIFont.systemFont(ofSize: CGFloat.descriptionFontSize)
+        tv.layer.borderWidth = CGFloat.borderWidth
+        tv.layer.borderColor = UIColor.borderColor.cgColor
+        tv.layer.cornerRadius = CGFloat.cornerRadius
+        tv.textContainerInset = UIEdgeInsets.textViewPadding
+        tv.isScrollEnabled = true
+        tv.inputAccessoryView = accessoryToolbar
+        return tv
     }()
 
     public private(set) lazy var saveButton: CustomButton = {
@@ -99,8 +112,8 @@ final class CreateTripView: UIView {
      override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemBackground
-        [titleTextField, startDateTextField, endDateTextField, budgetTextField,
-        participantsTextField, tokensView, suggestionsTableView, descriptionTextField, saveButton].forEach(addSubview)
+        [titleTextField, datesStackView, budgetTextField,
+        participantsTextField, tokensView, suggestionsTableView, descriptionTextView, saveButton].forEach(addSubview)
         tokensView.trailingSpace = CGFloat.inputSpace
         setupConstraints()
     }
@@ -108,8 +121,8 @@ final class CreateTripView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         backgroundColor = .systemBackground
-        [titleTextField, startDateTextField, endDateTextField, budgetTextField,
-        participantsTextField, tokensView, suggestionsTableView, descriptionTextField, saveButton].forEach(addSubview)
+        [titleTextField, datesStackView, budgetTextField,
+        participantsTextField, tokensView, suggestionsTableView, descriptionTextView, saveButton].forEach(addSubview)
         tokensView.trailingSpace = CGFloat.inputSpace
         setupConstraints()
     }
@@ -120,16 +133,18 @@ final class CreateTripView: UIView {
             make.leading.trailing.equalToSuperview().inset(CGFloat.horizontalInset)
             make.height.equalTo(CGFloat.fieldHeight)
         }
-        startDateTextField.snp.makeConstraints { make in
+        datesStackView.snp.makeConstraints { make in
             make.top.equalTo(titleTextField.snp.bottom).offset(CGFloat.verticalSpacing)
-            make.leading.trailing.height.equalTo(titleTextField)
+            make.leading.trailing.equalTo(titleTextField)
+            make.height.equalTo(CGFloat.fieldHeight)
         }
-        endDateTextField.snp.makeConstraints { make in
-            make.top.equalTo(startDateTextField.snp.bottom).offset(CGFloat.verticalSpacing)
-            make.leading.trailing.height.equalTo(titleTextField)
+        [startDateTextField, endDateTextField].forEach { field in
+            field.snp.makeConstraints { make in
+                make.height.equalTo(CGFloat.fieldHeight)
+            }
         }
         budgetTextField.snp.makeConstraints { make in
-            make.top.equalTo(endDateTextField.snp.bottom).offset(CGFloat.verticalSpacing)
+            make.top.equalTo(datesStackView.snp.bottom).offset(CGFloat.verticalSpacing)
             make.leading.trailing.height.equalTo(titleTextField)
         }
         participantsTextField.snp.makeConstraints { make in
@@ -146,12 +161,13 @@ final class CreateTripView: UIView {
             make.leading.trailing.equalTo(participantsTextField)
             suggestionsHeightConstraint = make.height.equalTo(0).constraint
         }
-            descriptionTextField.snp.makeConstraints { make in
+            descriptionTextView.snp.makeConstraints { make in
             make.top.equalTo(tokensView.snp.bottom).offset(CGFloat.verticalSpacing)
-            make.leading.trailing.height.equalTo(titleTextField)
+            make.leading.trailing.equalTo(titleTextField)
+            make.height.equalTo(CGFloat.descriptionHeight)
         }
         saveButton.snp.makeConstraints { make in
-            make.top.equalTo(descriptionTextField.snp.bottom).offset(CGFloat.buttonTop)
+            make.top.equalTo(descriptionTextView.snp.bottom).offset(CGFloat.buttonTop)
             make.leading.trailing.equalToSuperview().inset(CGFloat.horizontalInset)
             make.height.equalTo(CGFloat.buttonHeight)
         }
@@ -178,6 +194,11 @@ private extension CGFloat {
     static let tokenInset: CGFloat = 4
     static let inputSpace: CGFloat = 60
     static let tokenTop: CGFloat = 4
+    static let datesSpacing: CGFloat = 8
+    static let descriptionHeight: CGFloat = fieldHeight * 2
+    static let descriptionFontSize: CGFloat = 16
+    static let borderWidth: CGFloat = 0.5
+    static let cornerRadius: CGFloat = 12
 }
 
 private extension String {
@@ -188,4 +209,12 @@ private extension String {
     static var participantsPlaceholder: String { "participantsPlaceholder".localized }
     static var descriptionPlaceholder: String { "descriptionPlaceholder".localized }
     static var saveButtonTitle: String { "saveButtonTitle".localized }
+}
+
+private extension UIColor {
+    static let borderColor = UIColor.lightGray
+}
+
+private extension UIEdgeInsets {
+    static let textViewPadding = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
 }
