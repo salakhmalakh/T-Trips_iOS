@@ -25,9 +25,10 @@ struct LoginRequest: Codable {
 
 /// Request payload for the register endpoint.
 struct RegisterRequest: Codable {
+    let login: String
     let phone: String
-    let firstName: String
-    let lastName: String
     let password: String
+    let name: String
+    let surname: String
 }
 

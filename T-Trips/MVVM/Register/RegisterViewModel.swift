@@ -66,9 +66,10 @@ final class RegisterViewModel {
         let phoneNormalized = "+" + digits
 
         NetworkAPIService.shared.register(
+            login: phoneNormalized,
             phone: phoneNormalized,
-            firstName: first,
-            lastName: last,
+            name: first,
+            surname: last,
             password: password
         ) { [weak self] result in
             DispatchQueue.main.async {

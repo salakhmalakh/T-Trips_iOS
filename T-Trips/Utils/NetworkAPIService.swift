@@ -29,7 +29,7 @@ final class NetworkAPIService {
 
     // MARK: - Auth
     func authenticate(phone: String, password: String, completion: @escaping (Bool) -> Void) {
-        let url = baseURL.appendingPathComponent("/auth/login")
+        let url = baseURL.appendingPathComponent("/api/v1/auth/login")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -62,12 +62,12 @@ final class NetworkAPIService {
         case unknown
     }
 
-    func register(phone: String, firstName: String, lastName: String, password: String, completion: @escaping (Result<Void, RegisterError>) -> Void) {
-        let url = baseURL.appendingPathComponent("/auth/register")
+    func register(login: String, phone: String, name: String, surname: String, password: String, completion: @escaping (Result<Void, RegisterError>) -> Void) {
+        let url = baseURL.appendingPathComponent("/api/v1/users")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        let body = RegisterRequest(phone: phone, firstName: firstName, lastName: lastName, password: password)
+        let body = RegisterRequest(login: login, phone: phone, password: password, name: name, surname: surname)
         request.httpBody = try? JSONEncoder().encode(body)
 
         let task = session.dataTask(with: request) { data, response, error in
@@ -95,7 +95,7 @@ final class NetworkAPIService {
 
     // MARK: - Trips
     func getUserTrips(status: Trip.Status, completion: @escaping ([Trip]) -> Void) {
-        var components = URLComponents(url: baseURL.appendingPathComponent("/trips"), resolvingAgainstBaseURL: false)!
+        var components = URLComponents(url: baseURL.appendingPathComponent("/api/v1/trips"), resolvingAgainstBaseURL: false)!
         components.queryItems = [URLQueryItem(name: "status", value: status.rawValue)]
         var request = URLRequest(url: components.url!)
         request.httpMethod = "GET"
@@ -118,7 +118,7 @@ final class NetworkAPIService {
     }
 
     func getTrip(id: Int64, completion: @escaping (Trip?) -> Void) {
-        let url = baseURL.appendingPathComponent("/trips/\(id)")
+        let url = baseURL.appendingPathComponent("/api/v1/trips/\(id)")
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
@@ -140,7 +140,7 @@ final class NetworkAPIService {
     }
 
     func createTrip(_ dto: TripDtoForCreate, adminId: Int64, completion: @escaping (Trip?) -> Void) {
-        let url = baseURL.appendingPathComponent("/trips")
+        let url = baseURL.appendingPathComponent("/api/v1/trips")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -173,9 +173,9 @@ final class NetworkAPIService {
     }
 
     func updateTrip(_ trip: Trip, completion: @escaping (Trip?) -> Void) {
-        let url = baseURL.appendingPathComponent("/trips/\(trip.id)")
+        let url = baseURL.appendingPathComponent("/api/v1/trips/\(trip.id)")
         var request = URLRequest(url: url)
-        request.httpMethod = "PUT"
+        request.httpMethod = "PATCH"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try? JSONEncoder().encode(trip)
 
@@ -196,7 +196,7 @@ final class NetworkAPIService {
     }
 
     func leaveTrip(tripId: Int64, userId: Int64, completion: @escaping (Trip?) -> Void) {
-        let url = baseURL.appendingPathComponent("/trips/\(tripId)/leave")
+        let url = baseURL.appendingPathComponent("/api/v1/trips/\(tripId)/leave")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -220,7 +220,7 @@ final class NetworkAPIService {
 
     // MARK: - Expenses
     func getExpenses(tripId: Int64, completion: @escaping ([Expense]) -> Void) {
-        let url = baseURL.appendingPathComponent("/trips/\(tripId)/expenses")
+        let url = baseURL.appendingPathComponent("/api/v1/trips/\(tripId)/expenses")
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
@@ -242,7 +242,7 @@ final class NetworkAPIService {
     }
 
     func createExpense(tripId: Int64, dto: ExpenseDtoForCreate, ownerId: Int64, completion: @escaping (Expense?) -> Void) {
-        let url = baseURL.appendingPathComponent("/trips/\(tripId)/expenses")
+        let url = baseURL.appendingPathComponent("/api/v1/trips/\(tripId)/expenses")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -265,8 +265,8 @@ final class NetworkAPIService {
         task.resume()
     }
 
-    func deleteExpense(id: Int64, completion: @escaping () -> Void) {
-        let url = baseURL.appendingPathComponent("/expenses/\(id)")
+    func deleteExpense(tripId: Int64, id: Int64, completion: @escaping () -> Void) {
+        let url = baseURL.appendingPathComponent("/api/v1/trips/\(tripId)/expenses/\(id)")
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
 
@@ -284,10 +284,12 @@ final class NetworkAPIService {
 
     // MARK: - Debts
     func getDebts(tripId: Int64, userId: Int64?, completion: @escaping ([Debt]) -> Void) {
-        var components = URLComponents(url: baseURL.appendingPathComponent("/trips/\(tripId)/debts"), resolvingAgainstBaseURL: false)!
+        var components = URLComponents(url: baseURL.appendingPathComponent("/api/v1/debts"), resolvingAgainstBaseURL: false)!
+        var items = [URLQueryItem(name: "tripId", value: String(tripId))]
         if let uid = userId {
-            components.queryItems = [URLQueryItem(name: "userId", value: String(uid))]
+            items.append(URLQueryItem(name: "userId", value: String(uid)))
         }
+        components.queryItems = items
         var request = URLRequest(url: components.url!)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
@@ -309,9 +311,9 @@ final class NetworkAPIService {
     }
 
     func deleteDebt(id: String, completion: @escaping () -> Void) {
-        let url = baseURL.appendingPathComponent("/debts/\(id)")
+        let url = baseURL.appendingPathComponent("/api/v1/debts/\(id)")
         var request = URLRequest(url: url)
-        request.httpMethod = "DELETE"
+        request.httpMethod = "POST"
 
         let task = session.dataTask(with: request) { _, response, error in
             guard let httpResponse = response as? HTTPURLResponse,
@@ -327,7 +329,7 @@ final class NetworkAPIService {
 
     // MARK: - Participants
     func findParticipant(phone: String, completion: @escaping (User?) -> Void) {
-        var components = URLComponents(url: baseURL.appendingPathComponent("/participants/find"), resolvingAgainstBaseURL: false)!
+        var components = URLComponents(url: baseURL.appendingPathComponent("/api/v1/participant/search"), resolvingAgainstBaseURL: false)!
         components.queryItems = [URLQueryItem(name: "phone", value: phone)]
         var request = URLRequest(url: components.url!)
         request.httpMethod = "GET"
@@ -351,13 +353,17 @@ final class NetworkAPIService {
 
     // MARK: - User management
     func updateCurrentUser(firstName: String, lastName: String, phone: String, completion: @escaping (User?) -> Void) {
-        let url = baseURL.appendingPathComponent("/user")
+        guard let id = currentUser?.id else {
+            completion(nil)
+            return
+        }
+        let url = baseURL.appendingPathComponent("/api/v1/users/\(id)")
         var request = URLRequest(url: url)
-        request.httpMethod = "PUT"
+        request.httpMethod = "PATCH"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         let body: [String: String] = [
-            "firstName": firstName,
-            "lastName": lastName,
+            "name": firstName,
+            "surname": lastName,
             "phone": phone
         ]
         request.httpBody = try? JSONEncoder().encode(body)
@@ -379,7 +385,7 @@ final class NetworkAPIService {
     }
 
     func getNotifications(completion: @escaping ([NotificationItem]) -> Void) {
-        let url = baseURL.appendingPathComponent("/notifications")
+        let url = baseURL.appendingPathComponent("/api/v1/notifications")
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
@@ -401,7 +407,7 @@ final class NetworkAPIService {
     }
 
     func respondToInvitation(notificationId: Int, accept: Bool, completion: @escaping () -> Void) {
-        let url = baseURL.appendingPathComponent("/notifications/\(notificationId)/respond")
+        let url = baseURL.appendingPathComponent("/api/v1/notifications/\(notificationId)/respond")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -420,7 +426,7 @@ final class NetworkAPIService {
     }
 
     func logout() {
-        let url = baseURL.appendingPathComponent("/auth/logout")
+        let url = baseURL.appendingPathComponent("/api/v1/auth/logout")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
 
