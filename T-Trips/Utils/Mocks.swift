@@ -44,9 +44,9 @@ enum MockData {
     ]
 
     static let debts: [Debt] = [
-        Debt(debtId: "1", tripId: trips[0].id, fromUserId: users[1].id, toUserId: users[0].id, amount: 1250.37),
-        Debt(debtId: "2", tripId: trips[0].id, fromUserId: users[2].id, toUserId: users[0].id, amount: 500),
-        Debt(debtId: "3", tripId: trips[1].id, fromUserId: users[3].id, toUserId: users[2].id, amount: 300)
+        Debt(debtId: "1", tripId: trips[0].id, fromUserId: users[1].id, toUserId: users[0].id, amount: 1250.37, debtStatus: .pending),
+        Debt(debtId: "2", tripId: trips[0].id, fromUserId: users[2].id, toUserId: users[0].id, amount: 500, debtStatus: .pending),
+        Debt(debtId: "3", tripId: trips[1].id, fromUserId: users[3].id, toUserId: users[2].id, amount: 300, debtStatus: .pending)
     ]
 
     static let notifications: [NotificationItem] = [

@@ -48,9 +48,10 @@ final class MockAPIService {
         }
     }
 
-    func createTrip(_ dto: TripDtoForCreate, adminId: Int64, completion: @escaping (Trip) -> Void) {
+    func createTrip(_ dto: TripDtoForCreate, completion: @escaping (Trip) -> Void) {
         asyncDelay {
             let newId = (self.trips.map { $0.id }.max() ?? 0) + 1
+            let adminId = dto.participantIds.first ?? 0
             let trip = Trip(
                 id: newId,
                 adminId: adminId,
@@ -130,7 +131,8 @@ final class MockAPIService {
                         tripId: tripId,
                         fromUserId: uid,
                         toUserId: ownerId,
-                        amount: partAmount
+                        amount: partAmount,
+                        debtStatus: .pending
                     )
                     self.debts.append(debt)
                     self.addNotification(
@@ -174,9 +176,11 @@ final class MockAPIService {
         }
     }
 
-    func deleteDebt(id: String, completion: @escaping () -> Void) {
+    func payDebt(id: String, completion: @escaping () -> Void) {
         asyncDelay {
-            self.debts.removeAll { $0.debtId == id }
+            if let index = self.debts.firstIndex(where: { $0.debtId == id }) {
+                self.debts[index].debtStatus = .payed
+            }
             completion()
         }
     }

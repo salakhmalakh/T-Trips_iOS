@@ -3,7 +3,6 @@ import Combine
 
 final class CreateTripViewModel {
     var onTripCreated: ((Trip) -> Void)?
-    private let adminId: Int64
     @Published var title: String = ""
     @Published var budget: String = ""
     @Published var description: String = ""
@@ -15,8 +14,7 @@ final class CreateTripViewModel {
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(adminId: Int64 = 0) {
-        self.adminId = adminId
+    init() {
         Publishers.CombineLatest4($title, $budget, $description, $participantIds)
             .combineLatest(Publishers.CombineLatest($startDate, $endDate))
             .map { combined, dates in
@@ -41,7 +39,7 @@ final class CreateTripViewModel {
             participantIds: participantIds
         )
 
-        NetworkAPIService.shared.createTrip(dto, adminId: adminId) { [weak self] trip in
+        NetworkAPIService.shared.createTrip(dto) { [weak self] trip in
             DispatchQueue.main.async {
                 guard let trip = trip else { return }
                 self?.onTripCreated?(trip)

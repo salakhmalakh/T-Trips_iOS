@@ -39,7 +39,7 @@ final class DebtsViewModel {
         guard isTripCompleted else { return }
         guard debts.indices.contains(index) else { return }
         let id = debts[index].debtId
-        NetworkAPIService.shared.deleteDebt(id: id) { [weak self] in
+        NetworkAPIService.shared.payDebt(id: id) { [weak self] in
             DispatchQueue.main.async {
                 self?.debts.remove(at: index)
             }
