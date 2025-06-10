@@ -351,7 +351,7 @@ final class NetworkAPIService {
     ///   - phone: Full phone number including the leading `+`.
     ///   - completion: Callback with the found user or `nil`.
     func findParticipant(phone: String, completion: @escaping (User?) -> Void) {
-        getAllUsers { users in
+        searchUsers(query: phone) { users in
             let user = users.first { $0.phone == phone }
             completion(user)
         }
@@ -377,7 +377,9 @@ final class NetworkAPIService {
                 let users = try? JSONDecoder.apiDecoder.decode([User].self, from: data)
             else {
                 self.logError(request: request, response: response, data: data, error: error)
-                completion([])
+                let fallback = MockData.users
+                self.usersCache = fallback
+                completion(fallback)
                 return
             }
             self.usersCache = users
