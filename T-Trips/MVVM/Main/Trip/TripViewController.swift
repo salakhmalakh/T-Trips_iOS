@@ -9,6 +9,8 @@ import UIKit
 import Combine
 
 final class TripViewController: UIViewController {
+    public var onTripLeft: ((Int64) -> Void)?
+
     private let tripView = TripView()
     private let viewModel: TripViewModel
     private var cancellables = Set<AnyCancellable>()
@@ -120,8 +122,11 @@ final class TripViewController: UIViewController {
         alert.addAction(UIAlertAction(title: String.cancelTitle, style: .cancel))
         alert.addAction(
             UIAlertAction(title: String.confirmButtonTitle, style: .destructive) { [weak self] _ in
-                self?.viewModel.leaveTrip {
-                    self?.navigationController?.popViewController(animated: true)
+                guard let self = self else { return }
+                self.viewModel.leaveTrip { [weak self] in
+                    guard let self = self else { return }
+                    self.onTripLeft?(self.viewModel.trip.id)
+                    self.navigationController?.popViewController(animated: true)
                 }
             }
         )

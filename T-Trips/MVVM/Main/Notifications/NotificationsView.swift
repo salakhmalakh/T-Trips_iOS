@@ -6,6 +6,7 @@ final class NotificationsView: UIView {
         let table = UITableView()
         table.register(CustomTableCell.self, forCellReuseIdentifier: CustomTableCell.reuseId)
         table.register(InvitationCell.self, forCellReuseIdentifier: InvitationCell.reuseId)
+        table.backgroundColor = .appBackground
         return table
     }()
 

@@ -168,8 +168,11 @@ extension TripsViewController: UITableViewDataSource, UITableViewDelegate {
         let trip = viewModel.filteredTrips[indexPath.row]
         
         let tripVM = TripViewModel(trip: trip)
-        
+
         let tripVC = TripViewController(viewModel: tripVM)
+        tripVC.onTripLeft = { [weak self] id in
+            self?.viewModel.removeTrip(id: id)
+        }
         tripVC.hidesBottomBarWhenPushed = true
 
         navigationController?.pushViewController(tripVC, animated: true)
