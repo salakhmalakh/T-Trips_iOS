@@ -37,7 +37,10 @@ final class AuthViewModel {
 
     // MARK: - Actions
     func login() {
-        NetworkAPIService.shared.authenticate(phone: phone, password: password) { [weak self] success in
+        // Normalize phone number to remove formatting
+        let digits = phone.filter { $0.isNumber }
+        let normalized = "+" + digits
+        NetworkAPIService.shared.authenticate(phone: normalized, password: password) { [weak self] success in
             DispatchQueue.main.async {
                 if success {
                     self?.onLoginSuccess?()

@@ -16,3 +16,18 @@ struct ExpenseDtoForCreate: Codable {
     let title: String
     let paidForUserIds: [Int64]
 }
+
+/// Request payload for the login endpoint.
+struct LoginRequest: Codable {
+    let phone: String
+    let password: String
+}
+
+/// Request payload for the register endpoint.
+struct RegisterRequest: Codable {
+    let phone: String
+    let firstName: String
+    let lastName: String
+    let password: String
+}
+
