@@ -8,8 +8,15 @@ final class CreateTripViewController: UIViewController {
     private let viewModel: CreateTripViewModel
     private var cancellables = Set<AnyCancellable>()
 
+    private var users: [User] = []
     private var selectedUsers: [User] = []
+    private var filteredUsers: [User] = []
     private let participantsPlaceholder = "Участники"
+    private var availableUsers: [User] {
+        users.filter { user in
+            !selectedUsers.contains(where: { $0.id == user.id })
+        }
+    }
 
     init() {
         self.viewModel = CreateTripViewModel()
@@ -28,9 +35,28 @@ final class CreateTripViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = nil
+        loadUsers()
         setupBindings()
         setupPickers()
+        setupSuggestions()
         setupActions()
+    }
+
+    private func loadUsers() {
+        NetworkAPIService.shared.getAllUsers { [weak self] users in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.users = users
+                self.filterUsers()
+            }
+        }
+    }
+
+    private func setupSuggestions() {
+        let table = createView.suggestionsTableView
+        table.dataSource = self
+        table.delegate = self
+        table.register(UITableViewCell.self, forCellReuseIdentifier: "suggestCell")
     }
 
     private func setupBindings() {
@@ -85,10 +111,14 @@ final class CreateTripViewController: UIViewController {
         createView.descriptionTextView.delegate = self
 
         createView.participantsTextField.addAction(UIAction { [weak self] _ in
-            self?.findParticipant()
-        }, for: .editingDidEndOnExit)
+            self?.filterUsers()
+        }, for: .editingDidBegin)
         createView.participantsTextField.addAction(UIAction { [weak self] _ in
-            self?.findParticipant()
+            self?.filterUsers()
+        }, for: .editingChanged)
+        createView.participantsTextField.addAction(UIAction { [weak self] _ in
+            self?.createView.suggestionsTableView.isHidden = true
+            self?.createView.updateSuggestionsHeight(0)
         }, for: .editingDidEnd)
 
         createView.saveButton.addAction(UIAction { [weak self] _ in
@@ -135,33 +165,28 @@ final class CreateTripViewController: UIViewController {
         addToken(for: user)
         createView.participantsTextField.text = ""
         createView.participantsTextField.placeholder = selectedUsers.isEmpty ? participantsPlaceholder : nil
+        createView.updateSuggestionsHeight(0)
     }
 
-    private func findParticipant() {
-        let text = createView.participantsTextField.text ?? ""
-        let digits = text.filter { $0.isNumber }
-        guard !digits.isEmpty else { return }
-        let phone = "+" + digits
-
-        NetworkAPIService.shared.findParticipant(phone: phone) { [weak self] user in
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                if let user = user,
-                   !self.selectedUsers.contains(where: { $0.id == user.id }) {
-                    self.addParticipant(user)
-                } else {
-                    let alert = UIAlertController(
-                        title: nil,
-                        message: String.userNotFound,
-                        preferredStyle: .alert
-                    )
-                    alert.addAction(
-                        UIAlertAction(title: String.confirmButtonTitle, style: .default)
-                    )
-                    self.present(alert, animated: true)
-                }
-            }
+    private func filterUsers() {
+        let text = createView.participantsTextField.text?.lowercased() ?? ""
+        guard !text.isEmpty else {
+            filteredUsers = []
+            createView.updateSuggestionsHeight(0)
+            createView.suggestionsTableView.isHidden = true
+            return
         }
+        filteredUsers = availableUsers.filter { user in
+            let first = user.firstName.lowercased()
+            let last = user.lastName.lowercased()
+            let full = "\(first) \(last)"
+            return first.contains(text) || last.contains(text) || full.contains(text)
+        }
+        createView.suggestionsTableView.isHidden = filteredUsers.isEmpty
+        createView.bringSubviewToFront(createView.suggestionsTableView)
+        createView.suggestionsTableView.reloadData()
+        let height = min(CGFloat(filteredUsers.count) * 44, 132)
+        createView.updateSuggestionsHeight(height)
     }
 }
 
@@ -171,10 +196,33 @@ extension CreateTripViewController: UITextViewDelegate {
     }
 }
 
+extension CreateTripViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        filteredUsers.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "suggestCell") ?? UITableViewCell(style: .default, reuseIdentifier: "suggestCell")
+        cell.backgroundColor = .secondarySystemBackground
+        let user = filteredUsers[indexPath.row]
+        cell.textLabel?.text = "\(user.firstName) \(user.lastName)"
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let user = filteredUsers[indexPath.row]
+        filteredUsers.removeAll()
+        createView.suggestionsTableView.isHidden = true
+        createView.updateSuggestionsHeight(0)
+        addParticipant(user)
+        createView.suggestionsTableView.reloadData()
+    }
+}
+
 // MARK: - Constants
 private extension String {
     static var cancelTitle: String { "cancelButtonTitle".localized }
     static var deleteConfirmation: String { "deleteConfirmation".localized }
     static var confirmButtonTitle: String { "confirmButtonTitle".localized }
-    static var userNotFound: String { "userNotFound".localized }
 }
