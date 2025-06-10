@@ -143,12 +143,22 @@ final class CreateTripViewController: UIViewController {
         guard !digits.isEmpty else { return }
         let phone = "+" + digits
 
-        NetworkAPIService.shared.searchUsers(query: phone) { [weak self] users in
+        NetworkAPIService.shared.findParticipant(phone: phone) { [weak self] user in
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                if let user = users.first(where: { $0.phone == phone }),
+                if let user = user,
                    !self.selectedUsers.contains(where: { $0.id == user.id }) {
                     self.addParticipant(user)
+                } else {
+                    let alert = UIAlertController(
+                        title: nil,
+                        message: String.userNotFound,
+                        preferredStyle: .alert
+                    )
+                    alert.addAction(
+                        UIAlertAction(title: String.confirmButtonTitle, style: .default)
+                    )
+                    self.present(alert, animated: true)
                 }
             }
         }
@@ -166,4 +176,5 @@ private extension String {
     static var cancelTitle: String { "cancelButtonTitle".localized }
     static var deleteConfirmation: String { "deleteConfirmation".localized }
     static var confirmButtonTitle: String { "confirmButtonTitle".localized }
+    static var userNotFound: String { "userNotFound".localized }
 }

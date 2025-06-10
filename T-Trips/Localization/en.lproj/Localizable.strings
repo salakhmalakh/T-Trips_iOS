@@ -74,3 +74,4 @@
 "tripNameTitle" = "Trip";
 "acceptButtonTitle" = "Accept";
 "rejectButtonTitle" = "Reject";
+"userNotFound" = "User not found";
