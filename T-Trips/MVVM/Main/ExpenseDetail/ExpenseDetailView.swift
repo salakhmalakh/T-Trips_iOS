@@ -100,7 +100,7 @@ final class ExpenseDetailView: UIView {
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground
+        backgroundColor = .appBackground
         addSubview(containerView)
         [
             categoryTitleLabel, categoryLabel,
@@ -116,7 +116,7 @@ final class ExpenseDetailView: UIView {
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        backgroundColor = .systemBackground
+        backgroundColor = .appBackground
         addSubview(containerView)
         [
             categoryTitleLabel, categoryLabel,

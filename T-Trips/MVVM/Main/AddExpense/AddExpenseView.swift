@@ -136,7 +136,7 @@ final class AddExpenseView: UIView {
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground
+        backgroundColor = .appBackground
         [
             headerLabel,
             titleTextField,
@@ -156,7 +156,7 @@ final class AddExpenseView: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        backgroundColor = .systemBackground
+        backgroundColor = .appBackground
         [
             headerLabel,
             titleTextField,

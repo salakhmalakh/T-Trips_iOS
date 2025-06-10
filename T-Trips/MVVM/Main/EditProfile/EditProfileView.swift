@@ -29,14 +29,14 @@ final class EditProfileView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground
+        backgroundColor = .appBackground
         [firstNameTextField, lastNameTextField, phoneTextField, saveButton].forEach(addSubview)
         setupConstraints()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        backgroundColor = .systemBackground
+        backgroundColor = .appBackground
         [firstNameTextField, lastNameTextField, phoneTextField, saveButton].forEach(addSubview)
         setupConstraints()
     }

@@ -72,7 +72,7 @@ final class AuthView: UIView {
     }
 
     private func setupViews() {
-        backgroundColor = .systemBackground
+        backgroundColor = .appBackground
         [shieldImageView, phoneTextField, passwordTextField, loginButton, registerButton]
             .forEach(addSubview)
     }

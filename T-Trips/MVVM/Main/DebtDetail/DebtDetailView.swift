@@ -29,7 +29,7 @@ final class DebtDetailView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground
+        backgroundColor = .appBackground
         [creditorLabel, amountLabel, requisitesTitleLabel, requisitesLabel, tripTitleLabel, tripLabel, payButton].forEach(addSubview)
         creditorLabel.numberOfLines = 0
         creditorLabel.font = .systemFont(ofSize: CGFloat.creditorFont, weight: .medium)
@@ -44,7 +44,7 @@ final class DebtDetailView: UIView {
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        backgroundColor = .systemBackground
+        backgroundColor = .appBackground
         [creditorLabel, amountLabel, requisitesTitleLabel, requisitesLabel, tripTitleLabel, tripLabel, payButton].forEach(addSubview)
         creditorLabel.numberOfLines = 0
         creditorLabel.font = .systemFont(ofSize: CGFloat.creditorFont, weight: .medium)
