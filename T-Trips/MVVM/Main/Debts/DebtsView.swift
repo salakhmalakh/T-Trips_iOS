@@ -19,7 +19,7 @@ final class DebtsView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground
+        backgroundColor = .appBackground
         addSubview(tableView)
         addSubview(emptyLabel)
         tableView.snp.makeConstraints { make in
@@ -32,7 +32,7 @@ final class DebtsView: UIView {
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        backgroundColor = .systemBackground
+        backgroundColor = .appBackground
         addSubview(tableView)
         addSubview(emptyLabel)
         tableView.snp.makeConstraints { make in

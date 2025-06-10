@@ -20,7 +20,7 @@ final class TripsView: UIView {
         layout.sectionInset = UIEdgeInsets.cvSectionInset
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.showsHorizontalScrollIndicator = false
-        collection.backgroundColor = .systemBackground
+        collection.backgroundColor = .appBackground
         collection.register(FilterCell.self, forCellWithReuseIdentifier: FilterCell.reuseId)
         return collection
     }()
@@ -51,14 +51,14 @@ final class TripsView: UIView {
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground
+        backgroundColor = .appBackground
         [filterCollectionView, tableView, addTripButton, bottomBorder].forEach { addSubview($0) }
         setupConstraints()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        backgroundColor = .systemBackground
+        backgroundColor = .appBackground
         [filterCollectionView, tableView, addTripButton, bottomBorder].forEach { addSubview($0) }
         setupConstraints()
     }

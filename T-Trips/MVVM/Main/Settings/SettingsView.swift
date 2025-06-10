@@ -4,13 +4,13 @@ import SnapKit
 final class SettingsView: UIView {
     let tableView: UITableView = {
         let table = UITableView()
-        table.backgroundColor = .systemBackground
+        table.backgroundColor = .appBackground
         return table
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground
+        backgroundColor = .appBackground
         addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -19,7 +19,7 @@ final class SettingsView: UIView {
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        backgroundColor = .systemBackground
+        backgroundColor = .appBackground
         addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

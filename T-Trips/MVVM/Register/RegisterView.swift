@@ -78,7 +78,7 @@ final class RegisterView: UIView {
     }
 
     private func setupViews() {
-        backgroundColor = .systemBackground
+        backgroundColor = .appBackground
         [
             shieldImageView, fullNameTextField, phoneTextField, passwordTextField,
             confirmPasswordTextField, registerButton, loginButton

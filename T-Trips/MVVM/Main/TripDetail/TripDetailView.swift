@@ -41,7 +41,7 @@ final class TripDetailView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground
+        backgroundColor = .appBackground
 
         [headerLabel, titleLabel, datesStackView, budgetLabel,
          participantsTitleLabel, participantsLabel,
@@ -53,7 +53,7 @@ final class TripDetailView: UIView {
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        backgroundColor = .systemBackground
+        backgroundColor = .appBackground
 
         [headerLabel, titleLabel, datesStackView, budgetLabel,
          participantsTitleLabel, participantsLabel,
@@ -99,7 +99,7 @@ final class TripDetailView: UIView {
     }
 
     private func setupUI() {
-        backgroundColor = .systemBackground
+        backgroundColor = .appBackground
 
         headerLabel.numberOfLines = 0
 

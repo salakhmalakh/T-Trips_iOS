@@ -58,3 +58,14 @@ extension Double {
         }
     }
 }
+
+// MARK: - App background color
+extension UIColor {
+    static let appBackground = UIColor { traitCollection in
+        if traitCollection.userInterfaceStyle == .dark {
+            return UIColor(red: 26/255, green: 26/255, blue: 28/255, alpha: 1)
+        } else {
+            return UIColor.systemBackground
+        }
+    }
+}

@@ -119,7 +119,7 @@ final class CreateTripView: UIView {
 
      override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground
+        backgroundColor = .appBackground
         [headerLabel, titleTextField, datesStackView, budgetTextField,
         participantsTextField, tokensView, suggestionsTableView, descriptionTextView, saveButton].forEach(addSubview)
         tokensView.trailingSpace = CGFloat.inputSpace
@@ -128,7 +128,7 @@ final class CreateTripView: UIView {
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        backgroundColor = .systemBackground
+        backgroundColor = .appBackground
         [headerLabel, titleTextField, datesStackView, budgetTextField,
         participantsTextField, tokensView, suggestionsTableView, descriptionTextView, saveButton].forEach(addSubview)
         tokensView.trailingSpace = CGFloat.inputSpace

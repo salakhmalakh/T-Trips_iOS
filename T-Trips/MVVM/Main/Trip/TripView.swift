@@ -20,7 +20,7 @@ final class TripView: UIView {
         let table = UITableView()
         table.register(CustomTableCell.self, forCellReuseIdentifier: CustomTableCell.reuseId)
         table.separatorStyle = .none
-        table.backgroundColor = .systemBackground
+        table.backgroundColor = .appBackground
         return table
     }()
 
@@ -39,14 +39,14 @@ final class TripView: UIView {
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground
+        backgroundColor = .appBackground
         [headerLabel, tableView, addExpenseButton].forEach(addSubview)
         setupConstraints()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        backgroundColor = .systemBackground
+        backgroundColor = .appBackground
         [headerLabel, tableView, addExpenseButton].forEach(addSubview)
         setupConstraints()
     }
