@@ -31,7 +31,11 @@ final class DebtsViewController: UIViewController {
 
     private func loadParticipants() {
         NetworkAPIService.shared.getAllUsers { [weak self] users in
-            DispatchQueue.main.async { self?.participants = users }
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.participants = users
+                self.debtsView.tableView.reloadData()
+            }
         }
     }
 
