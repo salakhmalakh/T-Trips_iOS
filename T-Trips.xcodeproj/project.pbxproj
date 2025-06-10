@@ -42,8 +42,9 @@
 		760C74F52DF643C3006FE801 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74F22DF643C3006FE801 /* StartView.swift */; };
 		760C74F62DF643C3006FE801 /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74F32DF643C3006FE801 /* StartViewModel.swift */; };
 		760C74F72DF643C3006FE801 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74F42DF643C3006FE801 /* StartViewController.swift */; };
-		760C74F92DF647A2006FE801 /* MockAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74F82DF647A1006FE801 /* MockAPIService.swift */; };
-		760C74FC2DF65043006FE801 /* ParticipantTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74FB2DF65042006FE801 /* ParticipantTokenView.swift */; };
+                760C74F92DF647A2006FE801 /* MockAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74F82DF647A1006FE801 /* MockAPIService.swift */; };
+                76F7EAEE5E5F4FDC90686F2D /* NetworkAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2076B1BDCA51469D8D31C48F /* NetworkAPIService.swift */; };
+                760C74FC2DF65043006FE801 /* ParticipantTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C74FB2DF65042006FE801 /* ParticipantTokenView.swift */; };
 		762A60972DE468E700F31E34 /* CustomTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762A60962DE468E700F31E34 /* CustomTableCell.swift */; };
 		762A60992DE4690E00F31E34 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762A60982DE4690E00F31E34 /* FilterCell.swift */; };
 		762A609C2DE4AB4900F31E34 /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762A609B2DE4AB4900F31E34 /* AddExpenseView.swift */; };
@@ -141,8 +142,9 @@
 		760C74F22DF643C3006FE801 /* StartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		760C74F32DF643C3006FE801 /* StartViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
 		760C74F42DF643C3006FE801 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
-		760C74F82DF647A1006FE801 /* MockAPIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockAPIService.swift; sourceTree = "<group>"; };
-		760C74FB2DF65042006FE801 /* ParticipantTokenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantTokenView.swift; sourceTree = "<group>"; };
+                760C74F82DF647A1006FE801 /* MockAPIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockAPIService.swift; sourceTree = "<group>"; };
+                2076B1BDCA51469D8D31C48F /* NetworkAPIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkAPIService.swift; sourceTree = "<group>"; };
+                760C74FB2DF65042006FE801 /* ParticipantTokenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantTokenView.swift; sourceTree = "<group>"; };
 		762A60962DE468E700F31E34 /* CustomTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableCell.swift; sourceTree = "<group>"; };
 		762A60982DE4690E00F31E34 /* FilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		762A609B2DE4AB4900F31E34 /* AddExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
@@ -477,8 +479,9 @@
 			children = (
 				769953582DF7CB5A00EC069B /* NotificationManager.swift */,
 				76B8F7632DF786D300753078 /* LocalizationManager.swift */,
-				760C74F82DF647A1006FE801 /* MockAPIService.swift */,
-				767D33382DE37D7F00F66264 /* Extentions.swift */,
+                                760C74F82DF647A1006FE801 /* MockAPIService.swift */,
+                                2076B1BDCA51469D8D31C48F /* NetworkAPIService.swift */,
+                                767D33382DE37D7F00F66264 /* Extentions.swift */,
 				7673177D2DE4D79800017BCB /* Mocks.swift */,
 				3A06DB9FEBA540F9AF340769 /* Localization.swift */,
 			);
@@ -674,9 +677,10 @@
 				76B8F76B2DF7912D00753078 /* EditProfileViewModel.swift in Sources */,
 				760C74E92DF64280006FE801 /* NotificationsViewModel.swift in Sources */,
 				767D33392DE37D7F00F66264 /* Extentions.swift in Sources */,
-				762A60A02DE4AB6600F31E34 /* AddExpenseViewController.swift in Sources */,
-				760C74F92DF647A2006FE801 /* MockAPIService.swift in Sources */,
-				FF195912128E4480BB7D2F25 /* Localization.swift in Sources */,
+                               762A60A02DE4AB6600F31E34 /* AddExpenseViewController.swift in Sources */,
+                               760C74F92DF647A2006FE801 /* MockAPIService.swift in Sources */,
+                                76F7EAEE5E5F4FDC90686F2D /* NetworkAPIService.swift in Sources */,
+                               FF195912128E4480BB7D2F25 /* Localization.swift in Sources */,
 				767A421A2DDF8183008970ED /* RegisterViewModel.swift in Sources */,
 				766E62F52DD22DA200E70F12 /* TextFieldModel.swift in Sources */,
 				760C74E12DF64280006FE801 /* CreateTripViewModel.swift in Sources */,
