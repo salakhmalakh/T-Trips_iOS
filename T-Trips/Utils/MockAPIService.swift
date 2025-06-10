@@ -133,7 +133,23 @@ final class MockAPIService {
                         amount: partAmount
                     )
                     self.debts.append(debt)
+                    self.addNotification(
+                        userId: uid,
+                        tripId: tripId,
+                        type: .debtCreated,
+                        message: "У вас новый долг"
+                    )
                 }
+            }
+
+            let participants = self.trips.first(where: { $0.id == tripId })?.participantIds ?? []
+            for uid in participants where uid != ownerId {
+                self.addNotification(
+                    userId: uid,
+                    tripId: tripId,
+                    type: .expenseAdded,
+                    message: "Новый расход добавлен"
+                )
             }
 
             completion(expense)
@@ -202,6 +218,26 @@ final class MockAPIService {
         }
     }
 
+    func updateTrip(_ trip: Trip, completion: @escaping (Trip) -> Void) {
+        asyncDelay {
+            if let index = self.trips.firstIndex(where: { $0.id == trip.id }) {
+                self.trips[index] = trip
+            } else {
+                self.trips.append(trip)
+            }
+            let participants = trip.participantIds ?? []
+            for uid in participants where uid != trip.adminId {
+                self.addNotification(
+                    userId: uid,
+                    tripId: trip.id,
+                    type: .tripUpdated,
+                    message: "Поездка обновлена"
+                )
+            }
+            completion(trip)
+        }
+    }
+
     // MARK: - Auth
     func authenticate(phone: String, password: String, completion: @escaping (Bool) -> Void) {
         asyncDelay {
@@ -238,6 +274,38 @@ final class MockAPIService {
 private extension MockAPIService {
     func asyncDelay(_ block: @escaping () -> Void) {
         DispatchQueue.global().asyncAfter(deadline: .now() + 0.3, execute: block)
+    }
+
+    func addNotification(userId: Int64, tripId: Int64, type: NotificationItem.NotificationType, message: String) {
+        var nextId = (self.notifications.map { $0.id }.max() ?? 0) + 1
+        let note = NotificationItem(
+            id: nextId,
+            userId: userId,
+            tripId: tripId,
+            type: type,
+            message: message,
+            status: .unread,
+            createdAt: Date()
+        )
+        self.notifications.append(note)
+        if userId == self.currentUserId {
+            let title: String
+            switch type {
+            case .expenseAdded: title = "Expense Added"
+            case .debtCreated: title = "Debt Created"
+            case .tripUpdated: title = "Trip Updated"
+            case .invitation: title = "Invitation"
+            }
+            NotificationManager.shared.schedule(title: title, body: message)
+            let name: Notification.Name
+            switch type {
+            case .expenseAdded: name = .expenseAdded
+            case .debtCreated: name = .debtCreated
+            case .tripUpdated: name = .tripUpdated
+            case .invitation: return
+            }
+            NotificationCenter.default.post(name: name, object: nil)
+        }
     }
 }
 

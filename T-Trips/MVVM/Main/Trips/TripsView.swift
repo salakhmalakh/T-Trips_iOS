@@ -28,6 +28,7 @@ final class TripsView: UIView {
     let tableView: UITableView = {
         let table = UITableView()
         table.register(CustomTableCell.self, forCellReuseIdentifier: CustomTableCell.reuseId)
+        table.backgroundColor = .appBackground
         return table
     }()
     
