@@ -52,9 +52,9 @@ final class DebtCell: UITableViewCell {
                                         cornerRadius: contentView.layer.cornerRadius).cgPath
     }
 
-    func configure(with debt: Debt) {
-        let fromUser = MockData.users.first { $0.id == debt.fromUserId }
-        let toUser = MockData.users.first { $0.id == debt.toUserId }
+    func configure(with debt: Debt, users: [User]) {
+        let fromUser = users.first { $0.id == debt.fromUserId }
+        let toUser = users.first { $0.id == debt.toUserId }
         let fromName = [fromUser?.firstName, fromUser?.lastName].compactMap { $0 }.joined(separator: " ")
         let toName = [toUser?.firstName, toUser?.lastName].compactMap { $0 }.joined(separator: " ")
         participantsLabel.text = "\(fromName) → \(toName)"

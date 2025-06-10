@@ -8,7 +8,7 @@ final class CreateTripViewController: UIViewController {
     private let viewModel: CreateTripViewModel
     private var cancellables = Set<AnyCancellable>()
 
-    private let participants = MockData.users
+    private var participants: [User] = []
     private var selectedUsers: [User] = []
     private var filteredParticipants: [User] = []
     private let participantsPlaceholder = "Участники"
@@ -35,10 +35,17 @@ final class CreateTripViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = nil
+        loadParticipants()
         setupBindings()
         setupPickers()
         setupSuggestions()
         setupActions()
+    }
+
+    private func loadParticipants() {
+        NetworkAPIService.shared.getAllUsers { [weak self] users in
+            DispatchQueue.main.async { self?.participants = users }
+        }
     }
 
     private func setupBindings() {

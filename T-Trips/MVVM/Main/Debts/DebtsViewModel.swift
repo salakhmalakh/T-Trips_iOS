@@ -9,6 +9,7 @@ final class DebtsViewModel {
     private let userId: Int64?
 
     private var tripStatus: Trip.Status?
+    private(set) var tripTitle: String = ""
 
     var isTripCompleted: Bool { tripStatus == .completed }
 
@@ -22,6 +23,7 @@ final class DebtsViewModel {
         NetworkAPIService.shared.getTrip(id: tripId) { [weak self] trip in
             DispatchQueue.main.async {
                 self?.tripStatus = trip?.status
+                self?.tripTitle = trip?.title ?? ""
                 self?.loadDebts()
             }
         }

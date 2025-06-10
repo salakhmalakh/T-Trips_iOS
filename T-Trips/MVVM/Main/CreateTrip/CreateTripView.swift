@@ -53,7 +53,7 @@ final class CreateTripView: UIView {
     }()
 
     public private(set) lazy var titleTextField: CustomTextField = {
-        let model = TextFieldModel(placeholder: String.titlePlaceholder, state: .name)
+        let model = TextFieldModel(placeholder: String.titlePlaceholder, state: .title)
         let tf = textFieldFactory.makeTextField(with: model)
         tf.inputAccessoryView = accessoryToolbar
         return tf

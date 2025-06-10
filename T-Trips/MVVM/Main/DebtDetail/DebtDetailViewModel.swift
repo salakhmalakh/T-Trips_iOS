@@ -15,15 +15,14 @@ final class DebtDetailViewModel {
 
     var onPay: (() -> Void)?
 
-    init(debt: Debt, canPay: Bool) {
-        let creditor = MockData.users.first { $0.id == debt.toUserId }
-        let trip = MockData.trips.first { $0.id == debt.tripId }
+    init(debt: Debt, users: [User], tripTitle: String, canPay: Bool) {
+        let creditor = users.first { $0.id == debt.toUserId }
 
         creditorName = [creditor?.firstName, creditor?.lastName]
             .compactMap { $0 }
             .joined(separator: " ")
         creditorPhone = creditor?.phone ?? ""
-        tripTitle = trip?.title ?? ""
+        self.tripTitle = tripTitle
         amountText = debt.amount.rubleString
         showsPayButton = canPay && (NetworkAPIService.shared.currentUser?.id == debt.fromUserId)
     }

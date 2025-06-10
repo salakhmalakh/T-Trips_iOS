@@ -11,6 +11,8 @@ final class NetworkAPIService {
     private let session: URLSession
     private(set) var currentUser: User?
     private(set) var tokenPair: JwtTokenPair?
+    /// Cached list of users retrieved from the backend
+    private(set) var usersCache: [User] = []
 
     init(session: URLSession = .shared) {
         self.session = session
@@ -364,6 +366,35 @@ final class NetworkAPIService {
             }
             let user = try? JSONDecoder.apiDecoder.decode(User.self, from: data)
             completion(user)
+        }
+        task.resume()
+    }
+
+    /// Fetches all registered users. Results are cached for subsequent calls.
+    func getAllUsers(completion: @escaping ([User]) -> Void) {
+        if !usersCache.isEmpty {
+            completion(usersCache)
+            return
+        }
+        let url = baseURL.appendingPathComponent("/api/v1/users")
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        addAuthHeader(&request)
+
+        let task = session.dataTask(with: request) { data, response, error in
+            guard
+                let data = data,
+                let httpResponse = response as? HTTPURLResponse,
+                (200..<300).contains(httpResponse.statusCode),
+                let users = try? JSONDecoder.apiDecoder.decode([User].self, from: data)
+            else {
+                self.logError(request: request, response: response, data: data, error: error)
+                completion([])
+                return
+            }
+            self.usersCache = users
+            completion(users)
         }
         task.resume()
     }

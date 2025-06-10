@@ -5,6 +5,7 @@ final class DebtsViewController: UIViewController {
     private let debtsView = DebtsView()
     private let viewModel: DebtsViewModel
     private var cancellables = Set<AnyCancellable>()
+    private var participants: [User] = []
 
     init(tripId: Int64, userId: Int64? = nil) {
         self.viewModel = DebtsViewModel(tripId: tripId, userId: userId)
@@ -23,8 +24,15 @@ final class DebtsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "debts".localized
+        loadParticipants()
         setupBindings()
         setupTable()
+    }
+
+    private func loadParticipants() {
+        NetworkAPIService.shared.getAllUsers { [weak self] users in
+            DispatchQueue.main.async { self?.participants = users }
+        }
     }
 
     private func setupTable() {
@@ -56,7 +64,7 @@ extension DebtsViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         let debt = viewModel.debts[indexPath.row]
-        cell.configure(with: debt)
+        cell.configure(with: debt, users: participants)
         return cell
     }
 
@@ -67,7 +75,12 @@ extension DebtsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let debt = viewModel.debts[indexPath.row]
-        let vm = DebtDetailViewModel(debt: debt, canPay: viewModel.isTripCompleted)
+        let vm = DebtDetailViewModel(
+            debt: debt,
+            users: participants,
+            tripTitle: viewModel.tripTitle,
+            canPay: viewModel.isTripCompleted
+        )
         let vc = DebtDetailViewController(viewModel: vm)
         vm.onPay = { [weak self] in
             self?.viewModel.payDebt(at: indexPath.row)
