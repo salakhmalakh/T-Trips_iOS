@@ -13,9 +13,9 @@ enum MockData {
         User(id: 1, phone: "+79991234567", firstName: "Иван", lastName: "Иванов", hashPassword: "password123", status: .active, role: .user, active: true),
         User(id: 2, phone: "+79997654321", firstName: "Пётр", lastName: "Петров", hashPassword: "securePass", status: .active, role: .user, active: true),
         User(id: 3, phone: "+79990001122", firstName: "Сидор", lastName: "Сидоров", hashPassword: "pass1234", status: .active, role: .user, active: true),
-        User(id: 4, phone: "+79993334455", firstName: "Анна", lastName: "Смирнова", hashPassword: "qwerty", status: .active, role: .user, active: true),
+        User(id: 4, phone: "+79993334455", firstName: "Анна", lastName: "Смирнова", hashPassword: "qwertyui", status: .active, role: .user, active: true),
         User(id: 5, phone: "+79992223344", firstName: "Олег", lastName: "Орлов", hashPassword: "abc123", status: .deleted, role: .user, active: false),
-        User(id: 6, phone: "+79994445566", firstName: "Мария", lastName: "Фёдорова", hashPassword: "letmein", status: .active, role: .user, active: true)
+        User(id: 6, phone: "+79994445566", firstName: "Мария", lastName: "Фёдорова", hashPassword: "magadan2005", status: .active, role: .user, active: true)
     ]
 
     static let trips: [Trip] = [
