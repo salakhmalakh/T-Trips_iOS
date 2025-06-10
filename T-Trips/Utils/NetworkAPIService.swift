@@ -14,6 +14,19 @@ final class NetworkAPIService {
         self.session = session
     }
 
+    private func logError(request: URLRequest, response: URLResponse?, data: Data?, error: Error?) {
+        var parts: [String] = []
+        if let url = request.url { parts.append("URL: \(url.absoluteString)") }
+        if let httpResponse = response as? HTTPURLResponse {
+            parts.append("status: \(httpResponse.statusCode)")
+        }
+        if let error = error { parts.append("error: \(error.localizedDescription)") }
+        if let data = data, !data.isEmpty, let body = String(data: data, encoding: .utf8) {
+            parts.append("body: \(body)")
+        }
+        if !parts.isEmpty { print("[NetworkAPIService] " + parts.joined(separator: " | ")) }
+    }
+
     // MARK: - Auth
     func authenticate(phone: String, password: String, completion: @escaping (Bool) -> Void) {
         let url = baseURL.appendingPathComponent("/auth/login")
@@ -23,11 +36,12 @@ final class NetworkAPIService {
         let body = LoginRequest(phone: phone, password: password)
         request.httpBody = try? JSONEncoder().encode(body)
 
-        let task = session.dataTask(with: request) { data, response, _ in
+        let task = session.dataTask(with: request) { data, response, error in
             guard
                 let httpResponse = response as? HTTPURLResponse,
                 (200..<300).contains(httpResponse.statusCode)
             else {
+                self.logError(request: request, response: response, data: data, error: error)
                 completion(false)
                 return
             }
@@ -35,6 +49,8 @@ final class NetworkAPIService {
             if let data = data,
                let user = try? JSONDecoder.apiDecoder.decode(User.self, from: data) {
                 self.currentUser = user
+            } else {
+                self.logError(request: request, response: response, data: data, error: error)
             }
             completion(true)
         }
@@ -54,8 +70,9 @@ final class NetworkAPIService {
         let body = RegisterRequest(phone: phone, firstName: firstName, lastName: lastName, password: password)
         request.httpBody = try? JSONEncoder().encode(body)
 
-        let task = session.dataTask(with: request) { data, response, _ in
+        let task = session.dataTask(with: request) { data, response, error in
             guard let httpResponse = response as? HTTPURLResponse else {
+                self.logError(request: request, response: response, data: data, error: error)
                 completion(.failure(.unknown))
                 return
             }
@@ -69,6 +86,7 @@ final class NetworkAPIService {
             case 409:
                 completion(.failure(.phoneExists))
             default:
+                self.logError(request: request, response: response, data: data, error: error)
                 completion(.failure(.unknown))
             }
         }
@@ -83,13 +101,14 @@ final class NetworkAPIService {
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
 
-        let task = session.dataTask(with: request) { data, response, _ in
+        let task = session.dataTask(with: request) { data, response, error in
             guard
                 let data = data,
                 let httpResponse = response as? HTTPURLResponse,
                 (200..<300).contains(httpResponse.statusCode),
                 let trips = try? JSONDecoder.apiDecoder.decode([Trip].self, from: data)
             else {
+                self.logError(request: request, response: response, data: data, error: error)
                 completion([])
                 return
             }
@@ -104,13 +123,14 @@ final class NetworkAPIService {
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
 
-        let task = session.dataTask(with: request) { data, response, _ in
+        let task = session.dataTask(with: request) { data, response, error in
             guard
                 let data = data,
                 let httpResponse = response as? HTTPURLResponse,
                 (200..<300).contains(httpResponse.statusCode),
                 let trip = try? JSONDecoder.apiDecoder.decode(Trip.self, from: data)
             else {
+                self.logError(request: request, response: response, data: data, error: error)
                 completion(nil)
                 return
             }
@@ -136,13 +156,14 @@ final class NetworkAPIService {
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: payload, options: [])
 
-        let task = session.dataTask(with: request) { data, response, _ in
+        let task = session.dataTask(with: request) { data, response, error in
             guard
                 let data = data,
                 let httpResponse = response as? HTTPURLResponse,
                 (200..<300).contains(httpResponse.statusCode),
                 let trip = try? JSONDecoder.apiDecoder.decode(Trip.self, from: data)
             else {
+                self.logError(request: request, response: response, data: data, error: error)
                 completion(nil)
                 return
             }
@@ -158,13 +179,14 @@ final class NetworkAPIService {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try? JSONEncoder().encode(trip)
 
-        let task = session.dataTask(with: request) { data, response, _ in
+        let task = session.dataTask(with: request) { data, response, error in
             guard
                 let data = data,
                 let httpResponse = response as? HTTPURLResponse,
                 (200..<300).contains(httpResponse.statusCode),
                 let updated = try? JSONDecoder.apiDecoder.decode(Trip.self, from: data)
             else {
+                self.logError(request: request, response: response, data: data, error: error)
                 completion(nil)
                 return
             }
@@ -180,12 +202,13 @@ final class NetworkAPIService {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try? JSONEncoder().encode(["userId": userId])
 
-        let task = session.dataTask(with: request) { data, response, _ in
+        let task = session.dataTask(with: request) { data, response, error in
             guard
                 let data = data,
                 let httpResponse = response as? HTTPURLResponse,
                 (200..<300).contains(httpResponse.statusCode)
             else {
+                self.logError(request: request, response: response, data: data, error: error)
                 completion(nil)
                 return
             }
@@ -202,13 +225,14 @@ final class NetworkAPIService {
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
 
-        let task = session.dataTask(with: request) { data, response, _ in
+        let task = session.dataTask(with: request) { data, response, error in
             guard
                 let data = data,
                 let httpResponse = response as? HTTPURLResponse,
                 (200..<300).contains(httpResponse.statusCode),
                 let expenses = try? JSONDecoder.apiDecoder.decode([Expense].self, from: data)
             else {
+                self.logError(request: request, response: response, data: data, error: error)
                 completion([])
                 return
             }
@@ -225,13 +249,14 @@ final class NetworkAPIService {
 
         request.httpBody = try? JSONEncoder().encode(dto)
 
-        let task = session.dataTask(with: request) { data, response, _ in
+        let task = session.dataTask(with: request) { data, response, error in
             guard
                 let data = data,
                 let httpResponse = response as? HTTPURLResponse,
                 (200..<300).contains(httpResponse.statusCode),
                 let expense = try? JSONDecoder.apiDecoder.decode(Expense.self, from: data)
             else {
+                self.logError(request: request, response: response, data: data, error: error)
                 completion(nil)
                 return
             }
@@ -245,9 +270,10 @@ final class NetworkAPIService {
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
 
-        let task = session.dataTask(with: request) { _, response, _ in
+        let task = session.dataTask(with: request) { _, response, error in
             guard let httpResponse = response as? HTTPURLResponse,
                   (200..<300).contains(httpResponse.statusCode) else {
+                self.logError(request: request, response: response, data: nil, error: error)
                 completion()
                 return
             }
@@ -266,13 +292,14 @@ final class NetworkAPIService {
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
 
-        let task = session.dataTask(with: request) { data, response, _ in
+        let task = session.dataTask(with: request) { data, response, error in
             guard
                 let data = data,
                 let httpResponse = response as? HTTPURLResponse,
                 (200..<300).contains(httpResponse.statusCode),
                 let debts = try? JSONDecoder.apiDecoder.decode([Debt].self, from: data)
             else {
+                self.logError(request: request, response: response, data: data, error: error)
                 completion([])
                 return
             }
@@ -286,9 +313,10 @@ final class NetworkAPIService {
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
 
-        let task = session.dataTask(with: request) { _, response, _ in
+        let task = session.dataTask(with: request) { _, response, error in
             guard let httpResponse = response as? HTTPURLResponse,
                   (200..<300).contains(httpResponse.statusCode) else {
+                self.logError(request: request, response: response, data: nil, error: error)
                 completion()
                 return
             }
@@ -305,12 +333,13 @@ final class NetworkAPIService {
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
 
-        let task = session.dataTask(with: request) { data, response, _ in
+        let task = session.dataTask(with: request) { data, response, error in
             guard
                 let data = data,
                 let httpResponse = response as? HTTPURLResponse,
                 (200..<300).contains(httpResponse.statusCode)
             else {
+                self.logError(request: request, response: response, data: data, error: error)
                 completion(nil)
                 return
             }
@@ -333,12 +362,13 @@ final class NetworkAPIService {
         ]
         request.httpBody = try? JSONEncoder().encode(body)
 
-        let task = session.dataTask(with: request) { data, response, _ in
+        let task = session.dataTask(with: request) { data, response, error in
             guard
                 let data = data,
                 let httpResponse = response as? HTTPURLResponse,
                 (200..<300).contains(httpResponse.statusCode)
             else {
+                self.logError(request: request, response: response, data: data, error: error)
                 completion(nil)
                 return
             }
@@ -354,13 +384,14 @@ final class NetworkAPIService {
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
 
-        let task = session.dataTask(with: request) { data, response, _ in
+        let task = session.dataTask(with: request) { data, response, error in
             guard
                 let data = data,
                 let httpResponse = response as? HTTPURLResponse,
                 (200..<300).contains(httpResponse.statusCode),
                 let notes = try? JSONDecoder.apiDecoder.decode([NotificationItem].self, from: data)
             else {
+                self.logError(request: request, response: response, data: data, error: error)
                 completion([])
                 return
             }
@@ -376,9 +407,10 @@ final class NetworkAPIService {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try? JSONEncoder().encode(["accept": accept])
 
-        let task = session.dataTask(with: request) { _, response, _ in
+        let task = session.dataTask(with: request) { _, response, error in
             guard let httpResponse = response as? HTTPURLResponse,
                   (200..<300).contains(httpResponse.statusCode) else {
+                self.logError(request: request, response: response, data: nil, error: error)
                 completion()
                 return
             }
@@ -392,7 +424,12 @@ final class NetworkAPIService {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
 
-        let task = session.dataTask(with: request) { _, _, _ in }
+        let task = session.dataTask(with: request) { _, response, error in
+            if let httpResponse = response as? HTTPURLResponse,
+               !(200..<300).contains(httpResponse.statusCode) || error != nil {
+                self.logError(request: request, response: response, data: nil, error: error)
+            }
+        }
         task.resume()
     }
 }
