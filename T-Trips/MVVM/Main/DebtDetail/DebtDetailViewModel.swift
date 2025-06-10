@@ -11,14 +11,14 @@ final class DebtDetailViewModel {
 
     var onPay: (() -> Void)?
 
-    init(debt: Debt) {
+    init(debt: Debt, canPay: Bool) {
         let fromUser = MockData.users.first { $0.id == debt.fromUserId }
         let toUser = MockData.users.first { $0.id == debt.toUserId }
         let fromName = [fromUser?.firstName, fromUser?.lastName].compactMap { $0 }.joined(separator: " ")
         let toName = [toUser?.firstName, toUser?.lastName].compactMap { $0 }.joined(separator: " ")
         participantsText = "\(fromName) → \(toName)"
         amountText = debt.amount.rubleString
-        showsPayButton = MockAPIService.shared.currentUser?.id == debt.fromUserId
+        showsPayButton = canPay && (MockAPIService.shared.currentUser?.id == debt.fromUserId)
     }
 
     func payTapped() {

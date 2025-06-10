@@ -67,7 +67,7 @@ extension DebtsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let debt = viewModel.debts[indexPath.row]
-        let vm = DebtDetailViewModel(debt: debt)
+        let vm = DebtDetailViewModel(debt: debt, canPay: viewModel.isTripCompleted)
         let vc = DebtDetailViewController(viewModel: vm)
         vm.onPay = { [weak self] in
             self?.viewModel.payDebt(at: indexPath.row)
