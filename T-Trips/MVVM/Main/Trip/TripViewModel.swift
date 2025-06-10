@@ -47,7 +47,7 @@ final class TripViewModel {
     func deleteExpense(at index: Int) {
         guard isAdmin else { return }
         guard expenses.indices.contains(index), let id = expenses[index].id else { return }
-        NetworkAPIService.shared.deleteExpense(id: id) { [weak self] in
+        NetworkAPIService.shared.deleteExpense(tripId: trip.id, id: id) { [weak self] in
             DispatchQueue.main.async {
                 self?.expenses.remove(at: index)
             }

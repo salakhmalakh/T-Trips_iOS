@@ -156,9 +156,9 @@ final class MockAPIService {
         }
     }
 
-    func deleteExpense(id: Int64, completion: @escaping () -> Void) {
+    func deleteExpense(tripId: Int64, id: Int64, completion: @escaping () -> Void) {
         asyncDelay {
-            self.expenses.removeAll { $0.id == id }
+            self.expenses.removeAll { $0.id == id && $0.tripId == tripId }
             completion()
         }
     }
@@ -247,7 +247,7 @@ final class MockAPIService {
         }
     }
 
-    func register(phone: String, firstName: String, lastName: String, password: String, completion: @escaping (Result<Void, NetworkAPIService.RegisterError>) -> Void) {
+    func register(login: String, phone: String, name: String, surname: String, password: String, completion: @escaping (Result<Void, NetworkAPIService.RegisterError>) -> Void) {
         asyncDelay {
             guard self.users.first(where: { $0.phone == phone }) == nil else {
                 completion(.failure(.phoneExists))
@@ -257,8 +257,8 @@ final class MockAPIService {
             let user = User(
                 id: newId,
                 phone: phone,
-                firstName: firstName,
-                lastName: lastName,
+                firstName: name,
+                lastName: surname,
                 hashPassword: password,
                 status: .active,
                 role: .user,
