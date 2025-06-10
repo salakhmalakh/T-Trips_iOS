@@ -65,7 +65,7 @@ final class RegisterViewModel {
         let last = parts.count > 1 ? parts[1] : ""
         let phoneNormalized = "+" + digits
 
-        MockAPIService.shared.register(
+        NetworkAPIService.shared.register(
             phone: phoneNormalized,
             firstName: first,
             lastName: last,

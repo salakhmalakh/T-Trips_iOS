@@ -37,7 +37,7 @@ final class AuthViewModel {
 
     // MARK: - Actions
     func login() {
-        MockAPIService.shared.authenticate(phone: phone, password: password) { [weak self] success in
+        NetworkAPIService.shared.authenticate(phone: phone, password: password) { [weak self] success in
             DispatchQueue.main.async {
                 if success {
                     self?.onLoginSuccess?()
