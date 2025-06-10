@@ -247,10 +247,10 @@ final class MockAPIService {
         }
     }
 
-    func register(phone: String, firstName: String, lastName: String, password: String, completion: @escaping (Bool) -> Void) {
+    func register(phone: String, firstName: String, lastName: String, password: String, completion: @escaping (Result<Void, NetworkAPIService.RegisterError>) -> Void) {
         asyncDelay {
             guard self.users.first(where: { $0.phone == phone }) == nil else {
-                completion(false)
+                completion(.failure(.phoneExists))
                 return
             }
             let newId = (self.users.map { $0.id }.max() ?? 0) + 1
@@ -266,7 +266,7 @@ final class MockAPIService {
             )
             self.users.append(user)
             self.currentUserId = user.id
-            completion(true)
+            completion(.success(()))
         }
     }
 }

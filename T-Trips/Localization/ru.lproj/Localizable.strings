@@ -64,6 +64,7 @@
 "passwordMismatch" = "Пароли не совпадают";
 "phoneIncomplete" = "Номер телефона заполнен не полностью";
 "phoneExists" = "Пользователь с таким номером уже существует";
+"registrationFailed" = "Не удалось зарегистрироваться. Попробуйте снова";
 "firstName" = "Имя";
 "lastName" = "Фамилия";
 "payButtonTitle" = "Оплатить";
