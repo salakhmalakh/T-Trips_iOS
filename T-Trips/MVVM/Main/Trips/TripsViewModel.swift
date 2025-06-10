@@ -62,6 +62,10 @@ final class TripsViewModel {
     func addTrip(_ trip: Trip) {
         trips.append(trip)
     }
+
+    func removeTrip(id: Int64) {
+        trips.removeAll { $0.id == id }
+    }
 }
 
 private extension TripsViewModel.Filter {
