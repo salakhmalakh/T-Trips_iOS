@@ -42,6 +42,16 @@ final class CreateTripViewController: UIViewController {
         dismissKeyboardOnTap()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        registerForKeyboardNotifications()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        unregisterFromKeyboardNotifications()
+    }
+
     private func setupBindings() {
         viewModel.$isSaveEnabled
             .receive(on: RunLoop.main)

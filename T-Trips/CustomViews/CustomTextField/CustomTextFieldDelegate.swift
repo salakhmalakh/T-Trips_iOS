@@ -35,15 +35,11 @@ final class CustomTextFieldDelegate: NSObject, UITextFieldDelegate {
             /// only letters and space are allowed
             let allowed = CharacterSet.letters.union(.whitespaces)
             guard string.rangeOfCharacter(from: allowed.inverted) == nil else { return false }
-            
+
             let prospective = (currentText as NSString).replacingCharacters(in: range, with: string)
             /// only one space in a row allowed
             if prospective.contains("  ") { return false }
-            /// not more than two words is allowd
-            let words = prospective
-                .split(separator: " ", omittingEmptySubsequences: true)
-            if words.count > 2 { return false }
-            
+
             return true
             
         case .phoneNumber:
@@ -91,17 +87,10 @@ final class CustomTextFieldDelegate: NSObject, UITextFieldDelegate {
         switch state {
         case .name:
             let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
-            let capitalized = trimmed.capitalized
-            let parts = capitalized.split(
-                separator: " ",
-                maxSplits: 1,
-                omittingEmptySubsequences: true)
-                .map(String.init)
-            let first = parts.first ?? ""
-            let last  = parts.count > 1 ? parts[1] : ""
-            textField.text = [first, last]
-                .filter { !$0.isEmpty }
-                .joined(separator: " ")
+            let components = trimmed
+                .split(separator: " ", omittingEmptySubsequences: true)
+                .map { $0.capitalized }
+            textField.text = components.joined(separator: " ")
 
         case .phoneNumber:
             /// applies formatting after leaving the TF
