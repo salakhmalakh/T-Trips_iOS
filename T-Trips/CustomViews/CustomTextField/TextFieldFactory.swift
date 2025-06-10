@@ -20,6 +20,8 @@ final class TextFieldFactory: TextFieldFactoryProtocol {
         switch model.state {
         case .name:
             textField.keyboardType = .default
+        case .title:
+            textField.keyboardType = .default
         case .phoneNumber:
             textField.keyboardType = .numberPad
        case .password:

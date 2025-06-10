@@ -12,6 +12,7 @@ final class TripViewController: UIViewController {
     private let tripView = TripView()
     private let viewModel: TripViewModel
     private var cancellables = Set<AnyCancellable>()
+    private var participants: [User] = []
 
     // MARK: - Init
     init(viewModel: TripViewModel) {
@@ -35,10 +36,21 @@ final class TripViewController: UIViewController {
         if viewModel.trip.status == .completed {
             tripView.addExpenseButton.isHidden = true
         }
+        loadParticipants()
         setupNavigationBar()
         setupBindings()
         setupActions()
         setupTableView()
+    }
+
+    private func loadParticipants() {
+        NetworkAPIService.shared.getAllUsers { [weak self] users in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                let ids = self.viewModel.trip.participantIds ?? []
+                self.participants = users.filter { ids.contains($0.id) }
+            }
+        }
     }
 
     // MARK: - Setup
@@ -58,11 +70,9 @@ final class TripViewController: UIViewController {
         )
         viewModel.onAddExpense = { [weak self] in
             guard let self = self else { return }
-            let ids = self.viewModel.trip.participantIds ?? []
-            let participants = MockData.users.filter { ids.contains($0.id) }
             let addVC = AddExpenseViewController(
                 tripId: self.viewModel.trip.id,
-                participants: participants
+                participants: self.participants
             )
             addVC.onExpenseAdded = { [weak self] expense in
                 self?.viewModel.addExpense(expense)
@@ -98,7 +108,7 @@ final class TripViewController: UIViewController {
     }
 
     private func showTripDetails() {
-        let vm = TripDetailViewModel(trip: viewModel.trip, users: MockData.users)
+        let vm = TripDetailViewModel(trip: viewModel.trip, users: participants)
         let vc = TripDetailViewController(viewModel: vm)
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
@@ -169,7 +179,7 @@ extension TripViewController: UITableViewDataSource, UITableViewDelegate {
         
         // Кто оплатил
         let payerName: String = {
-            if let owner = expense.owner {
+            if let owner = participants.first(where: { $0.id == expense.ownerId }) {
                 return "\(owner.firstName) \(owner.lastName)"
             }
             return ""
@@ -177,8 +187,9 @@ extension TripViewController: UITableViewDataSource, UITableViewDelegate {
         
         // За кого оплачено — список через запятую
         let payeeName: String = {
-            let names = expense.paidForUsers
-                .map { "\($0.firstName) \($0.lastName)" }
+            let names = expense.paidForUserIds.compactMap { id in
+                participants.first(where: { $0.id == id })
+            }.map { "\($0.firstName) \($0.lastName)" }
             return names.joined(separator: ", ")
         }()
         

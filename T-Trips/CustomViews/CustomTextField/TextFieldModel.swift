@@ -13,6 +13,7 @@ struct TextFieldModel {
 
     enum State {
         case name
+        case title
         case phoneNumber
         case password
         case money

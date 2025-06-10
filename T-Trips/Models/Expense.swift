@@ -17,8 +17,13 @@ struct Expense: Codable, Identifiable {
     let createdAt: Date?
     let paidForUserIds: [Int64]
 
-    var owner: User? { MockData.users.first { $0.id == ownerId } }
-    var paidForUsers: [User] { MockData.users.filter { paidForUserIds.contains($0.id) } }
+    var owner: User? {
+        NetworkAPIService.shared.usersCache.first { $0.id == ownerId }
+    }
+
+    var paidForUsers: [User] {
+        NetworkAPIService.shared.usersCache.filter { paidForUserIds.contains($0.id) }
+    }
 
     enum Category: String, Codable, CaseIterable {
         case tickets = "TICKETS"
