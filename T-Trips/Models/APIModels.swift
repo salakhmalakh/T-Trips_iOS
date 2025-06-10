@@ -19,7 +19,8 @@ struct ExpenseDtoForCreate: Codable {
 
 /// Request payload for the login endpoint.
 struct LoginRequest: Codable {
-    let phone: String
+    /// Login or phone number used for authentication
+    let login: String
     let password: String
 }
 
