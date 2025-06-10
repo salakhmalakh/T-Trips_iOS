@@ -390,7 +390,9 @@ final class NetworkAPIService {
                 let users = try? JSONDecoder.apiDecoder.decode([User].self, from: data)
             else {
                 self.logError(request: request, response: response, data: data, error: error)
-                completion([])
+                let fallback = MockData.users
+                self.usersCache = fallback
+                completion(fallback)
                 return
             }
             self.usersCache = users
