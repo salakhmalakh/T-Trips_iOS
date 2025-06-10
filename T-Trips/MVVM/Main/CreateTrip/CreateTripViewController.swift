@@ -142,11 +142,22 @@ final class CreateTripViewController: UIViewController {
         let digits = text.filter { $0.isNumber }
         guard !digits.isEmpty else { return }
         let phone = "+" + digits
-        NetworkAPIService.shared.findParticipant(phone: phone) { [weak self] user in
+
+        NetworkAPIService.shared.searchUsers(query: phone) { [weak self] users in
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                if let user = user, !self.selectedUsers.contains(where: { $0.id == user.id }) {
+                if let user = users.first(where: { $0.phone == phone }),
+                   !self.selectedUsers.contains(where: { $0.id == user.id }) {
                     self.addParticipant(user)
+                } else {
+                    NetworkAPIService.shared.findParticipant(phone: phone) { [weak self] user in
+                        DispatchQueue.main.async { [weak self] in
+                            guard let self = self, let user = user else { return }
+                            if !self.selectedUsers.contains(where: { $0.id == user.id }) {
+                                self.addParticipant(user)
+                            }
+                        }
+                    }
                 }
             }
         }
