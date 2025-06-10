@@ -53,7 +53,18 @@ extension LanguagesViewController: UITableViewDataSource, UITableViewDelegate {
         guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let delegate = scene.delegate as? SceneDelegate,
               let window = delegate.window else { return }
-        let startVC = StartViewController()
+        let startVC = StartViewController(finishAction: {
+            let mainTab = MainTabBarController()
+            mainTab.selectedIndex = 2
+            window.rootViewController = mainTab
+            window.makeKeyAndVisible()
+            UIView.transition(
+                with: window,
+                duration: .transitionDuration,
+                options: .transitionCrossDissolve,
+                animations: nil
+            )
+        })
         let nav = UINavigationController(rootViewController: startVC)
         nav.navigationBar.prefersLargeTitles = true
         window.rootViewController = nav
@@ -78,4 +89,8 @@ private extension CGFloat {
 
 private extension String {
     static var languagesTitle: String { "languages".localized }
+}
+
+private extension Double {
+    static let transitionDuration = 0.2
 }
