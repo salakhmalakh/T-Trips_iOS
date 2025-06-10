@@ -36,12 +36,12 @@ final class NetworkAPIService {
     }
 
     // MARK: - Auth
-    func authenticate(login: String, password: String, completion: @escaping (Bool) -> Void) {
+    func authenticate(phone: String, password: String, completion: @escaping (Bool) -> Void) {
         let url = baseURL.appendingPathComponent("/api/v1/auth/login")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        let body = LoginRequest(login: login, password: password)
+        let body = LoginRequest(phone: phone, password: password)
         request.httpBody = try? JSONEncoder().encode(body)
 
         let task = session.dataTask(with: request) { data, response, error in

@@ -243,9 +243,9 @@ final class MockAPIService {
     }
 
     // MARK: - Auth
-    func authenticate(login: String, password: String, completion: @escaping (Bool) -> Void) {
+    func authenticate(phone: String, password: String, completion: @escaping (Bool) -> Void) {
         asyncDelay {
-            let user = self.users.first { $0.phone == login && $0.hashPassword == password }
+            let user = self.users.first { $0.phone == phone && $0.hashPassword == password }
             self.currentUserId = user?.id
             completion(user != nil)
         }
