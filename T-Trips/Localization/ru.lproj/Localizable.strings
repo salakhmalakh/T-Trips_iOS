@@ -71,3 +71,5 @@
 "leaveTripConfirmation" = "Вы уверены, что хотите выйти из поездки?";
 "requisitesTitle" = "Реквизиты";
 "tripNameTitle" = "Поездка";
+"acceptButtonTitle" = "Принять";
+"rejectButtonTitle" = "Отклонить";

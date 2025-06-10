@@ -7,6 +7,8 @@ final class MockAPIService {
     private var expenses: [Expense]
     private var debts: [Debt]
     private var users: [User]
+    private var notifications: [NotificationItem]
+    private var participants: [TripParticipant]
     private var currentUserId: Int64?
 
     private init() {
@@ -14,6 +16,8 @@ final class MockAPIService {
         self.expenses = MockData.expenses
         self.debts = MockData.debts
         self.users = MockData.users
+        self.notifications = MockData.notifications
+        self.participants = MockData.participants
     }
 
     var currentUser: User? {
@@ -27,9 +31,12 @@ final class MockAPIService {
                 completion([])
                 return
             }
+            let acceptedTripIds = self.participants
+                .filter { $0.userId == uid && $0.status == .accepted }
+                .map { $0.tripId }
             let result = self.trips.filter { trip in
                 trip.status == status &&
-                (trip.adminId == uid || (trip.participantIds?.contains(uid) ?? false))
+                (trip.adminId == uid || acceptedTripIds.contains(trip.id))
             }
             completion(result)
         }
@@ -53,9 +60,41 @@ final class MockAPIService {
                 budget: dto.budget,
                 description: dto.description,
                 status: dto.status,
-                participantIds: dto.participantIds
+                participantIds: [adminId]
             )
             self.trips.append(trip)
+
+            // create participants and notifications
+            var nextParticipantId = (self.participants.map { $0.id }.max() ?? 0) + 1
+            var nextNotificationId = (self.notifications.map { $0.id }.max() ?? 0) + 1
+            for uid in dto.participantIds where uid != adminId {
+                let participant = TripParticipant(
+                    id: Int64(nextParticipantId),
+                    tripId: newId,
+                    userId: uid,
+                    status: .pending,
+                    joinedAt: Date(),
+                    leftAt: nil
+                )
+                self.participants.append(participant)
+                nextParticipantId += 1
+
+                if let admin = self.users.first(where: { $0.id == adminId }) {
+                    let message = "\(admin.firstName) \(admin.lastName) приглашает вас в событие \(dto.title)"
+                    let notification = NotificationItem(
+                        id: nextNotificationId,
+                        userId: uid,
+                        tripId: newId,
+                        type: .invitation,
+                        message: message,
+                        status: .unread,
+                        createdAt: Date()
+                    )
+                    self.notifications.append(notification)
+                    nextNotificationId += 1
+                }
+            }
+
             completion(trip)
         }
     }
@@ -249,7 +288,46 @@ extension MockAPIService {
                 completion([])
                 return
             }
-            completion(MockData.notifications.filter { $0.userId == id })
+            completion(self.notifications.filter { $0.userId == id })
+        }
+    }
+
+    func respondToInvitation(notificationId: Int, accept: Bool, completion: @escaping () -> Void) {
+        asyncDelay {
+            guard let index = self.notifications.firstIndex(where: { $0.id == notificationId }) else {
+                completion()
+                return
+            }
+            let note = self.notifications.remove(at: index)
+            guard let tripId = note.tripId else { completion(); return }
+            if accept {
+                if let tIndex = self.trips.firstIndex(where: { $0.id == tripId }) {
+                    var ids = self.trips[tIndex].participantIds ?? []
+                    if !ids.contains(note.userId) { ids.append(note.userId) }
+                    let t = Trip(
+                        id: self.trips[tIndex].id,
+                        adminId: self.trips[tIndex].adminId,
+                        title: self.trips[tIndex].title,
+                        startDate: self.trips[tIndex].startDate,
+                        endDate: self.trips[tIndex].endDate,
+                        budget: self.trips[tIndex].budget,
+                        description: self.trips[tIndex].description,
+                        status: self.trips[tIndex].status,
+                        participantIds: ids
+                    )
+                    self.trips[tIndex] = t
+                }
+                if let pIndex = self.participants.firstIndex(where: { $0.tripId == tripId && $0.userId == note.userId }) {
+                    let p = self.participants[pIndex]
+                    self.participants[pIndex] = TripParticipant(id: p.id, tripId: p.tripId, userId: p.userId, status: .accepted, joinedAt: p.joinedAt, leftAt: p.leftAt)
+                }
+            } else {
+                if let pIndex = self.participants.firstIndex(where: { $0.tripId == tripId && $0.userId == note.userId }) {
+                    let p = self.participants[pIndex]
+                    self.participants[pIndex] = TripParticipant(id: p.id, tripId: p.tripId, userId: p.userId, status: .rejected, joinedAt: p.joinedAt, leftAt: p.leftAt)
+                }
+            }
+            completion()
         }
     }
 
