@@ -20,17 +20,21 @@ final class NetworkAPIService {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        let body: [String: String] = [
-            "phone": phone,
-            "password": password
-        ]
+        let body = LoginRequest(phone: phone, password: password)
         request.httpBody = try? JSONEncoder().encode(body)
 
-        let task = session.dataTask(with: request) { data, response, error in
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200..<300).contains(httpResponse.statusCode) else {
+        let task = session.dataTask(with: request) { data, response, _ in
+            guard
+                let httpResponse = response as? HTTPURLResponse,
+                (200..<300).contains(httpResponse.statusCode)
+            else {
                 completion(false)
                 return
+            }
+
+            if let data = data,
+               let user = try? JSONDecoder.apiDecoder.decode(User.self, from: data) {
+                self.currentUser = user
             }
             completion(true)
         }
@@ -47,21 +51,20 @@ final class NetworkAPIService {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        let body: [String: String] = [
-            "phone": phone,
-            "firstName": firstName,
-            "lastName": lastName,
-            "password": password
-        ]
+        let body = RegisterRequest(phone: phone, firstName: firstName, lastName: lastName, password: password)
         request.httpBody = try? JSONEncoder().encode(body)
 
-        let task = session.dataTask(with: request) { data, response, error in
+        let task = session.dataTask(with: request) { data, response, _ in
             guard let httpResponse = response as? HTTPURLResponse else {
                 completion(.failure(.unknown))
                 return
             }
             switch httpResponse.statusCode {
             case 200..<300:
+                if let data = data,
+                   let user = try? JSONDecoder.apiDecoder.decode(User.self, from: data) {
+                    self.currentUser = user
+                }
                 completion(.success(()))
             case 409:
                 completion(.failure(.phoneExists))
