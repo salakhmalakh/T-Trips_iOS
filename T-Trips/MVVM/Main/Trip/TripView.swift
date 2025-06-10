@@ -10,6 +10,12 @@ import SnapKit
 
 final class TripView: UIView {
     // MARK: - UI Components
+    let headerLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.font = .systemFont(ofSize: CGFloat.headerFont, weight: .bold)
+        lbl.textAlignment = .center
+        return lbl
+    }()
     let tableView: UITableView = {
         let table = UITableView()
         table.register(CustomTableCell.self, forCellReuseIdentifier: CustomTableCell.reuseId)
@@ -34,20 +40,25 @@ final class TripView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemBackground
-        [tableView, addExpenseButton].forEach(addSubview)
+        [headerLabel, tableView, addExpenseButton].forEach(addSubview)
         setupConstraints()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         backgroundColor = .systemBackground
-        [tableView, addExpenseButton].forEach(addSubview)
+        [headerLabel, tableView, addExpenseButton].forEach(addSubview)
         setupConstraints()
     }
 
     private func setupConstraints() {
+        headerLabel.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).offset(CGFloat.headerTopInset)
+            make.leading.trailing.equalToSuperview().inset(CGFloat.headerSideInset)
+        }
         tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalTo(headerLabel.snp.bottom).offset(CGFloat.tableTopInset)
+            make.leading.trailing.bottom.equalToSuperview()
         }
         addExpenseButton.snp.makeConstraints { make in
             make.width.height.equalTo(CGFloat.tripAddButtonSize)
@@ -62,6 +73,10 @@ private extension CGFloat {
     static let tripAddButtonSize: CGFloat   = 55
     static let tripHorizontalInset: CGFloat = 16
     static let tripVerticalInset: CGFloat   = 16
+    static let headerTopInset: CGFloat      = 16
+    static let headerSideInset: CGFloat     = 16
+    static let headerFont: CGFloat          = 24
+    static let tableTopInset: CGFloat       = 8
 }
 
 private extension String {

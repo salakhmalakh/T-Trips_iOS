@@ -11,6 +11,7 @@ import SnapKit
 final class CustomTableCell: UITableViewCell {
     static let reuseId = String.reuseId
     
+    private let iconView = UIImageView()
     private let titleLabel = UILabel()
     private let dateLabel = UILabel()
     
@@ -32,8 +33,10 @@ final class CustomTableCell: UITableViewCell {
         layer.shadowRadius = .shadowRadius
         layer.masksToBounds = false
         
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(dateLabel)
+        [iconView, titleLabel, dateLabel].forEach { contentView.addSubview($0) }
+
+        iconView.tintColor = .label
+        iconView.contentMode = .scaleAspectFit
         
         // Label styles
         titleLabel.font = .systemFont(ofSize: .titleFontSize, weight: .medium)
@@ -42,16 +45,20 @@ final class CustomTableCell: UITableViewCell {
         dateLabel.textColor = UIColor.dateTextColor
         
         // Constraints
+        iconView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(CGFloat.sideInset)
+            make.centerY.equalTo(titleLabel)
+            make.width.height.equalTo(CGFloat.iconSize)
+        }
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(CGFloat.topInset)
-            make.leading.equalToSuperview().offset(CGFloat.sideInset)
+            make.leading.equalTo(iconView.snp.trailing).offset(CGFloat.iconSpacing)
             make.trailing.equalToSuperview().inset(CGFloat.sideInset)
         }
         dateLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(CGFloat.labelSpacing)
             make.leading.trailing.equalTo(titleLabel)
-            make.bottom.equalToSuperview().inset(
-                CGFloat.bottomInset)
+            make.bottom.equalToSuperview().inset(CGFloat.bottomInset)
         }
     }
     
@@ -71,26 +78,45 @@ final class CustomTableCell: UITableViewCell {
     
     // MARK: - Configure for Trip
     func configure(with trip: Trip) {
+        iconView.isHidden = true
         titleLabel.text = trip.title
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         let start = formatter.string(from: trip.startDate)
         let end = formatter.string(from: trip.endDate)
         dateLabel.text = "\(start) - \(end)"
+        titleLabel.snp.remakeConstraints { make in
+            make.top.equalToSuperview().offset(CGFloat.topInset)
+            make.leading.equalToSuperview().offset(CGFloat.sideInset)
+            make.trailing.equalToSuperview().inset(CGFloat.sideInset)
+        }
     }
 
     // MARK: - Configure for Expense
     func configure(with expense: Expense) {
+        iconView.isHidden = false
+        iconView.image = UIImage(systemName: expense.category.symbolName)
         let amountString = expense.amount.rubleString
         let categoryString = expense.category.localized
         titleLabel.text = "\(amountString)"
         dateLabel.text = "\(categoryString)"
+        titleLabel.snp.remakeConstraints { make in
+            make.top.equalToSuperview().offset(CGFloat.topInset)
+            make.leading.equalTo(iconView.snp.trailing).offset(CGFloat.iconSpacing)
+            make.trailing.equalToSuperview().inset(CGFloat.sideInset)
+        }
     }
 
     // MARK: - Configure with plain text
     func configure(with text: String) {
+        iconView.isHidden = true
         titleLabel.text = text
         dateLabel.text = nil
+        titleLabel.snp.remakeConstraints { make in
+            make.top.equalToSuperview().offset(CGFloat.topInset)
+            make.leading.equalToSuperview().offset(CGFloat.sideInset)
+            make.trailing.equalToSuperview().inset(CGFloat.sideInset)
+        }
     }
 }
 
@@ -102,6 +128,8 @@ private extension CGFloat {
     static let bottomInset: CGFloat = 16
     static let sideInset: CGFloat = 16
     static let labelSpacing: CGFloat = 8
+    static let iconSize: CGFloat = 24
+    static let iconSpacing: CGFloat = 8
     static let titleFontSize: CGFloat = 16
     static let dateFontSize: CGFloat = 14
 }
