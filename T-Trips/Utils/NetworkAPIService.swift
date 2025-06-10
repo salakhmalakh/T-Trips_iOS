@@ -346,28 +346,15 @@ final class NetworkAPIService {
     }
 
     // MARK: - Participants
+    /// Searches user by phone using the `/api/v1/users` endpoint.
+    /// - Parameters:
+    ///   - phone: Full phone number including the leading `+`.
+    ///   - completion: Callback with the found user or `nil`.
     func findParticipant(phone: String, completion: @escaping (User?) -> Void) {
-        var components = URLComponents(url: baseURL.appendingPathComponent("/api/v1/participant/search"), resolvingAgainstBaseURL: false)!
-        components.queryItems = [URLQueryItem(name: "phone", value: phone)]
-        var request = URLRequest(url: components.url!)
-        request.httpMethod = "GET"
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        addAuthHeader(&request)
-
-        let task = session.dataTask(with: request) { data, response, error in
-            guard
-                let data = data,
-                let httpResponse = response as? HTTPURLResponse,
-                (200..<300).contains(httpResponse.statusCode)
-            else {
-                self.logError(request: request, response: response, data: data, error: error)
-                completion(nil)
-                return
-            }
-            let user = try? JSONDecoder.apiDecoder.decode(User.self, from: data)
+        searchUsers(query: phone) { users in
+            let user = users.first { $0.phone == phone }
             completion(user)
         }
-        task.resume()
     }
 
     /// Fetches all registered users. Results are cached for subsequent calls.
