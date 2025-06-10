@@ -48,7 +48,7 @@ final class AddExpenseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "addExpenseTitle".localized
+        navigationItem.title = nil
         setupBindings()
         setupPickers()
         setupSuggestions()

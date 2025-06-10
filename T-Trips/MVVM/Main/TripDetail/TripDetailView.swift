@@ -3,7 +3,13 @@ import SnapKit
 
 final class TripDetailView: UIView {
     // MARK: - UI Components
-    private let containerView = UIView()
+    let headerLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.font = .systemFont(ofSize: CGFloat.headerFontSize, weight: .bold)
+        lbl.textAlignment = .left
+        lbl.text = "tripDetailsTitle".localized
+        return lbl
+    }()
 
     let titleLabel = UILabel()
     let startLabel = UILabel()
@@ -37,10 +43,9 @@ final class TripDetailView: UIView {
         super.init(frame: frame)
         backgroundColor = .systemBackground
 
-        addSubview(containerView)
-        [titleLabel, datesStackView, budgetLabel,
+        [headerLabel, titleLabel, datesStackView, budgetLabel,
          participantsTitleLabel, participantsLabel,
-         descriptionTitleLabel, descriptionLabel].forEach(containerView.addSubview)
+         descriptionTitleLabel, descriptionLabel].forEach(addSubview)
 
         setupUI()
         setupConstraints()
@@ -50,23 +55,22 @@ final class TripDetailView: UIView {
         super.init(coder: coder)
         backgroundColor = .systemBackground
 
-        addSubview(containerView)
-        [titleLabel, datesStackView, budgetLabel,
+        [headerLabel, titleLabel, datesStackView, budgetLabel,
          participantsTitleLabel, participantsLabel,
-         descriptionTitleLabel, descriptionLabel].forEach(containerView.addSubview)
+         descriptionTitleLabel, descriptionLabel].forEach(addSubview)
 
         setupUI()
         setupConstraints()
     }
 
     private func setupConstraints() {
-        containerView.snp.makeConstraints { make in
-            make.edges.equalTo(safeAreaLayoutGuide).inset(UIEdgeInsets.contentInset)
-        }
-
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(CGFloat.topInset)
+        headerLabel.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).offset(CGFloat.topInset)
             make.leading.trailing.equalToSuperview().inset(CGFloat.horizontalInset)
+        }
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(headerLabel.snp.bottom).offset(CGFloat.sectionSpacing)
+            make.leading.trailing.equalTo(headerLabel)
         }
         datesStackView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(CGFloat.sectionSpacing)
@@ -95,15 +99,9 @@ final class TripDetailView: UIView {
     }
 
     private func setupUI() {
-        containerView.backgroundColor = .secondarySystemBackground
-        containerView.layer.cornerRadius = CGFloat.cornerRadius
-        containerView.layer.masksToBounds = true
+        backgroundColor = .systemBackground
 
-        layer.shadowColor = UIColor.shadowColor
-        layer.shadowOpacity = Float.shadowOpacity
-        layer.shadowOffset = .shadowOffset
-        layer.shadowRadius = .shadowRadius
-        layer.masksToBounds = false
+        headerLabel.numberOfLines = 0
 
         titleLabel.font = .systemFont(ofSize: CGFloat.titleFontSize, weight: .bold)
         titleLabel.numberOfLines = 0
@@ -130,10 +128,6 @@ final class TripDetailView: UIView {
         descriptionLabel.numberOfLines = 0
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        layer.shadowPath = UIBezierPath(roundedRect: containerView.frame, cornerRadius: containerView.layer.cornerRadius).cgPath
-    }
 }
 
 private extension CGFloat {
@@ -146,24 +140,7 @@ private extension CGFloat {
     static let budgetFontSize: CGFloat = 18
     static let detailFontSize: CGFloat = 14
     static let smallTitleFontSize: CGFloat = 12
-    static let cornerRadius: CGFloat = 12
-    static let shadowRadius: CGFloat = 4
     static let titleAlpha: CGFloat = 0.6
     static let datesSpacing: CGFloat = 8
-}
-
-private extension UIEdgeInsets {
-    static let contentInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-}
-
-private extension CGSize {
-    static let shadowOffset = CGSize(width: 0, height: 2)
-}
-
-private extension UIColor {
-    static let shadowColor = UIColor.black.cgColor
-}
-
-private extension Float {
-    static let shadowOpacity: Float = 0.1
+    static let headerFontSize: CGFloat = 28
 }

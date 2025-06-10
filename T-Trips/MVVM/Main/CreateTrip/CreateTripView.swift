@@ -5,6 +5,14 @@ final class CreateTripView: UIView {
     private let textFieldFactory = TextFieldFactory()
     private let buttonFactory = ButtonFactory()
 
+    let headerLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.font = .systemFont(ofSize: CGFloat.headerFontSize, weight: .bold)
+        lbl.textAlignment = .left
+        lbl.text = "createTripTitle".localized
+        return lbl
+    }()
+
     let suggestionsTableView: UITableView = {
         let table = UITableView()
         table.isHidden = true
@@ -112,7 +120,7 @@ final class CreateTripView: UIView {
      override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemBackground
-        [titleTextField, datesStackView, budgetTextField,
+        [headerLabel, titleTextField, datesStackView, budgetTextField,
         participantsTextField, tokensView, suggestionsTableView, descriptionTextView, saveButton].forEach(addSubview)
         tokensView.trailingSpace = CGFloat.inputSpace
         setupConstraints()
@@ -121,16 +129,20 @@ final class CreateTripView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         backgroundColor = .systemBackground
-        [titleTextField, datesStackView, budgetTextField,
+        [headerLabel, titleTextField, datesStackView, budgetTextField,
         participantsTextField, tokensView, suggestionsTableView, descriptionTextView, saveButton].forEach(addSubview)
         tokensView.trailingSpace = CGFloat.inputSpace
         setupConstraints()
     }
 
     private func setupConstraints() {
-        titleTextField.snp.makeConstraints { make in
+        headerLabel.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide).offset(CGFloat.topInset)
             make.leading.trailing.equalToSuperview().inset(CGFloat.horizontalInset)
+        }
+        titleTextField.snp.makeConstraints { make in
+            make.top.equalTo(headerLabel.snp.bottom).offset(CGFloat.verticalSpacing)
+            make.leading.trailing.equalTo(headerLabel)
             make.height.equalTo(CGFloat.fieldHeight)
         }
         datesStackView.snp.makeConstraints { make in
@@ -185,6 +197,7 @@ final class CreateTripView: UIView {
 
 private extension CGFloat {
     static let topInset: CGFloat = 24
+    static let headerFontSize: CGFloat = 28
     static let horizontalInset: CGFloat = 20
     static let verticalSpacing: CGFloat = 16
     static let fieldHeight: CGFloat = 50
