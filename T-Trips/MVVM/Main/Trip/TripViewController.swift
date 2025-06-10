@@ -49,6 +49,7 @@ final class TripViewController: UIViewController {
                 guard let self = self else { return }
                 let ids = self.viewModel.trip.participantIds ?? []
                 self.participants = users.filter { ids.contains($0.id) }
+                self.tripView.tableView.reloadData()
             }
         }
     }
