@@ -41,7 +41,7 @@ final class CreateTripViewModel {
             participantIds: participantIds
         )
 
-        MockAPIService.shared.createTrip(dto, adminId: adminId) { [weak self] trip in
+        NetworkAPIService.shared.createTrip(dto, adminId: adminId) { [weak self] trip in
             DispatchQueue.main.async {
                 self?.onTripCreated?(trip)
             }

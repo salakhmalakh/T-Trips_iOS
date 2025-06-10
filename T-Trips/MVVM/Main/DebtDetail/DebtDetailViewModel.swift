@@ -25,7 +25,7 @@ final class DebtDetailViewModel {
         creditorPhone = creditor?.phone ?? ""
         tripTitle = trip?.title ?? ""
         amountText = debt.amount.rubleString
-        showsPayButton = canPay && (MockAPIService.shared.currentUser?.id == debt.fromUserId)
+        showsPayButton = canPay && (NetworkAPIService.shared.currentUser?.id == debt.fromUserId)
     }
 
     func payTapped() {

@@ -309,24 +309,6 @@ private extension MockAPIService {
     }
 }
 
-// MARK: - DTOs
-struct TripDtoForCreate {
-    let title: String
-    let startDate: Date
-    let endDate: Date
-    let status: Trip.Status
-    let budget: Double
-    let description: String?
-    let participantIds: [Int64]
-}
-
-struct ExpenseDtoForCreate {
-    let category: Expense.Category
-    let amount: Double
-    let title: String
-    let paidForUserIds: [Int64]
-}
-
 // MARK: - User management
 extension MockAPIService {
     func updateCurrentUser(firstName: String, lastName: String, phone: String, completion: @escaping (User?) -> Void) {

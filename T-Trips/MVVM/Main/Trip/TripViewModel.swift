@@ -14,7 +14,7 @@ final class TripViewModel {
     let trip: Trip
 
     var isAdmin: Bool {
-        MockAPIService.shared.currentUser?.id == trip.adminId
+        NetworkAPIService.shared.currentUser?.id == trip.adminId
     }
 
     // MARK: - Handlers
@@ -28,7 +28,7 @@ final class TripViewModel {
 
     // MARK: - Data Loading
     private func loadExpenses() {
-        MockAPIService.shared.getExpenses(tripId: trip.id) { [weak self] expenses in
+        NetworkAPIService.shared.getExpenses(tripId: trip.id) { [weak self] expenses in
             DispatchQueue.main.async {
                 self?.expenses = expenses
             }
@@ -47,7 +47,7 @@ final class TripViewModel {
     func deleteExpense(at index: Int) {
         guard isAdmin else { return }
         guard expenses.indices.contains(index), let id = expenses[index].id else { return }
-        MockAPIService.shared.deleteExpense(id: id) { [weak self] in
+        NetworkAPIService.shared.deleteExpense(id: id) { [weak self] in
             DispatchQueue.main.async {
                 self?.expenses.remove(at: index)
             }
@@ -55,8 +55,8 @@ final class TripViewModel {
     }
 
     func leaveTrip(completion: @escaping () -> Void) {
-        guard let userId = MockAPIService.shared.currentUser?.id else { return }
-        MockAPIService.shared.leaveTrip(tripId: trip.id, userId: userId) { _ in
+        guard let userId = NetworkAPIService.shared.currentUser?.id else { return }
+        NetworkAPIService.shared.leaveTrip(tripId: trip.id, userId: userId) { _ in
             DispatchQueue.main.async { completion() }
         }
     }

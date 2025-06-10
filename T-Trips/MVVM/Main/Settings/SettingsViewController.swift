@@ -101,7 +101,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         alert.addAction(UIAlertAction(title: String.cancelTitle, style: .cancel))
         alert.addAction(
             UIAlertAction(title: String.confirmButtonTitle, style: .destructive) { _ in
-                MockAPIService.shared.logout()
+                NetworkAPIService.shared.logout()
                 guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                       let delegate = scene.delegate as? SceneDelegate,
                       let window = delegate.window else { return }

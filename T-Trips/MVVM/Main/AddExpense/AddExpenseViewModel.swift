@@ -59,7 +59,7 @@ final class AddExpenseViewModel {
             paidForUserIds: payeeIds
         )
 
-        MockAPIService.shared.createExpense(tripId: tripId, dto: dto, ownerId: payerId) { [weak self] expense in
+        NetworkAPIService.shared.createExpense(tripId: tripId, dto: dto, ownerId: payerId) { [weak self] expense in
             DispatchQueue.main.async {
                 self?.onAdd?(expense)
             }
