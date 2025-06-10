@@ -21,7 +21,7 @@ final class TripDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "tripDetailsTitle".localized
+        navigationItem.title = nil
         bind()
     }
 

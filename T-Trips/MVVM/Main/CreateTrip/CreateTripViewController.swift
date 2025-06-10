@@ -34,7 +34,7 @@ final class CreateTripViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "createTripTitle".localized
+        navigationItem.title = nil
         setupBindings()
         setupPickers()
         setupSuggestions()

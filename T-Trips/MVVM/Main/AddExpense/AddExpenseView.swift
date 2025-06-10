@@ -11,6 +11,14 @@ import SnapKit
 final class AddExpenseView: UIView {
     // MARK: - Factories
     private let textFieldFactory = TextFieldFactory()
+
+    let headerLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.font = .systemFont(ofSize: CGFloat.headerFontSize, weight: .bold)
+        lbl.textAlignment = .left
+        lbl.text = "addExpenseTitle".localized
+        return lbl
+    }()
     
     // MARK: - Pickers & Input Views
     let categoryPicker = UIPickerView()
@@ -130,6 +138,7 @@ final class AddExpenseView: UIView {
         super.init(frame: frame)
         backgroundColor = .systemBackground
         [
+            headerLabel,
             titleTextField,
             amountTextField,
             dateTextField,
@@ -149,6 +158,7 @@ final class AddExpenseView: UIView {
         super.init(coder: coder)
         backgroundColor = .systemBackground
         [
+            headerLabel,
             titleTextField,
             amountTextField,
             dateTextField,
@@ -165,9 +175,13 @@ final class AddExpenseView: UIView {
     }
     
     private func setupConstraints() {
-        titleTextField.snp.makeConstraints { make in
+        headerLabel.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide).offset(CGFloat.topInset)
             make.leading.trailing.equalToSuperview().inset(CGFloat.horizontalInset)
+        }
+        titleTextField.snp.makeConstraints { make in
+            make.top.equalTo(headerLabel.snp.bottom).offset(CGFloat.verticalSpacing)
+            make.leading.trailing.equalTo(headerLabel)
             make.height.equalTo(CGFloat.fieldHeight)
         }
         amountTextField.snp.makeConstraints { make in
@@ -226,6 +240,7 @@ final class AddExpenseView: UIView {
 // MARK: - Constants
 private extension CGFloat {
     static let topInset: CGFloat = 24
+    static let headerFontSize: CGFloat = 28
     static let horizontalInset: CGFloat = 20
     static let fieldHeight: CGFloat = 50
     static let verticalSpacing: CGFloat = 16
