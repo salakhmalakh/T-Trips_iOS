@@ -39,6 +39,7 @@ final class CreateTripViewController: UIViewController {
         setupPickers()
         setupSuggestions()
         setupActions()
+        dismissKeyboardOnTap()
     }
 
     private func setupBindings() {

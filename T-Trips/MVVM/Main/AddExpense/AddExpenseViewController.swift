@@ -53,6 +53,7 @@ final class AddExpenseViewController: UIViewController {
         setupPickers()
         setupSuggestions()
         setupActions()
+        dismissKeyboardOnTap()
     }
 
     // MARK: - Bindings

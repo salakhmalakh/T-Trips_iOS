@@ -47,14 +47,7 @@ final class AddExpenseView: UIView {
         return picker
     }()
     
-    private lazy var accessoryToolbar: UIToolbar = {
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let flex = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let done = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissInput))
-        toolbar.setItems([flex, done], animated: false)
-        return toolbar
-    }()
+
     
     // MARK: - UI Components
     public private(set) lazy var amountTextField: CustomTextField = {
@@ -64,7 +57,7 @@ final class AddExpenseView: UIView {
         )
         let textfield = textFieldFactory.makeTextField(with: model)
         textfield.keyboardType = .decimalPad
-        textfield.inputAccessoryView = accessoryToolbar
+        // accessory view removed to dismiss via tap gesture
         return textfield
     }()
 
@@ -74,7 +67,7 @@ final class AddExpenseView: UIView {
             state: .name
         )
         let textfield = textFieldFactory.makeTextField(with: model)
-        textfield.inputAccessoryView = accessoryToolbar
+        // accessory view removed to dismiss via tap gesture
         return textfield
     }()
     
@@ -85,7 +78,7 @@ final class AddExpenseView: UIView {
         )
         let textfield = textFieldFactory.makeTextField(with: model)
         textfield.inputView = datePicker
-        textfield.inputAccessoryView = accessoryToolbar
+        // accessory view removed to dismiss via tap gesture
         return textfield
     }()
     
@@ -96,7 +89,7 @@ final class AddExpenseView: UIView {
         )
         let textfield = textFieldFactory.makeTextField(with: model)
         textfield.inputView = categoryPicker
-        textfield.inputAccessoryView = accessoryToolbar
+        // accessory view removed to dismiss via tap gesture
         return textfield
     }()
     
@@ -107,7 +100,7 @@ final class AddExpenseView: UIView {
         )
         let textfield = textFieldFactory.makeTextField(with: model)
         textfield.inputView = payerPicker
-        textfield.inputAccessoryView = accessoryToolbar
+        // accessory view removed to dismiss via tap gesture
         return textfield
     }()
     
@@ -117,7 +110,7 @@ final class AddExpenseView: UIView {
             state: .name
         )
         let textfield = textFieldFactory.makeTextField(with: model)
-        textfield.inputAccessoryView = accessoryToolbar
+        // accessory view removed to dismiss via tap gesture
         return textfield
     }()
     
@@ -230,10 +223,6 @@ final class AddExpenseView: UIView {
     func updateSuggestionsHeight(_ height: CGFloat) {
         suggestionsHeightConstraint?.update(offset: height)
         layoutIfNeeded()
-    }
-    
-    @objc private func dismissInput() {
-        endEditing(true)
     }
 }
 

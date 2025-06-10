@@ -70,6 +70,16 @@ extension UIColor {
     }
 }
 
+// MARK: - Keyboard dismissal
+extension UIViewController {
+    /// Hides keyboard when tapping outside of a text field.
+    func dismissKeyboardOnTap() {
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+}
+
 // MARK: - Notification Names
 extension Notification.Name {
     static let expenseAdded = Notification.Name("expenseAdded")
