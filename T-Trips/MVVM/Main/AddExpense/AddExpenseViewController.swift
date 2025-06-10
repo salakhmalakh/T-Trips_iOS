@@ -56,6 +56,16 @@ final class AddExpenseViewController: UIViewController {
         dismissKeyboardOnTap()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        registerForKeyboardNotifications()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        unregisterFromKeyboardNotifications()
+    }
+
     // MARK: - Bindings
     private func setupBindings() {
         viewModel.$isAddEnabled
