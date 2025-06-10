@@ -401,6 +401,37 @@ final class NetworkAPIService {
         task.resume()
     }
 
+    /// Searches users on the backend by a query string.
+    /// - Parameters:
+    ///   - query: Partial name or phone to search for.
+    ///   - completion: Callback with found users or an empty array on failure.
+    func searchUsers(query: String, completion: @escaping ([User]) -> Void) {
+        var components = URLComponents(
+            url: baseURL.appendingPathComponent("/api/v1/users"),
+            resolvingAgainstBaseURL: false
+        )!
+        components.queryItems = [URLQueryItem(name: "search", value: query)]
+        var request = URLRequest(url: components.url!)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        addAuthHeader(&request)
+
+        let task = session.dataTask(with: request) { data, response, error in
+            guard
+                let data = data,
+                let httpResponse = response as? HTTPURLResponse,
+                (200..<300).contains(httpResponse.statusCode),
+                let users = try? JSONDecoder.apiDecoder.decode([User].self, from: data)
+            else {
+                self.logError(request: request, response: response, data: data, error: error)
+                completion([])
+                return
+            }
+            completion(users)
+        }
+        task.resume()
+    }
+
     // MARK: - User management
     func updateCurrentUser(firstName: String, lastName: String, phone: String, completion: @escaping (User?) -> Void) {
         guard let id = currentUser?.id else {

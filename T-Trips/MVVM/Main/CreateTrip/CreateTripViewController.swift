@@ -179,17 +179,20 @@ final class CreateTripViewController: UIViewController {
             createView.suggestionsTableView.isHidden = true
             return
         }
-        filteredParticipants = availableParticipants.filter { user in
-            let first = user.firstName.lowercased()
-            let last = user.lastName.lowercased()
-            let full = "\(first) \(last)"
-            return first.contains(text) || last.contains(text) || full.contains(text)
+
+        NetworkAPIService.shared.searchUsers(query: text) { [weak self] users in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.filteredParticipants = users.filter { user in
+                    !self.selectedUsers.contains(where: { $0.id == user.id })
+                }
+                self.createView.suggestionsTableView.isHidden = self.filteredParticipants.isEmpty
+                self.createView.bringSubviewToFront(self.createView.suggestionsTableView)
+                self.createView.suggestionsTableView.reloadData()
+                let height = min(CGFloat(self.filteredParticipants.count) * 44, 132)
+                self.createView.updateSuggestionsHeight(height)
+            }
         }
-        createView.suggestionsTableView.isHidden = filteredParticipants.isEmpty
-        createView.bringSubviewToFront(createView.suggestionsTableView)
-        createView.suggestionsTableView.reloadData()
-        let height = min(CGFloat(filteredParticipants.count) * 44, 132)
-        createView.updateSuggestionsHeight(height)
     }
 }
 
