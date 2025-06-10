@@ -74,3 +74,4 @@
 "tripNameTitle" = "Поездка";
 "acceptButtonTitle" = "Принять";
 "rejectButtonTitle" = "Отклонить";
+"userNotFound" = "Пользователь не найден";
