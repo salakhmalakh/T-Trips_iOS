@@ -54,4 +54,27 @@ struct User: Codable, Identifiable {
         active = try container.decodeIfPresent(Bool.self, forKey: .active)
         createdAt = try container.decodeIfPresent(Date.self, forKey: .createdAt)
     }
+
+    /// Memberwise initializer to allow creation of `User` instances in tests and mocks
+    init(
+        id: Int64,
+        phone: String,
+        firstName: String,
+        lastName: String,
+        hashPassword: String,
+        status: Status,
+        role: Role? = nil,
+        active: Bool? = nil,
+        createdAt: Date? = nil
+    ) {
+        self.id = id
+        self.phone = phone
+        self.firstName = firstName
+        self.lastName = lastName
+        self.hashPassword = hashPassword
+        self.status = status
+        self.role = role
+        self.active = active
+        self.createdAt = createdAt
+    }
 }
