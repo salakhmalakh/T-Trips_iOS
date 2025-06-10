@@ -19,7 +19,7 @@ final class DebtsViewModel {
     }
 
     private func loadTripStatus() {
-        MockAPIService.shared.getTrip(id: tripId) { [weak self] trip in
+        NetworkAPIService.shared.getTrip(id: tripId) { [weak self] trip in
             DispatchQueue.main.async {
                 self?.tripStatus = trip?.status
                 self?.loadDebts()
@@ -28,7 +28,7 @@ final class DebtsViewModel {
     }
 
     func loadDebts() {
-        MockAPIService.shared.getDebts(tripId: tripId, userId: userId) { [weak self] debts in
+        NetworkAPIService.shared.getDebts(tripId: tripId, userId: userId) { [weak self] debts in
             DispatchQueue.main.async {
                 self?.debts = debts
             }
@@ -39,7 +39,7 @@ final class DebtsViewModel {
         guard isTripCompleted else { return }
         guard debts.indices.contains(index) else { return }
         let id = debts[index].debtId
-        MockAPIService.shared.deleteDebt(id: id) { [weak self] in
+        NetworkAPIService.shared.deleteDebt(id: id) { [weak self] in
             DispatchQueue.main.async {
                 self?.debts.remove(at: index)
             }

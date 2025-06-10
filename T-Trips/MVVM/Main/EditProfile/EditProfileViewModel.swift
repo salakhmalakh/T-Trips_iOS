@@ -24,7 +24,7 @@ final class EditProfileViewModel {
     }
 
     func save() {
-        MockAPIService.shared.updateCurrentUser(firstName: firstName, lastName: lastName, phone: phone) { [weak self] user in
+        NetworkAPIService.shared.updateCurrentUser(firstName: firstName, lastName: lastName, phone: phone) { [weak self] user in
             DispatchQueue.main.async {
                 if user != nil { self?.onSaved?() }
             }

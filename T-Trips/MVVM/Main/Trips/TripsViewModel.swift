@@ -50,7 +50,7 @@ final class TripsViewModel {
             .store(in: &cancellables)
     }
     func loadTrips(for filter: Filter) {
-        MockAPIService.shared.getUserTrips(status: filter.correspondingStatus) { [weak self] trips in
+        NetworkAPIService.shared.getUserTrips(status: filter.correspondingStatus) { [weak self] trips in
             DispatchQueue.main.async {
                 self?.trips = trips
             }

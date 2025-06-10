@@ -7,7 +7,7 @@ final class EditProfileViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
 
     init() {
-        guard let user = MockAPIService.shared.currentUser else {
+        guard let user = NetworkAPIService.shared.currentUser else {
             fatalError("No logged user")
         }
         self.viewModel = EditProfileViewModel(user: user)
@@ -15,7 +15,7 @@ final class EditProfileViewController: UIViewController {
     }
 
     required init?(coder: NSCoder) {
-        guard let user = MockAPIService.shared.currentUser else { return nil }
+        guard let user = NetworkAPIService.shared.currentUser else { return nil }
         self.viewModel = EditProfileViewModel(user: user)
         super.init(coder: coder)
     }
