@@ -10,6 +10,7 @@ import SnapKit
 
 final class ExpenseDetailView: UIView {
     // MARK: - UI Components
+    private let containerView = UIView()
     let categoryTitleLabel: UILabel = {
         let lbl = UILabel()
         lbl.text = "categoryTitle".localized
@@ -100,35 +101,43 @@ final class ExpenseDetailView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemBackground
+        addSubview(containerView)
         [
             categoryTitleLabel, categoryLabel,
             amountTitleLabel, amountLabel,
             dateTitleLabel, dateLabel,
             payerTitleLabel, payerLabel,
-            payeeTitleLabel, payeeLabel,
-            deleteButton
-        ].forEach(addSubview)
+            payeeTitleLabel, payeeLabel
+        ].forEach(containerView.addSubview)
+        addSubview(deleteButton)
+        setupUI()
         setupConstraints()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         backgroundColor = .systemBackground
+        addSubview(containerView)
         [
             categoryTitleLabel, categoryLabel,
             amountTitleLabel, amountLabel,
             dateTitleLabel, dateLabel,
             payerTitleLabel, payerLabel,
-            payeeTitleLabel, payeeLabel,
-            deleteButton
-        ].forEach(addSubview)
+            payeeTitleLabel, payeeLabel
+        ].forEach(containerView.addSubview)
+        addSubview(deleteButton)
+        setupUI()
         setupConstraints()
     }
 
     private func setupConstraints() {
         let inset = CGFloat.horizontalInset
-        categoryTitleLabel.snp.makeConstraints { make in
+        containerView.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide).inset(CGFloat.topInset)
+            make.leading.trailing.equalToSuperview().inset(inset)
+        }
+        categoryTitleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(CGFloat.contentTop)
             make.leading.trailing.equalToSuperview().inset(inset)
         }
         categoryLabel.snp.makeConstraints { make in
@@ -168,10 +177,33 @@ final class ExpenseDetailView: UIView {
             make.leading.trailing.equalTo(categoryTitleLabel)
         }
         deleteButton.snp.makeConstraints { make in
-            make.top.equalTo(payeeLabel.snp.bottom).offset(CGFloat.sectionSpacing)
+            make.top.equalTo(containerView.snp.bottom).offset(CGFloat.buttonTop)
             make.leading.trailing.equalToSuperview().inset(inset)
             make.height.equalTo(CGFloat.buttonHeight)
         }
+        containerView.snp.makeConstraints { make in
+            make.bottom.equalTo(payeeLabel.snp.bottom).offset(CGFloat.contentBottom)
+        }
+    }
+
+    private func setupUI() {
+        containerView.backgroundColor = .secondarySystemBackground
+        containerView.layer.cornerRadius = CGFloat.cornerRadius
+        containerView.layer.masksToBounds = true
+
+        layer.shadowColor = UIColor.shadowColor
+        layer.shadowOpacity = Float.shadowOpacity
+        layer.shadowOffset = .shadowOffset
+        layer.shadowRadius = .shadowRadius
+        layer.masksToBounds = false
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layer.shadowPath = UIBezierPath(
+            roundedRect: containerView.frame,
+            cornerRadius: containerView.layer.cornerRadius
+        ).cgPath
     }
 }
 
@@ -189,8 +221,24 @@ private extension CGFloat {
     static let buttonTop: CGFloat        = 24
     static let buttonHeight: CGFloat     = 50
     static let buttonWidth: CGFloat      = 100
+    static let cornerRadius: CGFloat     = 12
+    static let shadowRadius: CGFloat     = 4
+    static let contentTop: CGFloat       = 16
+    static let contentBottom: CGFloat    = 16
 }
 
 private extension String {
     static var deleteButtonTitle: String { "deleteButtonTitle".localized }
+}
+
+private extension CGSize {
+    static let shadowOffset = CGSize(width: 0, height: 2)
+}
+
+private extension UIColor {
+    static let shadowColor = UIColor.black.cgColor
+}
+
+private extension Float {
+    static let shadowOpacity: Float = 0.1
 }
