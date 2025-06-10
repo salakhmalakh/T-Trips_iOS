@@ -61,6 +61,7 @@ final class AddExpenseViewModel {
 
         NetworkAPIService.shared.createExpense(tripId: tripId, dto: dto, ownerId: payerId) { [weak self] expense in
             DispatchQueue.main.async {
+                guard let expense = expense else { return }
                 self?.onAdd?(expense)
             }
         }
