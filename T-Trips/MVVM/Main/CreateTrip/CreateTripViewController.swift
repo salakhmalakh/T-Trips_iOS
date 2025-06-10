@@ -152,6 +152,7 @@ final class CreateTripViewController: UIViewController {
                         token.removeFromSuperview()
                         self.createView.participantsTextField.placeholder = self.selectedUsers.isEmpty ? self.participantsPlaceholder : nil
                         self.createView.tokensView.setNeedsLayout()
+                        self.createView.layoutIfNeeded()
                     }
                 }
             )
@@ -159,6 +160,7 @@ final class CreateTripViewController: UIViewController {
         }
         createView.tokensView.addSubview(token)
         createView.tokensView.setNeedsLayout()
+        createView.layoutIfNeeded()
     }
 
     private func addParticipant(_ user: User) {
