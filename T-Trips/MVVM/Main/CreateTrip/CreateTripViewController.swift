@@ -179,8 +179,11 @@ final class CreateTripViewController: UIViewController {
             createView.suggestionsTableView.isHidden = true
             return
         }
-        filteredParticipants = availableParticipants.filter {
-            $0.firstName.lowercased().contains(text) || $0.lastName.lowercased().contains(text)
+        filteredParticipants = availableParticipants.filter { user in
+            let first = user.firstName.lowercased()
+            let last = user.lastName.lowercased()
+            let full = "\(first) \(last)"
+            return first.contains(text) || last.contains(text) || full.contains(text)
         }
         createView.suggestionsTableView.isHidden = filteredParticipants.isEmpty
         createView.bringSubviewToFront(createView.suggestionsTableView)
