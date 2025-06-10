@@ -372,7 +372,7 @@ extension MockAPIService {
                 if let tIndex = self.trips.firstIndex(where: { $0.id == tripId }) {
                     var ids = self.trips[tIndex].participantIds ?? []
                     if !ids.contains(note.userId) { ids.append(note.userId) }
-                    let t = Trip(
+                    let trip = Trip(
                         id: self.trips[tIndex].id,
                         adminId: self.trips[tIndex].adminId,
                         title: self.trips[tIndex].title,
@@ -383,16 +383,16 @@ extension MockAPIService {
                         status: self.trips[tIndex].status,
                         participantIds: ids
                     )
-                    self.trips[tIndex] = t
+                    self.trips[tIndex] = trip
                 }
                 if let pIndex = self.participants.firstIndex(where: { $0.tripId == tripId && $0.userId == note.userId }) {
-                    let p = self.participants[pIndex]
-                    self.p[pIndex] = TripParticipant(id: p.id, tripId: p.tripId, userId: p.userId, status: .accepted, joinedAt: p.joinedAt, leftAt: p.leftAt)
+                    let participant = self.participants[pIndex]
+                    self.participants[pIndex] = TripParticipant(id: participant.id, tripId: participant.tripId, userId: participant.userId, status: .accepted, joinedAt: participant.joinedAt, leftAt: participant.leftAt)
                 }
             } else {
                 if let pIndex = self.participants.firstIndex(where: { $0.tripId == tripId && $0.userId == note.userId }) {
-                    let p = self.participants[pIndex]
-                    self.participants[pIndex] = TripParticipant(id: p.id, tripId: p.tripId, userId: p.userId, status: .rejected, joinedAt: p.joinedAt, leftAt: p.leftAt)
+                    let participant = self.participants[pIndex]
+                    self.participants[pIndex] = TripParticipant(id: participant.id, tripId: participant.tripId, userId: participant.userId, status: .rejected, joinedAt: participant.joinedAt, leftAt: participant.leftAt)
                 }
             }
             completion()

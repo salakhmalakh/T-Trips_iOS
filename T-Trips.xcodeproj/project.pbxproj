@@ -78,6 +78,7 @@
 		767D333E2DE3C39100F66264 /* TripViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767D333D2DE3C39100F66264 /* TripViewModel.swift */; };
 		767D33402DE3C3A300F66264 /* TripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767D333F2DE3C3A300F66264 /* TripViewController.swift */; };
 		767D33422DE3C4AF00F66264 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767D33412DE3C4AF00F66264 /* Expense.swift */; };
+		769953592DF7CB5A00EC069B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769953582DF7CB5A00EC069B /* NotificationManager.swift */; };
 		76AE6E632DE65E1F0061BDA3 /* ExpenseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AE6E622DE65E1F0061BDA3 /* ExpenseDetailView.swift */; };
 		76AE6E652DE65E4C0061BDA3 /* ExpenseDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AE6E642DE65E4C0061BDA3 /* ExpenseDetailViewModel.swift */; };
 		76AE6E672DE65E660061BDA3 /* ExpenseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AE6E662DE65E660061BDA3 /* ExpenseDetailViewController.swift */; };
@@ -177,6 +178,7 @@
 		767D333D2DE3C39100F66264 /* TripViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewModel.swift; sourceTree = "<group>"; };
 		767D333F2DE3C3A300F66264 /* TripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewController.swift; sourceTree = "<group>"; };
 		767D33412DE3C4AF00F66264 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
+		769953582DF7CB5A00EC069B /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		76AE6E622DE65E1F0061BDA3 /* ExpenseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailView.swift; sourceTree = "<group>"; };
 		76AE6E642DE65E4C0061BDA3 /* ExpenseDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailViewModel.swift; sourceTree = "<group>"; };
 		76AE6E662DE65E660061BDA3 /* ExpenseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailViewController.swift; sourceTree = "<group>"; };
@@ -473,6 +475,7 @@
 		767D33372DE37D6900F66264 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				769953582DF7CB5A00EC069B /* NotificationManager.swift */,
 				76B8F7632DF786D300753078 /* LocalizationManager.swift */,
 				760C74F82DF647A1006FE801 /* MockAPIService.swift */,
 				767D33382DE37D7F00F66264 /* Extentions.swift */,
@@ -649,6 +652,7 @@
 				76B8F7462DF72E9500753078 /* TokenWrappingView.swift in Sources */,
 				767A42402DE11525008970ED /* Trip.swift in Sources */,
 				76B8F7442DF72B2E00753078 /* TokenStackView.swift in Sources */,
+				769953592DF7CB5A00EC069B /* NotificationManager.swift in Sources */,
 				762A609E2DE4AB5400F31E34 /* AddExpenseViewModel.swift in Sources */,
 				76AE6E672DE65E660061BDA3 /* ExpenseDetailViewController.swift in Sources */,
 				760C74EA2DF64280006FE801 /* NotificationsViewController.swift in Sources */,
