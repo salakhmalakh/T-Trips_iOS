@@ -5,6 +5,7 @@ final class NotificationsView: UIView {
     let tableView: UITableView = {
         let table = UITableView()
         table.register(CustomTableCell.self, forCellReuseIdentifier: CustomTableCell.reuseId)
+        table.register(InvitationCell.self, forCellReuseIdentifier: InvitationCell.reuseId)
         return table
     }()
 
