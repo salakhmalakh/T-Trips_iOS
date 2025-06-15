@@ -53,7 +53,7 @@ final class AddExpenseViewController: UIViewController {
         setupPickers()
         setupSuggestions()
         setupActions()
-        dismissKeyboardOnTap()
+        setupTapGesture()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -101,10 +101,6 @@ final class AddExpenseViewController: UIViewController {
         addExpenseView.payeeTextField.addAction(UIAction { [weak self] _ in
             self?.filterPayees()
         }, for: .editingChanged)
-        addExpenseView.payeeTextField.addAction(UIAction { [weak self] _ in
-            self?.addExpenseView.suggestionsTableView.isHidden = true
-            self?.addExpenseView.updateSuggestionsHeight(0)
-        }, for: .editingDidEnd)
         addExpenseView.dateTextField.addAction(
             UIAction { [weak self] _ in self?.addExpenseView.dateTextField.becomeFirstResponder() },
             for: .editingDidBegin
@@ -231,6 +227,18 @@ final class AddExpenseViewController: UIViewController {
         let height = min(CGFloat(filteredPayees.count) * 44, 132)
         addExpenseView.updateSuggestionsHeight(height)
     }
+
+    private func setupTapGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc private func handleTap() {
+        view.endEditing(true)
+        addExpenseView.suggestionsTableView.isHidden = true
+        addExpenseView.updateSuggestionsHeight(0)
+    }
 }
 
 // MARK: - UIPickerViewDataSource & UIPickerViewDelegate
@@ -281,6 +289,7 @@ extension AddExpenseViewController: UITableViewDataSource, UITableViewDelegate {
         filteredPayees.removeAll()
         addExpenseView.suggestionsTableView.isHidden = true
         addExpenseView.updateSuggestionsHeight(0)
+        addExpenseView.payeeTextField.resignFirstResponder()
         addPayee(user)
         addExpenseView.suggestionsTableView.reloadData()
     }

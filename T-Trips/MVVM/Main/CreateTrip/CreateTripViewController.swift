@@ -39,7 +39,7 @@ final class CreateTripViewController: UIViewController {
         setupPickers()
         setupSuggestions()
         setupActions()
-        dismissKeyboardOnTap()
+        setupTapGesture()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -118,10 +118,6 @@ final class CreateTripViewController: UIViewController {
             self?.filterParticipants()
         }, for: .editingChanged)
       
-        createView.participantsTextField.addAction(UIAction { [weak self] _ in
-            self?.createView.suggestionsTableView.isHidden = true
-            self?.createView.updateSuggestionsHeight(0)
-        }, for: .editingDidEnd)
 
         createView.saveButton.addAction(UIAction { [weak self] _ in
             self?.viewModel.saveTrip()
@@ -189,6 +185,18 @@ final class CreateTripViewController: UIViewController {
         let height = min(CGFloat(filteredParticipants.count) * 44, 132)
         createView.updateSuggestionsHeight(height)
     }
+
+    private func setupTapGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc private func handleTap() {
+        view.endEditing(true)
+        createView.suggestionsTableView.isHidden = true
+        createView.updateSuggestionsHeight(0)
+    }
 }
 
 extension CreateTripViewController: UITableViewDataSource, UITableViewDelegate {
@@ -210,6 +218,7 @@ extension CreateTripViewController: UITableViewDataSource, UITableViewDelegate {
         filteredParticipants.removeAll()
         createView.suggestionsTableView.isHidden = true
         createView.updateSuggestionsHeight(0)
+        createView.participantsTextField.resignFirstResponder()
         addParticipant(user)
         createView.suggestionsTableView.reloadData()
     }
